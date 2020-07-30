@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+     <!-- Bootstrap CSS -->
+     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/menu.css" />
+    <title id="titulo-Restaurante">Menú Restaurante | Almuerza.co</title>
+</head>
+<body>
+
+  <a href="#" id="button_pedir" class="float"  >
+    <button type="button" class="btn btn-labeled  mt-3 d-flex align-items-center my-float" style="  background: #FB747C; color: white;">
+      <span class="btn-label"><i class="material-icons icon d-flex align-items-center">check_circle</i></span>
+      <small>Realiza tu pedido</small>
+    </button>
+  </a>
+
+
+  
+          <!-- navbar -->
+        <div class="container-fluid ">
+
+          <div class="row bg-zaboo-custom">
+
+            <div class="col-6" >
+              <img class="logo"src="../restaurantes/assets/img/brand-logo.png" height="70" alt="" style="padding: 0px;"> 
+            </div>
+  
+            <div class="col-6 mt-2 mb-2 text-right align-self-center ">
+              <div class="dropleft">
+                <button class="btn btn-secondary  circulo-usuario" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span > </span> <i class="material-icons icon-login shadow">account_circle</i>
+                </button>
+                <div class="dropdown-menu user-dropdown" aria-labelledby="dropdownMenuButton">
+                 <p class="user-name"></p> 
+           
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- Imagen de portada -->
+    <header class="header-portada ">
+      <img src="./assets/img/portada.png">
+
+    </header>
+      <!-- Imagen de portada -->
+          <div class="container-fluid ">
+          
+          <div class="row  shadow d-flex flex-row-reverse align-items-center" style="background-color: white; height: 60px;" >
+            
+
+            <div class="col-6  col-md-4 text-center carta-click"  >
+               <a href="#centro-restaurante-first-carta"><p class="scroll-nav"> Carta <i class="material-icons icon">restaurant </i></p></a>
+            </div>
+
+            <div class="col-6 col-md-4  text-center menu-click" >
+              <a href="#centro-restaurante-first"><p class="scroll-nav"> Menu del dia  <i class="material-icons icon">menu_book </i> </p></a>
+              
+            </div>
+
+            
+          </div>
+
+          </div>
+
+          <div class="container-fluid mb-5 overflow-hidden">
+
+            <div class=" user-items ">
+              
+             <div class=" row d-flex justify-content-center container-info">
+
+              <h5 class="title-menu-carta col-12 d-flex justify-content-center mt-2">Menú del día  <i class="material-icons icon">menu_book</i> </h5>
+
+                <div class="col-5 col-md-2 card-restaurant  mr-3 order-2 order-md-1 mt-2 mb-2">
+
+                  <div class="card shadow" >
+                    <div class="card-body">
+                      <h5 class="card-title card-title-pretty pb-2">Precio del Menú del día</h5>
+                      <p class="card-text precio-restaurant"></p>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="col-12 col-md-6 card-restaurant order-1 order-md-2 mt-2 mb-2 centro-restaurante">
+                  <div class="centro-restaurante-first" id="centro-restaurante-first"></div>
+                  <div class="centro-restaurante-second"></div>
+
+                  <div class="centro-restaurante-first-carta" id="centro-restaurante-first-carta"></div>
+                  <div class="centro-restaurante-second-carta"></div>
+
+
+                </div>
+
+                <div class="col-5 col-md-2 card-restaurant  ml-3 order-3 order-md-3 mt-2 mb-2">
+
+                    
+                    <div class="card shadow" >
+                    <div class="card-body">
+                      <h5 class="card-title card-title-pretty pb-2">Información de entrega</h5>
+                      <p class="card-text direccion-space"></p>
+                    </div>
+                    </div>
+
+                </div>
+              </div>
+
+            </div>
+            
+            
+            <div class="row mt-5" >
+
+              <div class="col-6 d-flex flex-row-reverse" >
+        
+                <button type="button" class="btn btn-outline-secondary button_pedir col-12 col-md-6" id="button_pedir">Realiza tu Pedido</button>
+              </div>
+              
+            
+            </div>
+          </div>
+
+    <!--botón para realizar el pedido-->
+
+     <!-- Modal hacer Pedido-->
+           
+     <div class="modal" tabindex="-1" role="dialog" id="modal-pedido">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title modal-pedido-title">Hacer Un Pedido</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body-pedido">
+              <div class="container modalToHide">
+              <form name="PedidoForm">
+
+                <div class="almuerzoDia"> 
+
+                </div>
+
+                <div class="PlatoDeLaCarta"> 
+
+                </div>
+                
+
+                
+              </form>
+
+              </div>
+
+
+              <div class="container ModalHacerPedido">
+              </div>
+
+          </div>
+
+          <div class="modal-footer" style="border: green 1px solid;">
+           <div class="row">
+                <button type="button" class="btn btn-secondary cerrar col-3 mr-2 ml-2 modalButton"  data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary adicionarMenu col-3  mr-2 ml-2 modalButton" onclick="AdicionarMenu()">Adicionar Menú</button>
+                <button type="button" class="btn btn-primary adicionarMenuCarta col-3 mr-2 ml-2 modalButton" onclick="AdicionarPlatoCarta()">Adicionar Plato de la Carta</button>
+                <button type="button" class="btn btn-primary hacerpedido col-3 mr-2 ml-2 modalButton" onclick="HacerPedido()">Hacer Pedido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    
+ 
+    <!-- Modal Hacer Pedido-->
+    
+
+    <!-- Modal usuario-->
+    <div class="modal" tabindex="-1" role="dialog" id="modal-usuario">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title modal-producto-title">Ingresa tu usuario y contraseña</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body-producto">
+                <!--formularios que se despliegan dentro del popup-->
+              <div class="popup mt-3 ml-3 mr-3">
+                <div class="popup-content ">
+                    <form class="register-form ml-2 mr-2 mt-2 mb-4" name="form-register" >
+                        <input type="text" placeholder="Nombre Completo" name="name" class="mt-2" />
+                        <input type="text" placeholder="Dirección" name="dir" />
+                        <input type="tel" placeholder="Telefono" name="telefono" />
+                        <input type="email" placeholder="Email" name="email"/>
+                        <input type="password" placeholder="Contraseña" name="password" />
+                        <button type="submit">Create</button>
+                        <p class="message signin">Already registered? <a href="#">Sign In</a></p>
+                    </form>
+                  
+                    <form class="login-form ml-2 mr-2 mt-2 mb-4" name="form-auth">
+                        <input class="mt-2 "type="email" placeholder="username" name="username"/>
+                        <input type="password" placeholder="password" name="password"/>
+                        <button type="submit">login</button>
+                        <p class="message register">Not registered? <a href="#">Create an account</a></p>
+                        <p class="message forgot">Forgot password? <a href="#">Click Here </a></p>
+                    </form>
+                  
+                    <form class="forgot-form ml-2 mr-2 mt-2 mb-4" name="form-forgot">
+                        <input type="email" placeholder="email" name="email-address"/>
+                        <button type="submit">Send Email</button>
+                        <p class="message register ">Not registered? <a href="#">Create an account</a></p>
+                    </form>
+                </div>
+              </div>
+
+
+          </div>
+
+        </div>
+      </div>
+  </div>
+    <!-- Modal usuario-->
+
+    <!-- Modal Direccion-->
+    <div class="modal fade" id="modal-direccion" tabindex="-1" role="dialog" aria-labelledby="modal-direccion" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-direccion-label">Cambiar la direccion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="user-direccion-modify"></p>
+                <form class="register-form" name="DireccionForm" >
+                  <div class="row">
+                  <div class="form-group mb-2 col-12">
+                    <label for="direccionInput" class="sr-only">Dirección de entrega</label>
+                    <input type="text" class="form-control" id="direccionInput" placeholder="Direccion" name="direccion">
+                  </div>
+                </div>
+                  </button>
+                </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="cambiar_direccion()">Cambiar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Direccion-->
+  
+
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script src="./js/menu.js?v=1"></script>
+    <!--<script src="../clientes/js/clientes.js"></script>-->
+
+    <!--despliegue del popup al darle click al botón-->
+
+
+    <script> 
+      
+      $(".register a").click(function(){
+    
+    
+        $("popup-content").animate({height: "toggle", opacity: "toggle"}, "slow");
+        
+        $(".login-form").css("display","none")
+        $(".forgot-form").css("display","none")
+        $(".register-form").css("display","block")
+        $(".modal-producto-title").empty()
+        $(".modal-producto-title").append("Registrate")
+    
+      });
+    
+      $(".signin a").click(function(){
+        $("popup-content").animate({height: "toggle", opacity: "toggle"}, "slow");
+      
+        $(".login-form").css("display","block")
+        $(".forgot-form").css("display","none")
+        $(".register-form").css("display","none")
+        $(".modal-producto-title").empty()
+        $(".modal-producto-title").append("Ingresa tu usuario y contraseña")
+    
+      });
+    
+      $(".forgot a").click(function(){
+        $("popup-content").animate({height: "toggle", opacity: "toggle"}, "slow");
+        
+        $(".login-form").css("display","none")
+        $(".forgot-form").css("display","block")
+        $(".register-form").css("display","none")
+        $(".modal-producto-title").empty()
+        $(".modal-producto-title").append("Olvidaste la contraseña")
+
+
+      });
+    </script> 
+
+</body>
+</html>

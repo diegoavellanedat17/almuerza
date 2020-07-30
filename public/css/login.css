@@ -1,0 +1,229 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+.login-page {
+  
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #FB747C;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #F9A624;
+}
+.form .message{
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a{
+  color: #26008f;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.form .forgot-form{
+    display: none; 
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+
+body {
+  background: #1c3643; /* fallback for old browsers */
+  /* background: linear-gradient(90deg,#D16647,#D16647 25%,#FFFBDD); */
+  font-family: 'Spartan', sans-serif !important;   
+  background: linear-gradient(90deg,#F9A624,#FB747C);
+  background: -webkit-linear-gradient(90deg,#F9A624,#FB747C );
+  background: -moz-linear-gradient(90deg,#F9A624,#FB747C );
+  background: -o-linear-gradient(90deg,#F9A624,#FB747C );
+  background: linear-gradient(90deg,#F9A624,#FB747C );
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+     
+}
+.logo-row {
+  top:-20px;
+    width: 60px;
+    margin: auto !important; 
+   height: 100px;
+   position: relative;
+
+}
+
+.logo {
+    width: 30%;
+    text-align: center;
+  
+}
+
+
+
+h1,
+h2 {
+  font-family: 'Yellowtail', cursive;
+  font-weight:400;
+  font-size:3em;
+  
+  text-align: center;
+  color: rgb(255, 255, 255);
+  top:100px;
+
+  animation-name:port;
+  -webkit-animation-name:port;
+  -webkit-animation-duration: 4s;
+  animation-duration: 10s;
+  position: relative;
+}
+
+@keyframes port {
+  0%{
+
+    opacity: 0.0;
+  }
+  100%{
+
+    opacity: 1.0;
+  }
+}
+
+@-webkit-keyframes port {
+  0%{
+ 
+    opacity: 0.0;
+  }
+  100%{
+    opacity: 1.0;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 400px) {
+
+  h1,
+  h2 {
+    font-family: 'Yellowtail', cursive;
+    font-weight:100;
+    font-size:3em;
+  
+    text-align: center;
+    color: rgb(255, 255, 255);
+    top:10px;
+  
+    animation-name:port;
+    -webkit-animation-name:port;
+    -webkit-animation-duration: 4s;
+    animation-duration: 10s;
+    position: relative;
+  }
+
+
+}
+
+@media screen and (max-width: 400px) {
+
+  .login-page {
+  
+    width: 300px;
+    padding: 8% 0 0;
+    margin: auto;
+  
+  }
+
+  h1,
+  h2 {
+    font-family: 'Yellowtail', cursive;
+    font-weight:100;
+    font-size:2em;
+  
+    text-align: center;
+    color: rgb(255, 255, 255);
+    top:10px;
+  
+    animation-name:port;
+    -webkit-animation-name:port;
+    -webkit-animation-duration: 4s;
+    animation-duration: 10s;
+    position: relative;
+  }
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: 'Spartan', sans-serif ;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family: 'Spartan', sans-serif ;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-family: 'Spartan', sans-serif ;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-family: 'Spartan', sans-serif ;
+}

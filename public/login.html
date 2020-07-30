@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Almuerza.co | Login</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./css/login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Spartan&display=swap" rel="stylesheet">
+  
+</head>
+<body >
+
+<h1 class="titulo-cabecera mb-2 ">Inicia Sesión en Almuerza.co</h1>
+
+<div class="login-page ">
+  <div class="form">
+    <!-- <div class="logo-row"><img src="./login/images/zaboo_logo.svg" class="logo" /></div> -->
+    <div class="row mb-3">
+      <div class="col-12">
+      <img src="./assets/img/Logo.png" alt=""  class="logo" >
+    </div>
+    </div>
+    
+    <form class="register-form" name="form-register" >
+      
+      <input type="text" placeholder="Nombre del restaurante" name="name" required/>
+      <input type="text" placeholder="Nit o CC" name="nit" required/>
+      <input type="text" placeholder="Persona a Cargo" name="persona" required/>
+      <input type="tel" placeholder="Telefono" name="telefono" required/>
+      <input type="text" placeholder="Dirección" name="dir" required/>
+      <div class="form-group">
+        <input type="text" placeholder="Link Restaurante" name="link" required/>
+        <small id="linkHelp" class="form-text text-muted">Sin espacios ni caracteres especiales </small>
+     </div>
+      <input type="email" placeholder="Email" name="email" required/>
+      <input type="password" placeholder="Contraseña" name="password" required/>
+      <button type="submit" class="shadow">Crear Cuenta</button>
+      <p class="message signin">Ya estoy registrado  <a href="#">Entrar</a></p>
+    </form>
+
+    <form class="login-form" name="form-auth">
+      <input type="email" placeholder="Email" name="username"/>
+      <input type="password" placeholder="Contraseña" name="password"/>
+      <button type="submit" class="shadow">Entrar</button>
+      <p class="message register">¿ Aún no estas registrado ? <a href="#">Crea una cuenta</a></p>
+      <p class="message forgot">¿ Olvidaste la contraseña ? <a href="#">Click acá</a></p>
+    </form>
+
+    <form class="forgot-form" name="form-forgot">
+      <input type="email" placeholder="Email" name="email-address"/>
+      <button type="submit" class="shadow">Enviar Email</button>
+      <p class="message register">¿ Aún no estas registrado ? <a href="#">Crea una cuenta</a></p>
+    </form>
+
+
+  </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script src="./js/login.js?v=1"></script>
+	<script> 
+  // 		$(".message a").click(function(){
+  //  		$("form").animate({height: "toggle", opacity: "toggle"}, "slow");
+  // });
+
+
+  $(".register a").click(function(){
+
+
+    $("form").animate({height: "toggle", opacity: "toggle"}, "slow");
+    
+    $(".login-form").css("display","none")
+    $(".forgot-form").css("display","none")
+    $(".register-form").css("display","block")
+    $(".titulo-cabecera").empty()
+    $(".titulo-cabecera").append("Registra tu restaurante")
+
+  });
+
+  $(".signin a").click(function(){
+    $("form").animate({height: "toggle", opacity: "toggle"}, "slow");
+   
+    $(".login-form").css("display","block")
+    $(".forgot-form").css("display","none")
+    $(".register-form").css("display","none")
+    $(".titulo-cabecera").empty()
+    $(".titulo-cabecera").append("Ingresa las creedenciales de tu Restaurante")
+
+  });
+
+  $(".forgot a").click(function(){
+    $("form").animate({height: "toggle", opacity: "toggle"}, "slow");
+    
+    $(".login-form").css("display","none")
+    $(".forgot-form").css("display","block")
+    $(".register-form").css("display","none")
+    $(".titulo-cabecera").empty()
+    $(".titulo-cabecera").append("Olvidaste la contraseña")
+  });
+
+</script> 
+</body>
+</html>

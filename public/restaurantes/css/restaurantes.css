@@ -1,0 +1,407 @@
+
+
+@media (max-width: 770px) {
+  .background-body-container{
+    background-color: #EFEEEE;
+    margin-left: 0%;
+   
+  }
+  .list-group{
+    margin-top: 0px;
+  }
+
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0px;
+    font-size: 1.2rem;
+    
+  }
+
+  .avatar {
+    background: rgba(0, 0, 0, 0.01);
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+  }
+
+
+  
+
+  .list-group-item{
+    font-size: medium;
+    margin: 0px !important;
+    padding-top: 0px !important;
+    padding-bottom: 3px;
+
+    
+}
+
+.image{
+  /*  */
+    width: 90px !important;
+    height: 90px !important;
+    border-radius: 50%;
+    border:white 3px solid;
+    margin: auto;
+    
+    
+  }
+  
+
+}
+@media (min-width: 770px) {
+.background-body-container{
+  background-color: #EFEEEE;
+  margin-left: 220px;
+}
+}
+
+
+
+.divUserName{
+  max-width: 180px !important;
+}
+.bg-zaboo-custom{
+    background: linear-gradient(90deg, #FB747C 70% ,#F9A624 100%);
+    opacity: 1;
+}
+
+.bg-zaboo-custom1{
+    background: linear-gradient(#FB747C 70%, #F9A624 100%);
+    opacity: 1;
+}
+small{
+ 
+  font-family: 'Spartan', sans-serif;
+}
+
+#clientes-activos{
+  font-size: 90px;
+  font-family: 'Spartan', sans-serif;
+  color:#FB747C;
+}
+
+
+.item_product{
+  cursor: pointer;
+}
+
+.table{
+  font-family: 'Spartan', sans-serif;
+font-size: smaller;
+background-color: white;
+border-radius: 23px !important;
+border-width: 1px !important;
+border-color: rgba(202, 202, 202, 0.9) !important;
+float: none;
+width: 100%;  /*Tested and working as expected: */
+}
+
+
+
+/* top-left border-radius */
+table  th:first-child {
+  border-top-left-radius: 23px;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+  border-top-right-radius: 23px;
+}
+
+
+.pedidos, .real-time{
+  opacity: 0.9; 
+}
+
+.pedidos:hover, .real-time:hover{
+
+  background-color: #FB747C;
+  color:white !important;
+}
+
+.panel{
+  border-radius: 23px !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: rgba(202, 202, 202, 0.9) !important;
+  width: 100%;  /*Tested and working as expected: */
+  
+  float: none;
+  background-color: white;
+}
+
+.BebidasTablaMenu{
+  background-color: rgb(252, 230, 228);
+}
+.EntradasTablaMenu{
+  background-color: rgb(214, 252, 252);
+}
+
+.FuerteTablaMenu{
+  background-color: rgb(240, 217, 234);
+}
+
+.PrincipioTablaMenu{
+  background-color: rgb(251, 255, 219);
+}
+
+.PostresTablaMenu{
+  background-color: rgb(151, 229, 168);
+}
+
+.hour{
+  background-color: rgb(250, 211, 207);
+}
+
+
+.id-modificar, .id-modificarCarta{
+  display:none;
+} 
+
+.id-precio{
+  display:none;
+}
+
+.id-pedido{
+  display:none;
+}
+
+.logo{
+    opacity: 1;
+}
+
+.icon-store , .icon-update {
+  font-size: 65px;
+ color: #cccccc;
+ 
+}
+
+.avatar {
+    background: rgba(0, 0, 0, 0.01);
+    padding: 2em 0.5em;
+    text-align: center;
+
+  }
+
+.avatar img {
+    width: 150px;
+    
+    overflow: hidden; 
+}
+
+.small-link{
+  font-size: 9px;;
+}
+
+.h4{
+    color: white !important;
+}
+
+.navbar{
+    z-index: 6;
+}
+body {
+    overflow-x: hidden;
+    font-family: 'Spartan', sans-serif;
+    background-color: #EFEEEE;
+ 
+  }
+
+.list-group-item:hover{
+    font-size: medium;
+    opacity: 0.5;
+}
+
+.info-card{
+  padding-right: 5px;
+  padding-top: 5px;
+}
+
+.card-image{
+  margin: auto !important;
+}
+
+hr.style3 {
+	border-top: 1px dashed #8c8b8b;
+}
+
+.division-style{
+  background-color: #fff;
+	border-top: 2px dashed #8c8b8b;
+}
+  
+  #sidebar-wrapper {
+    
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+    position: fixed;
+    
+    overflow-x: hidden;
+    
+    z-index: 5;
+  }
+  
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    
+  }
+  
+  #sidebar-wrapper .list-group {
+    width: 15rem;
+  
+  }
+
+
+  
+  #page-content-wrapper {
+    min-width: 100vw;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      margin-left: 0;
+     
+    }
+  
+    #page-content-wrapper {
+      min-width: 0;
+      width: 100%;
+    }
+  
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: -15rem;
+    }
+  }
+
+  #tituloMenuDia{
+    font-family: 'Yellowtail', cursive;
+  }
+
+  #tituloAlmuerzos{
+
+    font-family: 'Spartan', sans-serif;
+    font-weight: bolder;
+    font-size: 2em;
+  }
+
+  #titulocategoria{
+
+
+      font-family: 'Spartan', sans-serif;
+      font-weight: 900;
+      font-size: 0.7em;
+
+  }
+  #platoMenu{
+    font-family: 'Spartan', sans-serif;
+    font-size: 0.6em;
+  }
+
+  .inputFilter{
+    font-family: 'Spartan', sans-serif;
+    width: 50%; 
+  }
+
+  @media (max-width: 550px) {
+    #tituloMenuDia{
+      font-family: 'Yellowtail', cursive;
+      font-size: 0.8rem;
+    }
+  
+    #tituloAlmuerzos{
+  
+      font-family: 'Spartan', sans-serif;
+      font-weight: bolder;
+      font-size: 1rem;
+    }
+
+    .inputFilter{
+      font-family: 'Spartan', sans-serif;
+      width: 100%; 
+    }
+
+  }
+
+
+  
+.btn-label {
+  position: relative;
+  left: -12px;
+  display: inline-block;
+  background: rgba(0,0,0,0.15);
+  border-radius: 3px 0 0 3px;
+  border:transparent;
+  color: white;
+}
+.btn-labeled {
+  padding-top: 0;
+  padding-bottom: 0;
+  
+  height: 100%;
+}
+.btn { 
+  margin-bottom:10px; 
+
+}
+
+.Filtrar{
+background-color: transparent !important;
+border:solid 1px;
+border-top: none;
+border-left: none;
+border-right: none;
+font-size: 20px !important;
+}
+
+.settings-logo{
+  font-family: 'Spartan', sans-serif;
+  
+}
+
+/* .centered {
+  position: relative;
+  top: 50%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+} */
+
+.image{
+/*  */
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border:white 3px solid;
+  margin: auto;
+  
+  
+  
+}
+
+#logoImagen{
+  display: none;
+}
+
+.modal-header{
+  background: linear-gradient(90deg, #FB747C 70% ,#F9A624 100%);
+  color: white;
+  margin-bottom: 10px;
+}
+
+label{
+  color:gray;
+  margin-top: 10px;
+}
+
+input[type='checkbox'] { 
+border-radius: 50%;
+}

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+     <!-- Bootstrap CSS -->
+     
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/restaurantes.css" />
+    
+    <title>Restaurante | Almuerza.co</title>
+</head>
+<body>
+
+          <!-- navbar -->
+          <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-zaboo-custom ">
+            <button class="navbar-toggler"id="menu-toggle" type="button">
+                <span ><i class="material-icons icon">arrow_forward</i></span>
+            </button>
+            
+            <a class="navbar-brand ml-3" href="#" style=" padding: 0px; margin: 0px;">
+                 <img class="logo"src="./assets/img/brand-logo.png" height="70" alt="" style="padding: 0px;"> 
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+    
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="user-name">Usuario </span> <i class="material-icons icon">account_circle</i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item logout" href="#"><i class="material-icons icon">exit_to_app</i>Salir</a>
+                    <a class="dropdown-item settings" href="#"><i class="material-icons icon ">settings</i>Configuración</a>
+                   
+                  </div>
+                </li>
+        
+              </ul>
+    
+            </div>
+          </nav>
+          <!-- Wrapper  -->
+            <div class="d-flex" id="wrapper">
+        
+                <!-- Sidebar -->
+               
+                <div class=" bg-zaboo-custom1 border-right " id="sidebar-wrapper">
+                <div class="sidebar-heading">
+                    <header class="avatar" >
+                      <div class="centered mt-5 row ">
+                        <div class="image shadow-lg d-inline-flex">
+
+                        </div>
+                    </div>
+                    <!-- <img src="https://api.adorable.io/avatars/187/asis@adorable.io.png" /> -->
+                    <div class="divUserName">
+                    <h2 class=" h4 mt-3 user-name" id="SideUserName">Usuario</h2>
+                    </div>
+                    </header>
+                </div>
+        
+                <!-- <div class="list-group list-group-flush ">
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white mi_pagina" ><i class="material-icons icon">qr_code</i> Mi página</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white pedidos "><i class="material-icons icon">food_bank</i> Pedidos</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white clients"><i class="material-icons icon">group</i> Clientes</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white menu"><i class="material-icons icon">menu_book</i>  Ménu del día</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white carta"><i class="material-icons icon">restaurant</i>  Carta</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white settings" ><i class="material-icons icon">settings</i>  Configuración</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white logout"><i class="material-icons icon">exit_to_app</i> Salir</a>
+            
+                </div> -->
+
+                <div class="list-group list-group-flush ">
+                  <a href="#" class="list-group-item list-group-item-action bg-transparent text-white mi_pagina" ><i class="material-icons icon">qr_code</i> Mi página</a>
+                  <!-- Default dropright button -->
+                  <div class="btn-group dropright">
+                    <button type="button" class="list-group-item list-group-item-action bg-transparent text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="material-icons icon">food_bank</i>Pedidos
+                    </button>
+                    <div class="dropdown-menu menu-pedidos" style="position: absolute;">
+                          <a href="#" class="dropdown-item list-group-item list-group-item-action pedidos"><i class="material-icons icon">food_bank</i>Pedidos historicos</a>
+                          <a href="#" class="dropdown-item list-group-item list-group-item-action real-time"><i class="material-icons icon">update</i> Tiempo Real</a>
+                          
+                    </div>
+                  </div>
+                  
+                  <a href="#" class="list-group-item list-group-item-action bg-transparent text-white clients"><i class="material-icons icon">group</i> Clientes</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-transparent text-white menu"><i class="material-icons icon">menu_book</i>  Ménu del día</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-transparent text-white carta"><i class="material-icons icon">restaurant</i>  Carta</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-transparent text-white settings" ><i class="material-icons icon">settings</i>  Configuración</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-transparent text-white logout"><i class="material-icons icon">exit_to_app</i> Salir</a>
+          
+                </div>
+
+                </div>
+                <!-- /#sidebar-wrapper -->
+                <!-- #Container-->
+                <div id="logoImagen"></div>
+                <div class="container-fluid mt-5 background-body-container">
+
+                    
+                    <div class="row user-items container mt-5 " style=" float: none; margin: 0 auto;" >
+                                    
+
+                    </div>
+
+                    <div class="menuDia row container mt-3" style=" float: none; margin: 0 auto;">
+                    </div>
+               
+
+                </div>
+            </div>
+            <!-- /#Container-->
+          
+          <!-- /#wrapper -->
+          
+        <!-- Modal producto  Nuevo-->
+           
+            <div class="modal" tabindex="-1" role="dialog" id="modal-producto">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title modal-producto-title">Adicionar un Producto </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body-producto">
+                        <div class="container">
+                        <form name="crearProductoForm">
+                            <div class="form-group">
+                                <label for="categoria">Categoría</label>
+                                <select id="categoria" class="form-control" name="categoria">
+                                  <option selected>Escoge una</option>
+                                  <option>Entradas</option>
+                                  <option>Principio</option>
+                                  <option>Plato Fuerte</option>
+                                  <option>Bebidas</option>
+                                  <option>Postres</option>
+                                </select>
+                              </div>
+                            <div class="form-group">
+                                <label for="nombrePlato">Nombre del Plato</label>
+                                <input type="text" class="form-control" id="nombrePlato" placeholder="Nombre del Plato" name="NombrePlato">
+                             </div>
+
+                             <div class="form-group">
+                                <label for="descripcion">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion" placeholder="Descripción (Opcional)" name="descripcion">
+                             </div>
+
+                            <div class="form-check row">
+                                <label for="dias">Días activo</label>
+                                <div id="dias">
+                                    <input type="checkbox" name="Lunes"  class="col-1">Lunes     
+                                    <input type="checkbox" name="Martes" value="M"class="col-1">Martes    
+                                    <input type="checkbox" name="Miercoles" value="X"class="col-1">Miercoles
+                                    <input type="checkbox" name="Jueves" value="J"class="col-1">Jueves
+                                    <input type="checkbox" name="Viernes" value="V"class="col-1">Viernes
+                                    <input type="checkbox" name="Sabado" value="S"class="col-1">Sábado
+                                    <input type="checkbox" name="Domingo" value="D"class="col-1">Domingo   
+                                 </div> 
+                                   
+                            </div>
+
+                          </form>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-primary" onclick="GuardarPlato()">Guardar Cambios</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+  
+           
+        <!-- Modal producto Nuevo-->
+
+
+
+          <!-- Modal Modificar producto  -->
+           
+              <div class="modal" tabindex="-1" role="dialog" id="modal-modificar-producto">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title modal-modificar-producto-title">Modificar Producto </h5>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body-modificar-producto">
+                          <div class="container">
+                          <form name="modificarProductoForm">
+                              <div class="form-group">
+                                <small class="id-modificar"></small>
+                              
+                                  <label for="modificar-categoria">Categoría</label>
+                                  <select id="modificar-categoria" class="form-control" name="modificar-categoria">
+                                    <option selected>Escoge una</option>
+                                    <option>Entradas</option>
+                                    <option>Principio</option>
+                                    <option>Plato Fuerte</option>
+                                    <option>Bebidas</option>
+                                    <option>Postres</option>
+                                  </select>
+                                </div>
+                              <div class="form-group">
+                                  <label for="modificar-nombrePlato">Nombre del Plato</label>
+                                  <input type="text" class="form-control" id="modificar-nombrePlato" placeholder="Nombre del Plato" name="modificar-nombrePlato">
+                               </div>
+  
+                               <div class="form-group">
+                                  <label for="modificar-descripcion">Descripción</label>
+                                  <input type="text" class="form-control" id="modificar-descripcion" placeholder="Descripción (Opcional)" name="modificar-descripcion">
+                               </div>
+  
+                              <div class="form-check row">
+                                  <label for="modificar-dias">Días activo</label>
+                                  <div id="modificar-dias">
+                                      <input type="checkbox" name="Lunes"  class="col-1" id="LunesM">Lunes     
+                                      <input type="checkbox" name="Martes" value="M"class="col-1" id="MartesM">Martes    
+                                      <input type="checkbox" name="Miercoles" value="X"class="col-1" id="MiercolesM">Miercoles
+                                      <input type="checkbox" name="Jueves" value="J"class="col-1" id="JuevesM">Jueves
+                                      <input type="checkbox" name="Viernes" value="V"class="col-1" id="ViernesM">Viernes
+                                      <input type="checkbox" name="Sabado" value="S"class="col-1" id="SabadoM">Sábado
+                                      <input type="checkbox" name="Domingo" value="D"class="col-1" id="DomingoM">Domingo   
+                                   </div> 
+                                     
+                              </div>
+                              <div class="form-group">
+                              <label for="modificar-estado">Estado</label>
+                              <select id="modificar-estado" class="form-control" name="modificar-estado">
+                                <option selected>activo</option>
+                                <option>inactivo</option>
+                              </select>
+                            </div>
+  
+                            </form>
+  
+                          </div>
+  
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="UpdatePlato()" >Modificar plato</button>
+                        <button type="button" class="btn btn-danger" onclick="EliminarPlato()">Eliminar Plato</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+          <!-- Modal Modificar producto -->
+
+          <!-- Modal Pedido -->
+           
+                <div class="modal" tabindex="-1" role="dialog" id="modal-pedido">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title modal-modal-pedido-title">Modificar Estado del pedido </h5>
+                            
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body-pedido">
+                              <div class="container">
+                                <div class="infoPedido">
+
+                                </div>
+                              <form name="PedidoForm">
+                                    <small class="id-pedido"></small>
+
+                                  <div class="form-check row">
+                                      <label for="modificar-estado-pedido">Estado Del pedido</label>
+                                      <div id="modificar-estado-pedido">
+
+                                          <input type="checkbox" name="ordenado"  class="col-1 check" id="pedido-ordenado">Ordenado
+                                          <input type="checkbox" name="recibido" class="col-1 check" id="pedido-recibido">Recibido    
+                                          <input type="checkbox" name="entregado" class="col-1 check" id="pedido-entregado">Entregado
+                                      
+                                       </div> 
+                                         
+                                  </div>
+
+
+                                </form>
+      
+                              </div>
+      
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" onclick="EstadoPedido()" >Modificar estado</button>
+                            
+                          </div>
+                        </div>
+                      </div>
+                </div>
+    
+              <!-- Modal Pedido-->
+
+                <!-- Modal Precio Plato-->
+           
+                  <div class="modal" tabindex="-1" role="dialog" id="modal-precio">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title modal-producto-title">Precio del Plato </h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body-producto">
+                            <div class="container">
+                            <form name="PrecioForm">
+                                <div class="form-group">
+                                  <small class="id-precio"></small>
+                                  
+                                    <label for="precio">Precio Menú del día</label>
+                                    <input type="number" class="form-control" id="precio" placeholder="Precio" name="precio">
+                                 </div>
+    
+    
+                              </form>
+    
+                            </div>
+    
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          <button type="button" class="btn btn-primary" onclick="UpdatePrecio()">Actualizar Precio</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+              <!-- Modal Precio Plato-->
+
+              <!-- Modal producto  Nuevo carta-->  
+                  <div class="modal" tabindex="-1" role="dialog" id="modal-producto-carta">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title modal-producto-title">Adicionar un Producto de Carta</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body-producto">
+                              <div class="container">
+                              <form name="crearProductoCartaForm">
+                                  <div class="form-group">
+                                      <label for="categoria">Categoría</label>
+                                      <select id="categoria" class="form-control" name="categoria">
+                                        <option selected>Escoge una</option>
+                                        <option>Entradas</option>
+                                        <option>Principio</option>
+                                        <option>Plato Fuerte</option>
+                                        <option>Bebidas</option>
+                                        <option>Postres</option>
+                                      </select>
+                                    </div>
+                                  <div class="form-group">
+                                      <label for="nombrePlato">Nombre del Plato</label>
+                                      <input type="text" class="form-control" id="nombrePlato" placeholder="Nombre del Plato" name="NombrePlato">
+                                   </div>
+      
+                                   <div class="form-group">
+                                      <label for="descripcion">Descripción</label>
+                                      <input type="text" class="form-control" id="descripcion" placeholder="Descripción (Opcional)" name="descripcion">
+                                   </div>
+
+                                   <div class="form-group">
+                                    <label for="precioCarta">Precio</label>
+                                    <input type="number" class="form-control" id="precioCarta" placeholder="Precio" name="precio">
+                                 </div>
+      
+      
+      
+                                </form>
+      
+                              </div>
+      
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" onclick="GuardarPlatoCarta()">Guardar Cambios</button>
+                          </div>
+                        </div>
+                      </div>
+                  </div>           
+              <!-- Modal producto Nuevo Carta-->
+
+              <!-- Modal Modificar producto Carta -->
+           
+              <div class="modal" tabindex="-1" role="dialog" id="modal-modificarCarta-producto">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title modal-modificar-producto-title">Modificar Producto Carta </h5>
+                      
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body-modificar-producto">
+                        <div class="container">
+                        <form name="modificarCartaProductoForm">
+                            <div class="form-group">
+                              <small class="id-modificarCarta"></small>
+                            
+                                <label for="modificarCarta-categoria">Categoría</label>
+                                <select id="modificarCarta-categoria" class="form-control" name="modificarCarta-categoria">
+                                  <option selected>Escoge una</option>
+                                  <option>Entradas</option>
+                                  <option>Principio</option>
+                                  <option>Plato Fuerte</option>
+                                  <option>Bebidas</option>
+                                  <option>Postres</option>
+                                </select>
+                              </div>
+                            <div class="form-group">
+                                <label for="modificarCarta-nombrePlato">Nombre del Plato</label>
+                                <input type="text" class="form-control" id="modificarCarta-nombrePlato" placeholder="Nombre del Plato" name="modificarCarta-nombrePlato">
+                             </div>
+
+                             <div class="form-group">
+                                <label for="modificarCarta-descripcion">Descripción</label>
+                                <input type="text" class="form-control" id="modificarCarta-descripcion" placeholder="Descripción (Opcional)" name="modificarCarta-descripcion">
+                             </div>
+
+                             <div class="form-group">
+                              <label for="modificarCarta-precio">Precio</label>
+                              <input type="text" class="form-control" id="modificarCarta-precio" placeholder="Precio" name="modificarCarta-precio">
+                           </div>
+
+                       
+                            <div class="form-group">
+                            <label for="modificarCarta-estado">Estado</label>
+                            <select id="modificarCarta-estado" class="form-control" name="modificarCarta-estado">
+                              <option selected>activo</option>
+                              <option>inactivo</option>
+                            </select>
+
+                          </div>
+
+                          </form>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-primary" onclick="UpdatePlatoCarta()" >Modificar plato</button>
+                      <button type="button" class="btn btn-danger" onclick="EliminarPlatoCarta()">Eliminar Plato</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        <!-- Modal Modificar producto Carta-->
+
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script src="./js/restaurantes.js"></script>
+    
+    <script>
+        $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+        
+        });
+        $(window).resize(function(){
+            var width = $(window).width();
+            if(width > 960){
+            $('#wrapper').removeClass('toggled');
+            }
+            })
+        .resize();//trigger the resize event on page load.
+
+        $(document).ready(function(){
+          $('.check').click(function() {
+              $('.check').not(this).prop('checked', false);
+          });
+      });
+      </script>
+
+</body>
+</html>
