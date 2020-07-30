@@ -18,11 +18,13 @@
 </head>
 <body>
 
-  <a href="#" id="button_pedir" class="float"  >
-    <button type="button" class="btn btn-labeled  mt-3 d-flex align-items-center my-float" style="  background: #FB747C; color: white;">
+  <a href="#" id="button_pedir" class="float" >
+
+    <button type="button" class="btn btn-labeled  mt-3 d-flex align-items-center my-float shadow" style="  background: #FB747C; color: white;">
       <span class="btn-label"><i class="material-icons icon d-flex align-items-center">check_circle</i></span>
       <small>Realiza tu pedido</small>
     </button>
+
   </a>
 
 
@@ -83,18 +85,19 @@
 
               <h5 class="title-menu-carta col-12 d-flex justify-content-center mt-2">Menú del día  <i class="material-icons icon">menu_book</i> </h5>
 
-                <div class="col-5 col-md-2 card-restaurant  mr-3 order-2 order-md-1 mt-2 mb-2">
+                <div class="col-7 col-md-2 card-restaurant  mr-3 order-1 order-md-1 mt-2 mb-2">
 
                   <div class="card shadow" >
                     <div class="card-body">
                       <h5 class="card-title card-title-pretty pb-2">Precio del Menú del día</h5>
-                      <p class="card-text precio-restaurant"></p>
+                      <p class="card-text precio-restaurant d-flex justify-content-center"></p>
                     </div>
                   </div>
                   
                 </div>
 
-                <div class="col-12 col-md-6 card-restaurant order-1 order-md-2 mt-2 mb-2 centro-restaurante">
+                <div class="col-12 col-md-6 card-restaurant order-2 order-md-2 mt-2 mb-2 centro-restaurante">
+
                   <div class="centro-restaurante-first" id="centro-restaurante-first"></div>
                   <div class="centro-restaurante-second"></div>
 
@@ -104,7 +107,7 @@
 
                 </div>
 
-                <div class="col-5 col-md-2 card-restaurant  ml-3 order-3 order-md-3 mt-2 mb-2">
+                <div class="col-7 col-md-2 card-restaurant  ml-3 order-3 order-md-3 mt-2 mb-2">
 
                     
                     <div class="card shadow" >
@@ -135,7 +138,7 @@
 
      <!-- Modal hacer Pedido-->
            
-     <div class="modal" tabindex="-1" role="dialog" id="modal-pedido">
+    <div class="modal" tabindex="-1" role="dialog" id="modal-pedido">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -168,17 +171,56 @@
 
           </div>
 
-          <div class="modal-footer" style="border: green 1px solid;">
-           <div class="row">
-                <button type="button" class="btn btn-secondary cerrar col-3 mr-2 ml-2 modalButton"  data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary adicionarMenu col-3  mr-2 ml-2 modalButton" onclick="AdicionarMenu()">Adicionar Menú</button>
-                <button type="button" class="btn btn-primary adicionarMenuCarta col-3 mr-2 ml-2 modalButton" onclick="AdicionarPlatoCarta()">Adicionar Plato de la Carta</button>
-                <button type="button" class="btn btn-primary hacerpedido col-3 mr-2 ml-2 modalButton" onclick="HacerPedido()">Hacer Pedido</button>
+          <div class="modal-footer" >
+
+            <div class="container-fluid" >
+                
+              <div class="botones-adicionar-to-hide"> 
+               <div class="row justify-content-center ">
+
+          
+                  <button type="button" class="btn btn-labeled col-5  d-flex align-items-center shadow mt-1 mb-1 mr-1 ml-1" onclick="AdicionarMenu()" style=" background: #FB747C; color: white;">
+                    <span class="btn-label"><i class="material-icons icon d-flex align-items-center mr-1">add_circle</i></span>
+                    <small>Adicionar Menú</small>
+                  </button>
+
+                  <button type="button" class="btn btn-labeled col-5  d-flex align-items-center shadow mt-1 mb-1 mr-1 ml-1" onclick="AdicionarPlatoCarta()" style="background: #F9A624 ; color: white;">
+                    <span class="btn-label"><i class="material-icons icon d-flex align-items-center mr-1">add_circle</i></span>
+                    <small>Adicionar Plato de la Carta</small>
+                  </button>
+              
+
+                </div> 
+              </div>
+              <div class="botones-quitar-to-hide"> 
+                <div class="row justify-content-center"  >
+                  <div class="split-quitar"></div>
+                </div>
+              </div>
+              <div class="hacerpedido">
+                  <div class="row">
+                    
+                    <!-- <button type="button" class="btn btn-primary hacerpedido col-5  modalButton" onclick="HacerPedido()">Hacer Pedido</button> -->
+                    <button type="button" class="btn btn-labeled col-12 d-flex align-items-center justify-content-center shadow mt-1 mb-1 mr-1 ml-1" onclick="HacerPedido()" style="background: #4BD143; color: white;">
+                      <span class="btn-label"><i class="material-icons icon d-flex align-items-center mr-1">check_circle</i></span>
+                      <small>Hacer pedido</small>
+                    </button>
+
+                  </div>
+
+
+              </div>
+              <div class="atras-enviar">
+                <div class="row atras-enviar-add justify-content-center">
+
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
     
  
     <!-- Modal Hacer Pedido-->
@@ -197,30 +239,31 @@
           <div class="modal-body-producto">
                 <!--formularios que se despliegan dentro del popup-->
               <div class="popup mt-3 ml-3 mr-3">
-                <div class="popup-content ">
+                <div class="popup-content">
                     <form class="register-form ml-2 mr-2 mt-2 mb-4" name="form-register" >
                         <input type="text" placeholder="Nombre Completo" name="name" class="mt-2" />
                         <input type="text" placeholder="Dirección" name="dir" />
-                        <input type="tel" placeholder="Telefono" name="telefono" />
+                        <input type="tel" placeholder="Teléfono" name="telefono" />
                         <input type="email" placeholder="Email" name="email"/>
                         <input type="password" placeholder="Contraseña" name="password" />
-                        <button type="submit">Create</button>
-                        <p class="message signin">Already registered? <a href="#">Sign In</a></p>
+                        <button type="submit">Crear usuario</button>
+                        <p class="message signin">¿Ya estás registrado? <a href="#">Entrar</a></p>
                     </form>
                   
                     <form class="login-form ml-2 mr-2 mt-2 mb-4" name="form-auth">
-                        <input class="mt-2 "type="email" placeholder="username" name="username"/>
-                        <input type="password" placeholder="password" name="password"/>
-                        <button type="submit">login</button>
-                        <p class="message register">Not registered? <a href="#">Create an account</a></p>
-                        <p class="message forgot">Forgot password? <a href="#">Click Here </a></p>
+                        <input class="mt-2 "type="email" placeholder="Email" name="username"/>
+                        <input type="password" placeholder="Contraseña" name="password"/>
+                        <button type="submit">Entrar</button>
+                        <p class="message register">¿No estás resgistrado? <a href="#">Crear</a></p>
+                        <p class="message forgot">¿Olvidaste la contraseña? <a href="#">Click Acá </a></p>
                     </form>
                   
                     <form class="forgot-form ml-2 mr-2 mt-2 mb-4" name="form-forgot">
-                        <input type="email" placeholder="email" name="email-address"/>
-                        <button type="submit">Send Email</button>
-                        <p class="message register ">Not registered? <a href="#">Create an account</a></p>
+                        <input type="email" placeholder="Email" name="email-address"/>
+                        <button type="submit">Enviar Email</button>
+                        <p class="message register ">¿No estás resgistrado?<a href="#">Crear</a></p>
                     </form>
+
                 </div>
               </div>
 
@@ -283,7 +326,7 @@
       $(".register a").click(function(){
     
     
-        $("popup-content").animate({height: "toggle", opacity: "toggle"}, "slow");
+        $("form").animate({height: "toggle", opacity: "toggle"}, "slow");
         
         $(".login-form").css("display","none")
         $(".forgot-form").css("display","none")
@@ -294,7 +337,7 @@
       });
     
       $(".signin a").click(function(){
-        $("popup-content").animate({height: "toggle", opacity: "toggle"}, "slow");
+        $("form").animate({height: "toggle", opacity: "toggle"}, "slow");
       
         $(".login-form").css("display","block")
         $(".forgot-form").css("display","none")
@@ -305,7 +348,7 @@
       });
     
       $(".forgot a").click(function(){
-        $("popup-content").animate({height: "toggle", opacity: "toggle"}, "slow");
+        $("form").animate({height: "toggle", opacity: "toggle"}, "slow");
         
         $(".login-form").css("display","none")
         $(".forgot-form").css("display","block")

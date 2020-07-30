@@ -8,16 +8,27 @@ html {
 
 /* .card-restaurant{
   border: solid 1px red;
-} */
+}  */
 
 .card-title-pretty{
+  font-size: small;
   border-top: transparent !important;
   border-right: transparent !important;
   border-left: transparent !important;
   border: solid 3px #FB747C;
-  font-size: small;
- 
 
+}
+.hacer-pedido{
+  display:none
+}
+
+.card-text{
+  font-size: x-small;
+height: 80%;
+}
+
+.precioEnCarta{
+  margin: 0px;
 }
 
 a:link, a:visited{
@@ -33,44 +44,7 @@ a:link, a:visited{
 }
 
 
-/* button */
-.float{
-	position:fixed;
-	width:160px;
-	height:40px;
-	bottom:60px;
-	right:70px;
 
-	color:#FFF;
-	border-radius:50px;
-  text-align:center;
-  margin: auto;
-  font-size:27px;
-	box-shadow: 2px 2px 3px #999;
-  z-index:100;
-  
-}
-
-.float-wp{
-	position:fixed;
-	width:40px;
-	height:40px;
-	bottom:30px;
-  left:70px;
-
-	color:#FFF;
-	border-radius:50px;
-  text-align:center;
-  margin: auto;
-  font-size:27px;
-	box-shadow: 2px 2px 3px #999;
-  z-index:100;
-  
-}
-
-.my-float{
-	margin: auto;
-}
 
 
 
@@ -191,6 +165,25 @@ hr.style3 {
     #wrapper.toggled #sidebar-wrapper {
       margin-left: -15rem;
     }
+
+        /* button */
+
+        .float{
+          position:fixed;
+          width:190px;
+          height:40px;
+          bottom:60px;
+          right:70px;
+          margin: auto;
+          z-index:100;
+          
+        }
+    
+    
+    
+        .my-float{
+          margin: auto;
+        }
   }
 
   #tituloMenuDia{
@@ -212,27 +205,33 @@ hr.style3 {
       font-size: 0.7em;
 
   }
-  .platoMenu{
-    font-family: 'Spartan', sans-serif;
-    font-size: 0.6em;
-  }
+
 
   .descripcion-text{
     font-family: 'Spartan', sans-serif;
     font-size: 0.6em;
   }
 
-  @media (max-width: 550px) {
-    #tituloMenuDia{
-      font-family: 'Yellowtail', cursive;
-      font-size: 1.2rem;
+  @media (max-width: 768px) {
+
+
+    /* button */
+
+    .float{
+      position:fixed;
+      width:190px;
+      height:40px;
+      bottom:30px;
+      right:10px;
+      margin: auto;
+      z-index:100;
+      
     }
-  
-    #tituloAlmuerzos{
-  
-      font-family: 'Spartan', sans-serif;
-      font-weight: bolder;
-      font-size: 1rem;
+
+
+
+    .my-float{
+      margin: auto;
     }
 
   }
@@ -247,7 +246,7 @@ hr.style3 {
     box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
     text-decoration: none;
     transition: 0.4s;
-    border-color: #D16647;
+    border-color: #FB747C;
 }
 
 .user-direccion-modify{
@@ -261,7 +260,7 @@ hr.style3 {
 }
 
 .modal-header{
-  background: #D16647;
+  background: linear-gradient(90deg, #FB747C 70% ,#F9A624 100%);
 }
 
 .popup{
@@ -283,7 +282,7 @@ hr.style3 {
 .popup-content button{
   text-transform: uppercase;
   outline: 0;
-  background: #D16647;
+  background: #FB747C;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -300,6 +299,12 @@ hr.style3 {
 }
 .popup-content .forgot-form{
   display: none; 
+}
+
+.popup-content button:hover{
+
+  background: #F9A624;
+
 }
 
 input{
@@ -325,7 +330,7 @@ input{
 
 .modal-title {
 
-  font-family: 'Yellowtail', cursive;
+  font-family: 'Spartan', sans-serif;
   color: white;
 
 }
@@ -350,12 +355,20 @@ header img {
   transform: translateX(-50%);
 }
 
+
 .centered {
+
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 51%;
   transform: translate(-50%, -50%);
-  
+
+}
+
+.centered-second{
+  position: absolute;
+  left: 51%;
+  transform: translate(-50%, -50%);
 }
 
 .image{
@@ -373,8 +386,39 @@ header img {
   color: white;
   font-family: 'Spartan', sans-serif;
   font-weight: 300; 
+  max-width: 150px;
+  
 }
 
 .scroll-nav{
   font-family: 'Spartan', sans-serif;
+}
+
+#almuerzoTitle{
+  color: #8c8b8b;
+  border-bottom: solid 1px rgba(251, 116, 124, 0.91);
+}
+
+.modal-body-pedido{
+  font-size: smaller;
+}
+
+.opcionFont{
+  font-size: medium;
+}
+
+.resumen-title{
+  margin-top: 20px;
+  margin-bottom: 10px;
+font-size: medium;
+color:rgba(141, 140, 140, 0.91); ;
+}
+
+.subtotal-title{
+color:rgb(251, 116, 124);
+}
+
+.GranTotal{
+  font-size: large;
+  color: black;
 }

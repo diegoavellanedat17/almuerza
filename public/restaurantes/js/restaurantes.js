@@ -1596,15 +1596,16 @@ function homePage(){
                     console.log(clientes.length)
                     $(".user-items").append(` 
                     <div class="col-12  col-lg-6 d-inline-flex ">
-                
+                    
                         <div class="card mb-3 mt-3 shadow">
                             <img class="card-img-top" src="./assets/img/portada.jpg" alt="Card image cap">
                             <div class="card-body">
                                 <div class="row d-flex align-items-center">
                                 <i class="material-icons icon-store col-3 col-md-2" >storefront</i>
                                 <h5 class="card-title col-9 ml-md-3 " >${userData.name}</h5>
+                                <a href="https://almuerza.co/menu/menu.html?restaurante=${link}" class="to-menu" target="_blank">
                                 <p class="card-text col-10" ><small class="text-muted small-link">https://almuerza.co/menu/menu.html?restaurante=${link}</small></p>
-                                
+                                </a>
                                 <i class="material-icons icon justify-content-end col-1 mr-1" style="font-size:18px; cursor: pointer;">content_copy</i>
                                 
                                 </div>
@@ -1619,25 +1620,31 @@ function homePage(){
                 
                         <div class="card mb-3 mt-3 shadow">
                             
-                            <div class="card-body ">
-                
-                                <h5 class="card-title col-12 col-md-12 d-flex justify-content-center" >Código  QR </h5>
-                                <div class="row">
-                                    <div id="qrcodeInicio" class="col-12 col-sm-6 col-md-12 d-flex justify-content-center"  ></div>
-                                    <div  class="col-12 col-sm-6 col-md-12 mt-3">
-                                        <small class=" text-justify text-muted">Los siguientes imprimibles te permiten ubicar los códigos en las mesas y puertas</small>
+                                <div class="card-body ">
+
+                                    <h5 class="card-title col-12 col-md-12 d-flex justify-content-center" >Código  QR </h5>
+                                    <a href="https://almuerza.co/menu/menu.html?restaurante=${link}" class="to-menu" target="_blank">
+                                    <div class="row">
+                                        <div id="qrcodeInicio" class="col-12 col-sm-6 col-md-12 d-flex justify-content-center"  ></div>
+                                        <div  class="col-12 col-sm-6 col-md-12 mt-3">
+                                            <small class=" text-justify text-muted">Los siguientes imprimibles te permiten ubicar los códigos en las mesas y puertas</small>
+                                        </div>
+                                        
                                     </div>
-                                    
-                                </div>
-                                <div class="row d-flex flex-row-reverse">
-                            
-                                    <button type="button" class="btn btn-labeled  mt-3 d-flex align-items-center" onClick="DescargarPDF()" style="  background: #FB747C; color: white;">
-                                        <span class="btn-label"><i class="material-icons icon d-flex align-items-center">get_app</i></span>
-                                        <small>Descargar</small>
-                                    </button>
-                                </div>
+                                    </a>
+
                       
-                            </div>
+
+                                        <div class="row d-flex flex-row-reverse container-descargar-button " >
+                                    
+                                            <button type="button" class="btn btn-labeled  mt-3 d-flex align-items-center descargar-button" onClick="DescargarPDF()" style="  background: #FB747C; color: white;">
+                                                <span class="btn-label"><i class="material-icons icon d-flex align-items-center">get_app</i></span>
+                                                <small>Descargar</small>
+                                            </button>
+                                        </div>
+                                 
+                                </div>
+                            
                 
                         </div>
                 

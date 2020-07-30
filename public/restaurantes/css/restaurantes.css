@@ -48,6 +48,7 @@
   
 
 }
+
 @media (min-width: 770px) {
 .background-body-container{
   background-color: #EFEEEE;
@@ -55,6 +56,20 @@
 }
 }
 
+
+.descargar-button{
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.container-descargar-button{
+  padding: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.to-menu:hover{
+  text-decoration: none;
+}
 
 
 .divUserName{
@@ -405,3 +420,4 @@ label{
 input[type='checkbox'] { 
 border-radius: 50%;
 }
+

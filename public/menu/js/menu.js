@@ -29,7 +29,16 @@ function VerificarExistenciarestaurante(){
     consulta_restaurantes.get()
     .then(function(querySnapshot){
         if(querySnapshot.empty){
-            alert("Ingresa un restaurante válido") 
+            $(".user-items").css("display","none")
+            $(".float").css("display","none")
+
+            swal({
+                title:"Advertencia",
+                  text:"No es un restaurante válido",
+                  icon:"error"
+              }).then(function(){
+                window.location = 'https://almuerza.co/'
+              })
         }
         else{
 
@@ -42,15 +51,16 @@ function VerificarExistenciarestaurante(){
                 
                 var nombreRestaurante=doc.data().nombre
                 uid_restaurante=doc.data().uid
+                var direccion_restaurante=doc.data().dir
 
                 // Colocar el logo del restaurante si existe 
-                LocateLogo(uid_restaurante,nombreRestaurante)
+                LocateLogo(uid_restaurante,nombreRestaurante,direccion_restaurante)
 
                 var vista_menu=db.collection('menu').where("uid_restaurante","==",uid_restaurante)
                 vista_menu.get()
                 .then(function(querySnapshot){
                     if(querySnapshot.empty){
-                        alert('Aun no hay un menú creado')
+                        console.log("No hay un menu creado")
                     }
                     else{
 
@@ -69,6 +79,7 @@ function VerificarExistenciarestaurante(){
                             if($("#" + categoriaFix).length == 0) {
                                 //si no existe esa categoria debe crearse
                              if (categoriaFix === 'Entradas' || categoriaFix === 'Principio'){
+                                 console.log("entradas o principio menu")
                                 // $(`
                                 // <div class="col-12 col-md-6 clase-categoria" id="${categoriaFix}">
                                 //         <h5 id="titulocategoria" class="col-12 text-center" style="color: #fef88f">${categoria}</h5>
@@ -83,9 +94,10 @@ function VerificarExistenciarestaurante(){
                                 <h5 class="categoria-name mt-3 ">${categoria}</h5>
                                 <div class="card shadow" >
                                   <div class="card-body clase-categoria" id="${categoriaFix}">
-                                    <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu">${nombre}</h5>
+                                    <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu text-capitalize">${nombre}</h5>
                                     <p class="card-text">${descripcion}</p>
                                   </div>
+                                </div>
                                 
                                 `).insertAfter( ".centro-restaurante-first" );
     
@@ -97,8 +109,9 @@ function VerificarExistenciarestaurante(){
                                 <h5 class="categoria-name mt-3">${categoria}</h5>
                                 <div class="card shadow" >
                                   <div class="card-body clase-categoria" id="${categoriaFix}">
-                                    <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu">${nombre}</h5>
+                                    <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu text-capitalize">${nombre}</h5>
                                     <p class="card-text">${descripcion}</p>
+                                  </div>
                                   </div>
                                 
                                 `).insertAfter( ".centro-restaurante-second" );
@@ -113,8 +126,9 @@ function VerificarExistenciarestaurante(){
                                 <h5 class="categoria-name mt-3">${categoria}</h5>
                                 <div class="card shadow" >
                                   <div class="card-body clase-categoria" id="${categoriaFix}">
-                                    <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu">${nombre}</h5>
+                                    <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu text-capitalize">${nombre}</h5>
                                     <p class="card-text">${descripcion}</p>
+                                  </div>
                                   </div>
                                 
                                 `)
@@ -127,7 +141,7 @@ function VerificarExistenciarestaurante(){
 
                                 $(`#${categoriaFix}`).append(`   
 
-                                <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu">${nombre}</h5>
+                                <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu text-capitalize">${nombre}</h5>
                                 <p class="card-text">${descripcion}</p>   
                                 
                                 `)
@@ -171,8 +185,7 @@ function VerificarExistenciarestaurante(){
                 console.log("No hay productos de carta ")
             }
             else{
-                $(".centro-restaurante").append(`<h5 class="title-menu-carta col-12 d-flex justify-content-center  mt-5">Carta del restaurante <i class="material-icons icon">restaurant </i></h5>`)
-                 
+               $(`<h5 class="title-menu-carta col-12 d-flex justify-content-center  mt-5">Carta del restaurante <i class="material-icons icon">restaurant </i></h5>`).insertBefore(".centro-restaurante-first-carta")
                 querySnapshot.forEach(function(doc){
                     const categoria=doc.data().categoria
                     const nombre=doc.data().nombre
@@ -185,36 +198,49 @@ function VerificarExistenciarestaurante(){
                     if(estado==='activo'){  
                         if($(`#${categoriaFix}Carta`).length == 0) {
                             //si no existe esa categoria debe crearse
-                        
-                            if (categoriaFix === 'EntradasCarta' || categoriaFix === 'PrincipioCarta'){
-
+                            console.log("crearse")
+                            if (categoriaFix === 'Entradas' || categoriaFix === 'Principio'){
+                                console.log("entrada o principio")
 
                                 $(`
 
                                 <h5 class="categoria-name mt-3">${categoria}</h5>
                                 <div class="card shadow" >
-                                  <div class="card-body" id="${categoriaFix}Carta">
-                                    <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu nombreEnCarta"id="${doc.id}">${nombre}</h5>
-                                    <p class="card-text">${descripcion}</p>
-                                    <p class="card-text precioEnCarta">${precio}</p>
-                                  </div>
+                                
+                                    <div class="card-body" id="${categoriaFix}Carta">
+                                        <div class="row" style=" height:45px">
+                                            <h5 class="card-title  platoMenu nombreEnCarta col-6 "id="${doc.id}" > <p class=" card-title-pretty d-inline-flex text-capitalize">${nombre}</p> </h5>
+                                            <div class="card-text col-6 text-center" ><p class="mt-2 precioEnCarta d-inline-flex" >${precio}</p></div>
+                                        </div>
+
+                                        <p class="card-text ">${descripcion}</p>
+
+                                    </div> 
+
+                                    
+                                </div>
                                 
                                 `).insertAfter( ".centro-restaurante-first-carta" );
 
                                 
 
                             }
-                            else if(categoriaFix === 'PlatoFuerteCarta'){
+                            else if(categoriaFix === 'PlatoFuerte'){
                              
                                $(`
 
                                <h5 class="categoria-name mt-3">${categoria}</h5>
                                <div class="card shadow" >
-                                 <div class="card-body" id="${categoriaFix}Carta">
-                                   <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu nombreEnCarta" id="${doc.id}">${nombre}</h5>
-                                   <p class="card-text">${descripcion}</p>
-                                   <p class="card-text precioEnCarta">${precio}</p>
-                                 </div>
+                                    <div class="card-body" id="${categoriaFix}Carta">
+                                        <div class="row" style=" height:45px">
+                                            <h5 class="card-title  platoMenu nombreEnCarta col-6 "id="${doc.id}" > <p class=" card-title-pretty d-inline-flex text-capitalize">${nombre}</p> </h5>
+                                            <div class="card-text col-6 text-center" ><p class="mt-2 precioEnCarta d-inline-flex" >${precio}</p></div>
+                                        </div>
+
+                                    <p class="card-text ">${descripcion}</p>
+                                    
+                                    </div> 
+                                </div>
                                
                                `).insertAfter( ".centro-restaurante-second-carta" );
 
@@ -226,11 +252,17 @@ function VerificarExistenciarestaurante(){
 
                                 <h5 class="categoria-name mt-3">${categoria}</h5>
                                 <div class="card shadow" >
-                                  <div class="card-body" id="${categoriaFix}Carta">
-                                    <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu nombreEnCarta"id="${doc.id}">${nombre}</h5>
-                                    <p class="card-text">${descripcion}</p>
-                                    <p class="card-text precioEnCarta">${precio}</p>
-                                  </div>
+                                    <div class="card-body" id="${categoriaFix}Carta">
+                                        <div class="row" style=" height:45px">
+                                            <h5 class="card-title  platoMenu nombreEnCarta col-6 "id="${doc.id}" > <p class=" card-title-pretty d-inline-flex text-capitalize">${nombre}</p> </h5>
+                                            <div class="card-text col-6 text-center" ><p class="mt-2 precioEnCarta d-inline-flex" >${precio}</p></div>
+                                        </div>
+
+                                        <p class="card-text ">${descripcion}</p>
+                                        
+                                    </div> 
+   
+                                </div>
                                 
                                 `)
                              }
@@ -239,9 +271,12 @@ function VerificarExistenciarestaurante(){
     
                         else{
                             $(`#${categoriaFix}Carta`).append(`
-                            <h5 class="card-title card-title-pretty d-inline-flex pb-2 platoMenu nombreEnCarta"id="${doc.id}">${nombre}</h5>
-                            <p class="card-text">${descripcion}</p>   
-                            <p class="card-text precioEnCarta">${precio}</p>  
+                            <div class="row" style=" height:45px">
+                                <h5 class="card-title  platoMenu nombreEnCarta col-6 "id="${doc.id}" > <p class=" card-title-pretty d-inline-flex text-capitalize">${nombre}</p> </h5>
+                                <div class="card-text col-6 text-center" ><p class="mt-2 precioEnCarta d-inline-flex" >${precio}</p></div>
+                            </div>
+
+                            <p class="card-text ">${descripcion}</p>
                             `)
                         }
                     }
@@ -300,6 +335,7 @@ document.getElementById("button_pedir").addEventListener("click", function(){
                     $(".quitarPlatoCarta").remove()
                 }
                 if(numero_platos_carta=== 0 && numero_almuerzos===0){
+                    console.log("debemos quitar hacer pedido")
                     $(".notas").remove()
                     $(".hacerpedido").css("display","none")
                 }
@@ -310,19 +346,22 @@ document.getElementById("button_pedir").addEventListener("click", function(){
 
                 
                 if(tipo==='cliente'){
+             
                     $(".modalToHide").css("display","block")
                     $(".modal-body-pedido").css("display","block")
                     $(".btn-group").css("display","block")
                     $(".fieldTotal").remove()
-                    $(".atrasBoton").remove()
-                    $(".enviarOrden").remove()
+                    $(".atras-enviar").css("display","none")
                     $(".almuerzoDia").empty()
                     $(".PlatoDeLaCarta").empty()
+                    $(".botones-adicionar-to-hide").css("display","block")
+                    $(".botones-quitar-to-hide").css("display","block")
                    
                     $(".ModalHacerPedido").empty()
                     $("#modal-pedido").modal()
-                    $(".adicionarMenuCarta").css("display","block")
-                    $(".adicionarMenu").css("display","block")
+                   
+
+
 
                 }
                 else{
@@ -346,14 +385,14 @@ $(".carta-click").click(function(){
     console.log("click en menu")
     $(".carta-click").addClass("navigation-select")
     $(".menu-click").removeClass("navigation-select")
-    })
+})
 
 
 function AdicionarMenu(){
     $(".notas").remove()
     numero_almuerzos++;
-    $(".almuerzoDia").append( `       <div style="border-bottom: gray 1px solid;" id="almuerzoTitle${numero_almuerzos}">
-                <h5 id="almuerzoTitle">Almuerzo ${numero_almuerzos} </h5>
+    $(".almuerzoDia").append( `       <div id="almuerzoTitle${numero_almuerzos}">
+                <label id="almuerzoTitle" class="opcionFont">Almuerzo ${numero_almuerzos} </label>
                     </div>`)
     var categorias = $(".clase-categoria").map(function() { return this.id;});
                     var i;
@@ -381,7 +420,14 @@ function AdicionarMenu(){
                     
 
     if(numero_almuerzos>0 && $(".quitarMenu").length == 0){
-        $(`<button type="button" class="btn btn-outline-danger col-3 quitarMenu modalButton" onclick="QuitarMenu()">Quitar un Menú</button>`).insertAfter(".adicionarMenu")
+        $(`
+    
+        <button type="button" class="btn btn-labeled col-5 quitarMenu d-flex align-items-center shadow mt-1 mb-1 mr-1 ml-1" onclick="QuitarMenu()" style="  background: transparent ; color: #FB747C; border: solid 2px #FB747C">
+            <span class="btn-label"><i class="material-icons icon d-flex align-items-center mr-1">remove_circle</i></span>
+            <small>Quitar Menú</small>
+        </button>
+        
+        `).insertBefore(".split-quitar")
     }
 
     if(numero_platos_carta!= 0 || numero_almuerzos!=0){
@@ -393,8 +439,9 @@ function AdicionarMenu(){
 
 }
 
-
 function AdicionarPlatoCarta(){
+
+
     // la idea es colocar un Dropdown menu con las opciones de platos de la carta
     var platosCartaID= $(".nombreEnCarta").map(function() { return this.id;});
     var platosCartaNombres= $(".nombreEnCarta").map(function() { return $( this ).text();});
@@ -405,9 +452,9 @@ function AdicionarPlatoCarta(){
     numero_platos_carta++;
 
     console.log(`El numero de almuerzos a la carta es ${numero_platos_carta}`)
-    $(".PlatoDeLaCarta").append( `       <div style="border-bottom: gray 1px solid;" id="PlatoCarta${numero_platos_carta}">
-            <label for="OpcionCarta${numero_platos_carta}" id="almuerzoTitle">Opción ${numero_platos_carta} de la carta</label>
-            <select id="OpcionCarta${numero_platos_carta}" class="form-control" name="OpcionCarta${numero_platos_carta}" >
+    $(".PlatoDeLaCarta").append( `       <div id="PlatoCarta${numero_platos_carta}">
+            <label for="OpcionCarta${numero_platos_carta}" id="almuerzoTitle" class="opcionFont">Opción ${numero_platos_carta} de la carta</label>
+            <select id="OpcionCarta${numero_platos_carta}" class="form-control mb-3" name="OpcionCarta${numero_platos_carta}" >
             </select>
         </div>`)
         var i;
@@ -426,7 +473,15 @@ function AdicionarPlatoCarta(){
        </div> `)
 
        if(numero_platos_carta>0 && $(".quitarPlatoCarta").length == 0){
-        $(`<button type="button" class="btn btn-outline-danger col-3 quitarPlatoCarta modalButton" onclick="QuitarPlatoCarta()">Quitar Plato Carta</button>`).insertAfter(".adicionarMenuCarta")
+        $(`
+        
+        
+        <button type="button" class="btn btn-labeled col-5 quitarPlatoCarta  d-flex align-items-center shadow mt-1 mb-1 mr-1 ml-1" onclick="QuitarPlatoCarta()" style="  background: transparent ; color: #F9A624; border: solid 2px #F9A624">
+            <span class="btn-label"><i class="material-icons icon d-flex align-items-center mr-1">remove_circle</i></span>
+            <small>Quitar plato de la Carta</small>
+        </button>
+        `).insertAfter(".split-quitar")
+    
     }
 
     if(numero_platos_carta!= 0 || numero_almuerzos!=0){
@@ -532,9 +587,7 @@ function crearUsuario(event){
 			title:"Advertencia",
 			  text:"Debes llenar todos los campos",
 			  icon:"warning"
-		  }).then(function(){
-            $("#modal-usuario").modal('toggle');
-          })
+		  })
 	}
 
 	else{
@@ -560,7 +613,15 @@ function crearUsuario(event){
 					  text:"Revisa tu email y regresa para pedir",
 					  icon:"success"
 				  
-				  })
+				  }).then(function(){
+                    $("form").animate({height: "toggle", opacity: "toggle"}, "slow");
+      
+                    $(".login-form").css("display","block")
+                    $(".forgot-form").css("display","none")
+                    $(".register-form").css("display","none")
+                    $(".modal-producto-title").empty()
+                    $(".modal-producto-title").append("Ingresa tu usuario y contraseña")
+                  })
 
 			  }).catch(function(error) {
 				alert(error)
@@ -588,12 +649,28 @@ function AutenticarUsuario(event){
     .then(result=>{
     	if(result.user.emailVerified){
             swal({
-                title:"Check",
+                title:"¡Listo!",
                   text:"Bienvenido",
                   icon:"success"
               
               }).then(function(){
-                $("#modal-usuario").modal('toggle');
+                $("#modal-usuario").modal("toggle")
+                $(".hacerpedido").css("display","none")
+                $(".modalToHide").css("display","block")
+                $(".modal-body-pedido").css("display","block")
+                $(".btn-group").css("display","block")
+                $(".fieldTotal").remove()
+                $(".atras-enviar").css("display","none")
+                $(".almuerzoDia").empty()
+                $(".PlatoDeLaCarta").empty()
+                $(".botones-adicionar-to-hide").css("display","block")
+                $(".botones-quitar-to-hide").css("display","block")
+               
+                $(".ModalHacerPedido").empty()
+                $("#modal-pedido").modal()
+                
+
+                $("#modal-pedido").modal()
               })
     	
 		}
@@ -620,7 +697,13 @@ function AutenticarUsuario(event){
   	})
     
     .catch(function (error) {
-    alert(error)
+        swal({
+            title:"Lo sentimos",
+              text:"Verifica tu Email o contraseña",
+              icon:"error"
+          
+          })
+ 
 	  console.log(error);
 
     });
@@ -666,6 +749,11 @@ firebase.auth().onAuthStateChanged(user => {
     var consulta_usuario=db.collection('clientes').where("uid","==",user.uid)
     consulta_usuario.get()
     .then(function(querySnapshot){
+
+        if(querySnapshot.empty){
+            $(".direccion-space").empty()
+            $(".direccion-space").append(`<p>Debes ingresar como cliente para pedir</p>`)
+        }
 
     querySnapshot.forEach(function(doc){
          var direccionEntrega= doc.data().dir
@@ -713,8 +801,9 @@ function GuardarInformacionCliente(name,email,password,dir,tel,userUid) {
 		uid:userUid,
 	})
     .then(function() {
-    console.log("Document successfully written!");
-    firebase.auth().signOut()
+        console.log("Document successfully written!");
+        firebase.auth().signOut()
+        
     })
     .catch(function(error) {
     console.error("Error writing document: ", error);
@@ -728,19 +817,33 @@ function HacerPedido(){
     var categorias = $(".clase-categoria").map(function() { return this.id;});
 
     if($(".atrasBoton").length == 0){
-        $(`<button type="button" class="btn btn-outline-danger col-3 atrasBoton" onclick="Atras()">Atras</button>`).insertAfter(".cerrar")
-        $(`<button type="button" class="btn btn-primary col-3 enviarOrden" onclick="EnviarOrden()">Enviar Orden</button>`).insertAfter(".cerrar")
+        //$(`<button type="button" class="btn btn-outline-danger col-3 atrasBoton" onclick="Atras()">Atras</button>`).insertAfter(".hacerpedido")
+        //$(`<button type="button" class="btn btn-primary col-3 enviarOrden" onclick="EnviarOrden()">Enviar Orden</button>`).insertAfter(".hacerpedido")
+
+        $(".atras-enviar-add").append(`
+        <button type="button" class="btn btn-labeled col-5 d-flex align-items-center shadow mt-1 mb-1 mr-1 ml-1 atrasBoton" onclick="Atras()" style="background: transparent ; color: #FB747C;border: solid 2px #FB747C"">
+            <span class="btn-label"><i class="material-icons icon d-flex align-items-center mr-1">add_circle</i></span>
+            <small>Atras</small>
+      </button>
+
+      <button type="button" class="btn btn-labeled col-5 d-flex align-items-center shadow mt-1 mb-1 mr-1 ml-1" onclick="EnviarOrden()" style="background: #4BD143; color: white;">
+        <span class="btn-label"><i class="material-icons icon d-flex align-items-center mr-1">add_circle</i></span>
+        <small>Enviar</small>
+    </button>
+        
+        `)
     }
 
+    $(".modal-body-pedido").animate({height: "toggle", opacity: "toggle"}, "slow");
+    $(".modal-body-pedido").animate({height: "toggle", opacity: "toggle"}, "fast");
+
     $(".modalToHide").css("display","none")
-    $(".adicionarMenu").css("display","none")
-    $(".quitarMenu").css("display","none")
-    $(".atrasBoton").css("display","block")
+    $(".atras-enviar").css("display","block")
+   
+   
+    $(".botones-quitar-to-hide").css("display","none")
+    $(".botones-adicionar-to-hide").css("display","none")
     $(".hacerpedido").css("display","none")
-    $(".adicionarMenuCarta").css("display","none")
-    $(".quitarPlatoCarta").css("display","none")
-    
-    $(".enviarOrden").css("display","block")
     
     $(".ModalHacerPedido").css("display","block")
     $(".ModalHacerPedido").empty()
@@ -750,7 +853,7 @@ function HacerPedido(){
     if(numero_almuerzos >0){
 
         $(".ModalHacerPedido").append(`
-        <h5>Resumen del pedido Menú</h5>
+        <h5 class="resumen-title">Resumen del pedido Menú</h5>
         <table class="table table-sm TablaHacerPedido">
         <thead>
         <tr class="headerTablaHacerPedido">
@@ -762,6 +865,12 @@ function HacerPedido(){
 
 
         </tbody>
+
+        </table>
+        <div class="row subtotal-menu ">
+        
+        </div>
+
 
 
         
@@ -808,7 +917,7 @@ function HacerPedido(){
     if(numero_platos_carta>0){
         $(".ModalHacerPedido").append(`
         </table>
-            <h5>Resumen del pedido Carta</h5>
+            <h5 class="resumen-title" >Resumen del pedido Carta</h5>
             <table class="table table-sm TablaHacerPedidoCarta">
             <thead>
             <tr class="headerTablaHacerPedidoCarta">
@@ -822,6 +931,9 @@ function HacerPedido(){
             </tbody>
 
         </table>
+        <div class="row subtotal-carta ">
+        
+        </div>
         
         `)
         $(".headerTablaHacerPedidoCarta").empty()
@@ -870,11 +982,27 @@ function HacerPedido(){
     const precio_menus=precio*numero_almuerzos
     const granTotal=precio_menus+total_platos_carta
     console.log(granTotal)
-    $( `<div class="fieldTotal"><p class="totalPagar">Total</p> <small class="GranTotal">${granTotal}</small></div>`).insertAfter( ".ModalHacerPedido" );
+    $(".subtotal-menu").append( `<p class="col-12 text-right align-self-center "><span class="subtotal-title"> Subtotal Menú:</span> $${precio_menus}</p> `)
+    $(".subtotal-carta").append(`<p class="col-12 text-right align-self-center "><span class="subtotal-title"> Subtotal Carta:</span> $${total_platos_carta}</p> `)
+
+    $( `<div class="fieldTotal">
+            <div class="container-fluid">
+                <div class="row">
+                <div class="col-12 totalPagar text-right">
+                    <p class="subtotal-title">Total: <span class="GranTotal">$${granTotal}</span> </p> 
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        `).insertAfter( ".ModalHacerPedido" );
 
     var notas=document.forms["PedidoForm"][`notas`].value
     if(notas!=""){
-    $( `<p>Notas</p> <small>${notas}</small>`).insertAfter( ".totalPagar" );
+    $( `<div class="col-12 ">
+        <p class="subtotal-title">Notas: <small style="color:black;">${notas}</small> </p> 
+        </div>
+    `).insertBefore( ".totalPagar" );
 
     }
 
@@ -884,16 +1012,22 @@ function HacerPedido(){
 }
 
 function Atras(){
+    $(".modal-body-pedido").animate({height: "toggle", opacity: "toggle"}, "slow");
+    $(".modal-body-pedido").animate({height: "toggle", opacity: "toggle"}, "fast");
+    //quitar el total 
     $(".fieldTotal").remove()
+    //Muestra el modal de formulario
     $(".modalToHide").css("display","block")
-    $(".modal-body-pedido").css("display","block")
-    $(".adicionarMenu").css("display","block")
-    $(".quitarMenu").css("display","block")
-    $(".atrasBoton").css("display","none") 
-    $(".enviarOrden").css("display","none") 
+    //este modal es como reduntante
+    //$(".modal-body-pedido").css("display","block")
+
+    
+    $(".atras-enviar").css("display","none") 
+
     $(".hacerpedido").css("display","block")
-    $(".adicionarMenuCarta").css("display","block")
-    $(".quitarPlatoCarta").css("display","block")
+
+    $(".botones-adicionar-to-hide").css("display","block")
+    $(".botones-quitar-to-hide").css("display","block")
 
     $(".ModalHacerPedido").css("display","none")
 }
@@ -1061,16 +1195,27 @@ function cambiar_direccion(){
     });
 }
 
-function LocateLogo(uid_restaurante,nombreRestaurante){
+function LocateLogo(uid_restaurante,nombreRestaurante,direccion_restaurante){
 
     $(".header-portada").append(
         `
-        <div class="centered ">
+        <div class="centered " >
             <div class="image shadow-lg">
             </div>
-            <div class="mt-5 row">
-                <p class="pide-en col-12">Pide en ${nombreRestaurante}</p>
-            </div>
+
+        </div>
+
+
+        <div class="centered-second" style="top:70%">
+         
+            <p class="pide-en col-12" >Pide en ${nombreRestaurante}</p>
+
+        </div>
+
+        <div class="centered-second" style="top:90%">
+         
+            <p class="pide-en col-12 " >${direccion_restaurante}</p>
+
         </div>
 
 
