@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="./css/clientes.css"/>
-    <title id="titulo-Restaurante">Cliente</title>
+    <title>Cliente | Almuerza.co</title>
 </head>
 <body>
 
@@ -26,8 +26,8 @@
       <span ><i class="material-icons icon">arrow_forward</i></span>
   </button>
   
-  <a class="navbar-brand ml-3" href="#">
-      <!-- <img class="logo"src="./images/zaboo-logo_2.svg" width="120" height="40" alt=""> -->
+  <a class="navbar-brand ml-3" href="#" style=" padding: 0px; margin: 0px;">
+    <img class="logo"src="../restaurantes/assets/img/brand-logo.png" height="70" alt="" style="padding: 0px;"> 
   </a>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,10 +42,9 @@
           <span class="user-name"> </span> <i class="material-icons icon">account_circle</i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item logout" href="#"><i class="material-icons icon">exit_to_app</i>Logout</a>
-          <a class="dropdown-item settings" href="#"><i class="material-icons icon ">settings</i>Settings</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item assistance" href="#" data-toggle="modal" data-target="#assistanceModal"><i class="material-icons icon">email</i>Inmediate assistance</a>
+          <a class="dropdown-item logout" href="#"><i class="material-icons icon" >exit_to_app</i>Salir</a>
+          <a class="dropdown-item settings" href="#"><i class="material-icons icon ">settings</i>Configuración</a>
+                   
         </div>
       </li>
 
@@ -57,7 +56,7 @@
         <div class="d-flex" id="wrapper">
         
           <!-- Sidebar -->
-          <div class=" bg-zaboo-custom1 border-right fixed-left" id="sidebar-wrapper">
+          <div class=" bg-zaboo-custom1 border-right " id="sidebar-wrapper">
             <div class="sidebar-heading"> 
               <header class="avatar">
               <div class="image-avatar mt-5"></div>
@@ -76,10 +75,11 @@
           <!-- /#sidebar-wrapper -->
           <!-- #Container-->
                
-          <div class="container-fluid mt-5">
-              <div class="row user-items container mt-3">
-                  
-              </div>
+          <div id="logoImagen"></div>
+          <div class="container-fluid mt-5 background-body-container">
+            <div class="row user-items container mt-5 " style=" float: none; margin: 0 auto;" >
+                
+            </div>
           </div>
         </div>
 
