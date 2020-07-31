@@ -92,6 +92,7 @@ function pedidosUsuario(user){
     
     consulta_pedidos=db.collection('pedidos').where("uid_cliente","==",user.uid).orderBy("hora_pedido", "desc")
     .onSnapshot(function(querySnapshot) {
+
         $(".user-items").empty()
         $(".user-items").append(`
         <h3 class="col-12 d-flex flex-row-reverse" style="font-size:30px; color: #cccccc;"><i class="material-icons icon " style="font-size:30px;">restaurant_menu</i> Mis pedidos  </h3>
@@ -100,12 +101,12 @@ function pedidosUsuario(user){
                 <table class="table table-hover table">
                     <thead class="thead-dark">
                     <tr class="TablaPedidosHeader">
-                        <th scope="col">Fecha</th>
+                        <th scope="col" class="fecha-corner">Fecha</th>
                         <th scope="col">Restaurante</th>
                         <th scope="col">Pedido</th>
                         <th scope="col">Total</th>
                         <th scope="col">Notas</th>
-                        <th scope="col">Estado</th>                    
+                        <th scope="col" class="fecha-corner" >Estado</th>                    
                     </tr>
                     </thead>
                     <tbody class="TablaPedidosBody">

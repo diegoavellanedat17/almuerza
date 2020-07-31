@@ -14,44 +14,44 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="./css/clientes.css"/>
-    <title>Cliente | Almuerza.co</title>
+    <title> Cliente | Almuerza.co</title>
 </head>
 <body>
 
   
-          <!-- navbar -->
-<!-- navbar -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-zaboo-custom ">
-  <button class="navbar-toggler"id="menu-toggle" type="button">
-      <span ><i class="material-icons icon">arrow_forward</i></span>
-  </button>
-  
-  <a class="navbar-brand ml-3" href="#" style=" padding: 0px; margin: 0px;">
-    <img class="logo"src="../restaurantes/assets/img/brand-logo.png" height="70" alt="" style="padding: 0px;"> 
-  </a>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+        <!-- navbar -->
+          <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-zaboo-custom ">
+              <button class="navbar-toggler"id="menu-toggle" type="button">
+                  <span ><i class="material-icons icon">arrow_forward</i></span>
+              </button>
+              
+              <a class="navbar-brand ml-3" href="#" style=" padding: 0px; margin: 0px;">
+                <img class="logo"src="../restaurantes/assets/img/brand-logo.png" height="70" alt="" style="padding: 0px;"> 
+              </a>
+              
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
 
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="user-name"> </span> <i class="material-icons icon">account_circle</i>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item logout" href="#"><i class="material-icons icon" >exit_to_app</i>Salir</a>
-          <a class="dropdown-item settings" href="#"><i class="material-icons icon ">settings</i>Configuración</a>
-                   
-        </div>
-      </li>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="user-name"> </span> <i class="material-icons icon">account_circle</i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item logout" href="#"><i class="material-icons icon" >exit_to_app</i>Salir</a>
+                      <a class="dropdown-item settings" href="#"><i class="material-icons icon ">settings</i>Configuración</a>
+                              
+                    </div>
+                  </li>
 
-    </ul>
+                </ul>
 
-  </div>
-</nav>
+              </div>
+          </nav>
+        <!-- navbar -->
 
         <div class="d-flex" id="wrapper">
         
@@ -59,9 +59,11 @@
           <div class=" bg-zaboo-custom1 border-right " id="sidebar-wrapper">
             <div class="sidebar-heading"> 
               <header class="avatar">
-              <div class="image-avatar mt-5"></div>
-              <!-- <img src="https://api.adorable.io/avatars/187/asis@adorable.io.png" /> -->
-              <h2 class="font-weight-bold h4 mt-3 user-name" id="SideUserName"></h2>
+                <div class="image-avatar mt-5"></div>
+                <!-- <img src="https://api.adorable.io/avatars/187/asis@adorable.io.png" /> -->
+                <div class="divUserName">
+                  <h2 class=" h4 mt-3 user-name text-center" id="SideUserName"></h2>
+                  </div>
               </header>
             </div>
             <div class="list-group list-group-flush ">
@@ -73,15 +75,16 @@
             </div>
           </div>
           <!-- /#sidebar-wrapper -->
+
           <!-- #Container-->
                
-          <div id="logoImagen"></div>
           <div class="container-fluid mt-5 background-body-container">
             <div class="row user-items container mt-5 " style=" float: none; margin: 0 auto;" >
                 
             </div>
           </div>
         </div>
+         <!-- #Container-->
 
          
     <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
@@ -98,7 +101,16 @@
       $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
+        console.log("oresed")
       });
+
+      $(window).resize(function(){
+            var width = $(window).width();
+            if(width > 960){
+            $('#wrapper').removeClass('toggled');
+            }
+            })
+        .resize();//trigger the resize event on page load.
       
     </script>
     

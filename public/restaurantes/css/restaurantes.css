@@ -14,6 +14,7 @@
     padding: 0px;
     font-size: 1.2rem;
     
+    
   }
 
   .avatar {
@@ -75,6 +76,7 @@
 .divUserName{
   max-width: 180px !important;
 }
+
 .bg-zaboo-custom{
     background: linear-gradient(90deg, #FB747C 70% ,#F9A624 100%);
     opacity: 1;
@@ -247,6 +249,7 @@ hr.style3 {
   
   #sidebar-wrapper {
     
+    
     min-height: 100vh;
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
@@ -254,7 +257,7 @@ hr.style3 {
     -o-transition: margin .25s ease-out;
     transition: margin .25s ease-out;
     position: fixed;
-    
+   
     overflow-x: hidden;
     
     z-index: 5;
