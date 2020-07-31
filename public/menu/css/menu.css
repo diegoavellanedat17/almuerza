@@ -44,7 +44,9 @@ a:link, a:visited{
 }
 
 
-
+.header-portada{
+  margin-top:70px;
+}
 
 
 
@@ -52,7 +54,7 @@ a:link, a:visited{
   border-top: transparent !important;
   border-right: transparent !important;
   border-left: transparent !important;
-  border: solid 3px #F9A624;
+  border: solid 3px  #F9A624;
 }
 
 .categoria-name{
