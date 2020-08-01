@@ -802,7 +802,31 @@ firebase.auth().onAuthStateChanged(user => {
 });
 
 function user_dashboard(){
-    window.location = '../clientes/clientes.html'
+    var user = firebase.auth().currentUser;
+    var uid=user.uid
+    var consulta_restaurantes=db.collection('restaurantes').where("uid","==",uid)
+    consulta_restaurantes.get()
+    .then(function(querySnapshot){
+        if(querySnapshot.empty){
+
+            window.location = '../clientes/clientes.html'//redirigiendo al html de prueba mientras miramos donde redireccionamos para realizar los pedidos
+        }
+        else{
+            querySnapshot.forEach(function(doc){
+               
+                const tipo=doc.data().tipo
+                if(tipo ==='restaurante'){
+                    window.location = '../restaurantes/restaurantes.html'
+                }
+                else{
+                    firebase.auth().signOut()
+                    window.location = '../login.html'
+                }
+            })
+        }
+        
+    })
+
 }
 
 function GuardarInformacionCliente(name,email,password,dir,tel,userUid) {
