@@ -752,34 +752,35 @@ var convertImgToDataURLviaCanvas = function(url, callback) {
 
 //descargar PDF
 function DescargarPDF(){
+    console.log("descargar")
     var user = firebase.auth().currentUser;
     var nombreRestaurante=user.displayName;
     var src=$("#imagenQR").attr("src")
-    if($('#logoImagen').length){
+    if($('#logoImagen').is(':empty')){
         
-        var Logosrc=$("#logoImagen").text()
-
-    convertImgToDataURLviaCanvas( Logosrc, function( base64_data ) {
-
-        console.log( base64_data );
         var doc = new jsPDF()
-        var ratio=logo_width/logo_height
+
         doc.text(`Código QR ${nombreRestaurante} !`, 10, 10)
         doc.addImage(src, 'JPEG', 50,50, 100, 100)
-        doc.addImage(base64_data, 'JPEG', 80, 20, 40, 40/ratio)
+
         doc.save(`${nombreRestaurante}.pdf`)
-        
-    } );
 
     }
     else{
     
-        var doc = new jsPDF()
+        var Logosrc=$("#logoImagen").text()
 
-        doc.text(`Código QR ${nombreRestaurante} !`, 10, 10)
-        doc.addImage(src, 'JPEG', 50,50, 100, 100)
-
-        doc.save('a4.pdf')
+        convertImgToDataURLviaCanvas( Logosrc, function( base64_data ) {
+    
+            console.log( base64_data );
+            var doc = new jsPDF()
+            var ratio=logo_width/logo_height
+            doc.text(`Código QR ${nombreRestaurante} !`, 10, 10)
+            doc.addImage(src, 'JPEG', 50,50, 100, 100)
+            doc.addImage(base64_data, 'JPEG', 80, 20, 40, 40/ratio)
+            doc.save(`${nombreRestaurante}.pdf`)
+            
+        } );
         
     }
     
