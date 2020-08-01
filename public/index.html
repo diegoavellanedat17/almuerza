@@ -1,61 +1,341 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Almuerza.co </title>
+<html lang="en">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/7.17.1/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/7.17.1/firebase-auth.js"></script>
-    <script defer src="/__/firebase/7.17.1/firebase-database.js"></script>
-    <script defer src="/__/firebase/7.17.1/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/7.17.1/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Bienvenido a Almuerza.co Página en contrucción</h2>
-      <a href="./login.html">Click aca para entrar</a>
-      
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+  <title>Bienvenido | Almuerza.co</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
 
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Bootslander - v2.2.0
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <a href="https://wa.me/573203554051" class="float" target="_blank" >
+    <i class="fa fa-whatsapp my-float"></i>
+  </a>
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center">
+
+      <div class="logo mr-auto">
+        <!--<h1 class="text-light"><a href="index.html"><span>Bootslander</span></a></h1>-->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="index.html"><img src="assets/img/brand-logo.png" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="#hero">Inicio</a></li>
+          <li><a href="#about">Carácteristicas</a></li>
+          <li><a href="#details">Solución</a></li>
+          <li><a href="#pricing">Precios</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
+          <div data-aos="zoom-out">
+            <h1>Tu menú ahora 100% digital con <span class="almuerza-estilo">Almuerza.co</span></h1>
+            <h2>Es momento de digitalizar tu restaurante y convertirlo en uno del siglo XXI a bajo costo.</h2>
+            <div class="text-center text-lg-left">
+              <a href="./login.html" class="btn-get-started scrollto">Comencemos</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
+          <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+      </defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+      </g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+      </g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+      </g>
+    </svg>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch" data-aos="fade-right">
+
+
+            
+          </div>
+
+          <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
+            <h3>¿Por qué necesito Almuerza.co?</h3>
+            <p>La adaptación e innovación es la clave del éxito en este mundo en constante cambio. Te ofrecemos una solución moderna y eficaz para las necesidades de tu restaurante.</p>
+
+            <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
+              <div class="icon"><i class="bx bx-dish"></i></div>
+              <h4 class="title"><a href="">Carta Digital.</a></h4>
+              <p class="description">Puedes crear tu menú 100% digital para que tus clientes sepan todos los días que les tienes preparado.</p>
+            </div>
+
+            <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
+              <div class="icon"><i class="bx bx-link"></i></div>
+              <h4 class="title"><a href="">Tu link y código QR personalizado.</a></h4>
+              <p class="description">Tus clientes podrán acceder a tu carta a través de tu link y código QR personalizado.</p>
+            </div>
+
+            <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
+              <div class="icon"><i class="bx bx-wifi"></i></div>
+              <h4 class="title"><a href="">Pedidos Online.</a></h4>
+              <p class="description">Tus clientes podrán realizar sus pedidos Online desde cualquier dispositivo y tú los recibiras en tiempo real en la plataforma. No más llamadas ni tiempos de espera.</p>
+            </div>
+
+            <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
+              <div class="icon"><i class="bx bx-data"></i></div>
+              <h4 class="title"><a href="">Tus clientes, tus datos.</a></h4>
+              <p class="description">Tendrás acceso a tu propia base de datos con toda la información de tus clientes y su historial de pedidos. En cualquier momento y cualquier lugar.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+   <!-- ======= Details Section ======= -->
+    <section id="details" class="details">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Lo que ofrecemos</h2>
+          <p>La mejor solución</p>
+        </div>
+
+        <div class="row content">
+
+          <div class="col-md-7 pt-4 order-2 order-md-1" data-aos="fade-up">
+            <h3>RESTAURANTES</h3>
+            <p class="font-italic">
+              Le proporcionamos a los restaurantes tradicionales la oportunidad de crear su establecimiento digital dónde podrán compartir a los clientes sus platos y bebidas, de una manera rápida, sencilla y amigable. Les birndamos los siguientes beneficios:
+            </p>
+            <ul>
+              <li><i class="icofont-check"></i> Visibilidad del establecimiento en Google Business</li>
+              <li><i class="icofont-check"></i> Publicidad del restaurantes y distribución códigos QR</li>
+              <li><i class="icofont-check"></i> Programa de beneficios para partners restaurantes</li>
+              <li><i class="icofont-check"></i> Soporte técnico permanente premium</li>
+            </ul>
+            <p>
+              Queremos darle la oportunidad a que todos los restaurantes se beneficien por medio de Almuerza.co y hagan parte de esta era digital necesaria en la nueva normalidad.
+            </p>
+          </div>
+
+          <div class="col-md-5 order-1 order-md-2 " data-aos="fade-right">
+            <img src="assets/img/details.png" class="img-fluid" alt="">
+          </div>
+        </div>
+
+        <!-- End Details Section -->
+
+    <!-- ======= Features Section ======= -->
+    <!-- End Features Section -->
+
+    <!-- ======= Counts Section ======= -->
+    <!-- End Counts Section -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>lAS CUENTAS CLARAS</h2>
+          <p>Un plan, todo incluido. SIN COMISIONES.</p>
+        </div>
+
+        <div class="row justify-content-center" data-aos="fade-left">
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-md-0 ">
+            <div class="box featured shadow" data-aos="zoom-in" data-aos-delay="200">
+              <h3>Plan Estandar</h3>
+              <h4><sup>$</sup>59.900<span> / mes</span></h4>
+              <ul>
+                <li><i class="icofont-check"></i>Menú digital a tu medida</li>
+                <li><i class="icofont-check"></i>Link y código QR perzonalizado</li>
+                <li><i class="icofont-check"></i>Módulo de pedidos en tiempo real e histórico</li>
+                <li><i class="icofont-check"></i>Base de datos de clientes</li>
+                <li><i class="icofont-check"></i>Menú adaptable a múltiples dispositivos</li>
+                <li><i class="icofont-check"></i>Horarios y contacto</li>
+                
+              </ul>
+              <div class="btn-wrap">
+                <a href="./login.html" class="btn-buy">15 días gratis</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+            <div class="box shadow" data-aos="zoom-in" data-aos-delay="400">
+              <span class="advanced" style="font-size: 60%"> 5% Descuento</span>
+              <h3>Plan Anual</h3>
+              <h4><sup>$</sup>679.900<span> / año</span></h4>
+              <ul>
+                <li><i class="icofont-check"></i>Todo lo que incluye nuestro Plan Estandar, por un año, con 5% de descuento.</li>
+                
+              </ul>
+              <div class="btn-wrap">
+                <a href="./login.html" class="btn-buy">Adquierelo ahora</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+    <!-- ======= F.A.Q Section ======= -->
+    <!-- End F.A.Q Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Contacto</h2>
+          <p>Contáctanos</p>
+        </div>
+
+        <div class="row ">
+
+          <div class=" col-12 col-md-4  mr-5 mb-4" data-aos="fade-right" data-aos-delay="100">
+            <div class="info">
+              <div class="address">
+                <i class="icofont-google-map"></i>
+                <h4>Ubicación:</h4>
+                <p>Bogotá, Colombia</p>
+              </div>
+
+              <div class="email">
+                <i class="icofont-envelope"></i>
+                <h4>Email:</h4>
+                <p>soporte@almuerza.co</p>
+              </div>
+
+              <div class="phone">
+                <i class="icofont-phone"></i>
+                <h4>Teléfono:</h4>
+                <p>+57 333 3333333</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          
+          <div class="col-12 col-md-4 " data-aos="fade-right" data-aos-delay="100">
+            <div class="info">
+              <div class="address">
+                <i class="icofont-instagram"></i>
+                <h4>Instagram</h4>
+                <p>@_almuerza.co</p>
+              </div>
+
+              <div class="email">
+                <i class="icofont-facebook"></i>
+                <h4>Facebook</h4>
+                <p></p>
+              </div>
+
+   
+
+            </div>
+
+          </div>
+
+        
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Almuerza.co</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
 </html>
