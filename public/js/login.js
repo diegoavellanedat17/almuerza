@@ -56,24 +56,30 @@ function crearUsuario(event){
 		  })
 	}
 
+	else if (validateAddress(link)!=true){
+		
+		swal({
+			title:"Advertencia",
+			  text:"Recuerda que el link no debe tener caracteres especiales",
+			  icon:"warning"
+		  })
+	}
+
 	else{
-		console.log(`El usuario que quiere crearse es ${name} con email ${email} y contraseña ${password}`)
+
 		// empezamos con el meneito de firebase 
         // como ya tenemos la info vamos a agregarla 
-
-        
-
 		firebase.auth().createUserWithEmailAndPassword(email, password)
 		.then(result=>{
 			result.user.updateProfile({
 				displayName: name
 			})
-			console.log("Entra a creacion de usuario")
+		
 			var user = firebase.auth().currentUser;
 			console.log(user.emailVerified)
 			
 			user.sendEmailVerification().then(function() {
-				console.log("Enviando correo de Verificacion")
+			
 				GuardarInformacionRestaurante(name,email,password,person,nit,tel,user.uid,dir,link)
 				// Email sent.
 
@@ -209,5 +215,13 @@ function GuardarInformacionRestaurante(name,email,password,person,nit,tel,userUi
 
 	//setTimeout(function(){console.log("timer") }, 2000);
 
+}
+
+function validateAddress(string_word){
+    
+    if( /[^a-zA-Z0-9\-\/]/.test( string_word ) ) {
+        return false;
+    }
+    return true;     
 }
 

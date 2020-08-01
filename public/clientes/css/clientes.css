@@ -12,6 +12,10 @@
     opacity: 1;
 }
 
+.icon-user{
+  color: #b3b3b3 !important;
+}
+
 th{
   border: solid 1px red;
 }
