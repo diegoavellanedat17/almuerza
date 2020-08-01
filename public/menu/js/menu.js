@@ -389,14 +389,29 @@ $(".carta-click").click(function(){
 
 
 function AdicionarMenu(){
-    $(".notas").remove()
-    numero_almuerzos++;
-    $(".almuerzoDia").append( `       <div id="almuerzoTitle${numero_almuerzos}">
-                <label id="almuerzoTitle" class="opcionFont">Almuerzo ${numero_almuerzos} </label>
-                    </div>`)
+
     var categorias = $(".clase-categoria").map(function() { return this.id;});
-                    var i;
-                    for (i = 0; i < categorias.length; i++) { 
+    console.log(categorias)
+
+    if(categorias.length===0){
+        	swal({
+			title:"Atención",
+			  text:"El restaurante no tiene un menú del día para hoy",
+			  icon:"error"
+		  }).then(function(){
+              $("#modal-pedido").modal("toggle")
+          })
+    }
+    else{
+
+        $(".notas").remove()
+        numero_almuerzos++;
+        $(".almuerzoDia").append( `       <div id="almuerzoTitle${numero_almuerzos}">
+                    <label id="almuerzoTitle" class="opcionFont">Almuerzo ${numero_almuerzos} </label>
+                        </div>`)
+            var i;
+
+            for (i = 0; i < categorias.length; i++) { 
 
                         $(".almuerzoDia").append( `
                                
@@ -436,6 +451,8 @@ function AdicionarMenu(){
     }
 
     console.log(`El numero de almuerzos es ${numero_almuerzos}`)
+
+    }
 
 }
 
@@ -1108,6 +1125,7 @@ function GuardarPedido(pedido,uid_restaurante,user_uid) {
           }).then(()=>{
             $("#modal-pedido").modal('toggle');
             console.log("cerrar modal")
+            window.location = '../clientes/clientes.html'
           })
         var consulta_restaurantes=db.collection('restaurantes').where("uid","==",uid_restaurante)
         consulta_restaurantes.get()
@@ -1125,7 +1143,7 @@ function GuardarPedido(pedido,uid_restaurante,user_uid) {
                         clientes: clientes
                     })
                     .then(function(){
-                        console.log("metido en restaurantes")
+                       console.log("guardado")
                     })
                     .catch(function(err){
                         console.log(err)
