@@ -121,7 +121,7 @@ function VerificarExistenciarestaurante(){
                              else{
 
 
-                                $(".centro-restaurante").append(`
+                                $(`
 
                                 <h5 class="categoria-name mt-3">${categoria}</h5>
                                 <div class="card shadow" >
@@ -131,7 +131,7 @@ function VerificarExistenciarestaurante(){
                                   </div>
                                   </div>
                                 
-                                `)
+                                `).insertAfter(".centro-restaurante-tercero")
                              }
                               }
             
