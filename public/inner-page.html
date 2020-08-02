@@ -100,9 +100,20 @@
 
     <section class="inner-page">
       <div class="container">
-        <p>
-          Example inner page template
-        </p>
+          <h1>Ingresa to numero para crear una cuenta</h1>
+
+          <form action="">
+
+            <input type="text" id="number" placeholder="3101231232">
+            <div id="recaptcha-container"></div>
+            <button type="button" onclick="phoneAuth()">SendCode</button>
+          </form><br>
+          <h1>Ingresa el codigo de verificacion</h1>
+          <form action="">
+
+            <input type="text" id="verificationCode" placeholder="ingresa tu codigo de verificacion">
+            <button type="button" onclick="codeverify()">Verificar el codigo</button>
+          </form>
       </div>
     </section>
 
@@ -184,7 +195,7 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-  <div id="preloader"></div>
+
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/jquery/jquery.min.js"></script>
@@ -197,8 +208,65 @@
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
 
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script >
+
+    var firebaseConfig = {
+    apiKey: "AIzaSyBjasCFXiGf7JZAdqlG_lo-7XMwLwUJw0E",
+    authDomain: "delifast-7576c.firebaseapp.com",
+    databaseURL: "https://delifast-7576c.firebaseio.com",
+    projectId: "delifast-7576c",
+    storageBucket: "delifast-7576c.appspot.com",
+    messagingSenderId: "415819035666",
+    appId: "1:415819035666:web:9300f229e79d85c0f6d4cb",
+    measurementId: "G-ESS36GVJTN"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var phoneNumber = "+573138869521";
+  var testVerificationCode = "290607";
+
+    window.onload=function () {
+    render();
+  };
+  function render() {
+    window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    recaptchaVerifier.render();
+  }
+  function phoneAuth() {
+    //get the number
+    console.log("aunth")
+    var number=document.getElementById('number').value;
+    //phone number authentication function of firebase
+    //it takes two parameter first one is number,,,second one is recaptcha
+    firebase.auth().signInWithPhoneNumber(phoneNumber,window.recaptchaVerifier).then(function (confirmationResult) {
+        //s is in lowercase
+        window.confirmationResult=confirmationResult;
+        coderesult=confirmationResult;
+        console.log(coderesult);
+        alert("Message sent");
+    }).catch(function (error) {
+        alert(error.message);
+    });
+}
+
+function codeverify() {
+    var code=document.getElementById('verificationCode').value;
+    confirmationResult.confirm(code).then(function (result) {
+        alert("Successfully registered");
+        var user=result.user;
+        console.log(user);
+    }).catch(function (error) {
+        alert(error.message);
+    });
+}
+
+  </script>
 
 </body>
 

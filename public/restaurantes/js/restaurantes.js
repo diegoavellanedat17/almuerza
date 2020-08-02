@@ -753,7 +753,7 @@ var convertImgToDataURLviaCanvas = function(url, callback) {
 //descargar PDF
 function DescargarPDF(){
 
-    console.log("descargar")
+
 
     var user = firebase.auth().currentUser;
     var nombreRestaurante=user.displayName;
@@ -768,7 +768,7 @@ function DescargarPDF(){
             doc.addImage(base_qr_pdf, 'JPEG', 0,0, 210, 300)
             doc.addImage(src, 'JPEG', 55,90, 100, 100)
     
-            doc.save(`${nombreRestaurante}.pdf`)
+           doc.save(`${nombreRestaurante}.pdf`)
 
         })
         
@@ -781,10 +781,10 @@ function DescargarPDF(){
 
         convertImgToDataURLviaCanvas( Logosrc, function( base64_data ) {
     
-            console.log( base64_data );
+            //console.log( base64_data );
 
             convertImgToDataURLviaCanvas(url_pdf_qr,function(base_qr_pdf){
-                console.log(base_qr_pdf)
+                //console.log(base_qr_pdf)
                 var doc = new jsPDF()
                 var ratio=logo_width/logo_height
             
@@ -792,7 +792,8 @@ function DescargarPDF(){
                 doc.addImage(src, 'JPEG', 55,90, 100, 100)
                 doc.addImage(base64_data, 'JPEG', 80, 60, 40, 40/ratio)
                 doc.save(`${nombreRestaurante}.pdf`)
-
+  
+                console.log(doc)
             })
 
 
@@ -1277,7 +1278,7 @@ function EstadoPedido(){
             estado='recibido'
         }
         else{
-            estado='entregado'
+            estado='enviado'
         }
         var actualizar_estado_pedido=db.collection('pedidos').doc(ref_id)
         return actualizar_estado_pedido.update({
