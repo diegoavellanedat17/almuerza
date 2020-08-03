@@ -58,10 +58,14 @@
   text-decoration: none;
 }
 .form .register-form {
-  display: none;
+  display: block;
 }
 .form .forgot-form{
     display: none; 
+}
+
+.form .login-form{
+  display: none; 
 }
 .container {
   position: relative;
