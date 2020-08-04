@@ -143,11 +143,16 @@ $(".real-time").click(function(){
 
         querySnapshot.forEach(function(doc){
             var pedido={}
+            cantidad_menu=0
             var EntradasPedido=doc.data().Entradas
             var PrincipioPedido=doc.data().Principio
             var PlatoFuertePedido=doc.data().PlatoFuerte
             var BebidasPedido=doc.data().Bebidas
             var PedidoCarta=doc.data().carta
+            var ProteinasPedido=doc.data().Proteinas
+            var EnsaladasPedido=doc.data().Ensaladas
+            var PostresPedido=doc.data().Postres
+
             var nombreCliente=doc.data().nombre
             const hora_pedido=doc.data().hora_pedido
             const total=doc.data().total
@@ -156,9 +161,10 @@ $(".real-time").click(function(){
             const estado=doc.data().estado
             var date_pedido= new Date (hora_pedido)
             hora_print=date_pedido.toLocaleString()
-         
+            console.log(hora_print)
             //Primero toca Validar si hay algo dentro del item y no esta creado el header
             if(EntradasPedido!= undefined ){
+                
                 //Meterse a recorrer el arreglo
                 cantidad_menu=EntradasPedido.length
                                 
@@ -244,6 +250,74 @@ $(".real-time").click(function(){
         
             }
 
+                    //Primero toca Validar si hay algo dentro del item y no esta creado el header
+            if(ProteinasPedido!= undefined ){
+            cantidad_menu=ProteinasPedido.length
+        
+                    for (i = 0; i < ProteinasPedido.length; i++) {
+                        //Verificar que exista ese key dentro del objeto
+                        if (!([`menu${[i]}`] in pedido)){// verdadero si no existe el key
+                         
+                            pedido[`menu${[i]}`]=[]
+                            pedido[`menu${[i]}`][0] = ProteinasPedido[i];
+                        }
+                        else{
+                         
+                            var array_aux= pedido[`menu${[i]}`]
+                            array_aux.push(ProteinasPedido[i])
+                            pedido[`menu${[i]}`] = array_aux;
+                        }
+                        //pedido[`menu${[i]}`] = EntradasPedido[i];
+                    }
+            
+            }
+
+            //Primero toca Validar si hay algo dentro del item y no esta creado el header
+            if(EnsaladasPedido!= undefined ){
+                cantidad_menu=EnsaladasPedido.length
+                
+            for (i = 0; i < EnsaladasPedido.length; i++) {
+                //Verificar que exista ese key dentro del objeto
+                    if (!([`menu${[i]}`] in pedido)){// verdadero si no existe el key
+                    
+                        pedido[`menu${[i]}`]=[]
+                        pedido[`menu${[i]}`][0] = EnsaladasPedido[i];
+                        }
+                    else{
+                                 
+                        var array_aux= pedido[`menu${[i]}`]
+                        array_aux.push(EnsaladasPedido[i])
+                        pedido[`menu${[i]}`] = array_aux;
+                        }
+                //pedido[`menu${[i]}`] = EntradasPedido[i];
+                    }
+                    
+            }
+
+                //Primero toca Validar si hay algo dentro del item y no esta creado el header
+            if(PostresPedido!= undefined ){
+                cantidad_menu=PostresPedido.length
+        
+            for (i = 0; i < PostresPedido.length; i++) {
+                //Verificar que exista ese key dentro del objeto
+                if (!([`menu${[i]}`] in pedido)){// verdadero si no existe el key
+                         
+                    pedido[`menu${[i]}`]=[]
+                    pedido[`menu${[i]}`][0] = PostresPedido[i];
+                    }
+                        else{
+                         
+                            var array_aux= pedido[`menu${[i]}`]
+                            array_aux.push(PostresPedido[i])
+                            pedido[`menu${[i]}`] = array_aux;
+                        }
+                        //pedido[`menu${[i]}`] = EntradasPedido[i];
+                    }
+            
+            }
+
+           
+
    
 
             $(".TablaPedidosBody").append(`     <tr id="${doc.id}" onClick="ClickPedido(this.id)">
@@ -291,7 +365,7 @@ $(".real-time").click(function(){
                             });
                     });                            
 
-
+                   
         })
             
         
@@ -570,10 +644,17 @@ $(".pedidos").click(function(){
 
       querySnapshot.forEach(function(doc){
         var pedido={}
+        cantidad_menu=0
+        // las categorias posibles 
         var EntradasPedido=doc.data().Entradas
         var PrincipioPedido=doc.data().Principio
         var PlatoFuertePedido=doc.data().PlatoFuerte
         var BebidasPedido=doc.data().Bebidas
+        var PlatoFuertePedido=doc.data().PlatoFuerte
+        var ProteinasPedido=doc.data().Proteinas
+        var EnsaladasPedido=doc.data().Ensaladas
+        var PostresPedido=doc.data().Postres
+
         var PedidoCarta=doc.data().carta
         var nombreCliente=doc.data().nombre
         const hora_pedido=doc.data().hora_pedido
@@ -583,9 +664,10 @@ $(".pedidos").click(function(){
         const estado=doc.data().estado
         var date_pedido= new Date (hora_pedido)
         hora_print=date_pedido.toLocaleString()
-        console.log(date_pedido)
+    
         //Primero toca Validar si hay algo dentro del item y no esta creado el header
         if(EntradasPedido!= undefined ){
+        
             //Meterse a recorrer el arreglo
             cantidad_menu=EntradasPedido.length
                             
@@ -608,6 +690,7 @@ $(".pedidos").click(function(){
         //Primero toca Validar si hay algo dentro del item y no esta creado el header
                     
         if(PrincipioPedido!= undefined ){
+         
             cantidad_menu=PrincipioPedido.length
 
             for (i = 0; i < PrincipioPedido.length; i++) {
@@ -630,6 +713,7 @@ $(".pedidos").click(function(){
         //Primero toca Validar si hay algo dentro del item y no esta creado el header
 
         if(PlatoFuertePedido!= undefined ){
+     
             cantidad_menu=PlatoFuertePedido.length
 
             for (i = 0; i < PlatoFuertePedido.length; i++) {
@@ -651,6 +735,7 @@ $(".pedidos").click(function(){
         }
         //Primero toca Validar si hay algo dentro del item y no esta creado el header
         if(BebidasPedido!= undefined ){
+      
             cantidad_menu=BebidasPedido.length
 
             for (i = 0; i < BebidasPedido.length; i++) {
@@ -671,7 +756,76 @@ $(".pedidos").click(function(){
     
         }
 
-        console.log(pedido)
+        //Primero toca Validar si hay algo dentro del item y no esta creado el header
+        if(ProteinasPedido!= undefined ){
+
+            cantidad_menu=ProteinasPedido.length
+        
+                    for (i = 0; i < ProteinasPedido.length; i++) {
+                        //Verificar que exista ese key dentro del objeto
+                        if (!([`menu${[i]}`] in pedido)){// verdadero si no existe el key
+                         
+                            pedido[`menu${[i]}`]=[]
+                            pedido[`menu${[i]}`][0] = ProteinasPedido[i];
+                        }
+                        else{
+                         
+                            var array_aux= pedido[`menu${[i]}`]
+                            array_aux.push(ProteinasPedido[i])
+                            pedido[`menu${[i]}`] = array_aux;
+                        }
+                        //pedido[`menu${[i]}`] = EntradasPedido[i];
+                    }
+            
+        }
+
+        //Primero toca Validar si hay algo dentro del item y no esta creado el header
+        if(EnsaladasPedido!= undefined ){
+         
+            cantidad_menu=EnsaladasPedido.length
+                
+            for (i = 0; i < EnsaladasPedido.length; i++) {
+                //Verificar que exista ese key dentro del objeto
+                    if (!([`menu${[i]}`] in pedido)){// verdadero si no existe el key
+                    
+                        pedido[`menu${[i]}`]=[]
+                        pedido[`menu${[i]}`][0] = EnsaladasPedido[i];
+                        }
+                    else{
+                                 
+                        var array_aux= pedido[`menu${[i]}`]
+                        array_aux.push(EnsaladasPedido[i])
+                        pedido[`menu${[i]}`] = array_aux;
+                        }
+                //pedido[`menu${[i]}`] = EntradasPedido[i];
+                    }
+                    
+        }
+
+        //Primero toca Validar si hay algo dentro del item y no esta creado el header
+        if(PostresPedido!= undefined ){
+         
+            cantidad_menu=PostresPedido.length
+        
+            for (i = 0; i < PostresPedido.length; i++) {
+                //Verificar que exista ese key dentro del objeto
+                if (!([`menu${[i]}`] in pedido)){// verdadero si no existe el key
+                         
+                    pedido[`menu${[i]}`]=[]
+                    pedido[`menu${[i]}`][0] = PostresPedido[i];
+                    }
+                        else{
+                         
+                            var array_aux= pedido[`menu${[i]}`]
+                            array_aux.push(PostresPedido[i])
+                            pedido[`menu${[i]}`] = array_aux;
+                        }
+                        //pedido[`menu${[i]}`] = EntradasPedido[i];
+                    }
+            
+        }
+
+        
 
         $(".TablaPedidosBody").append(`     <tr id="${doc.id}" onClick="ClickPedido(this.id)">
                                                 <td scope="row" class="hour"><small>${hora_print}</small></th>
@@ -707,6 +861,7 @@ $(".pedidos").click(function(){
                                 <td ><small>${total}</small></td>
                                 <td ><small>${estado}</small></td>`)
 
+
         // para la tabla de filtrado
 
         $(document).ready(function(){
@@ -717,7 +872,6 @@ $(".pedidos").click(function(){
                         });
                         });
                 });                            
-
 
     })
 
