@@ -102,7 +102,7 @@ function VerificarExistenciarestaurante(){
                                 `).insertAfter( ".centro-restaurante-first" );
     
                              }
-                             else if(categoriaFix === 'PlatoFuerte'){
+                             else if(categoriaFix === 'PlatoFuerte' || categoriaFix === 'Proteinas' || categoriaFix === 'Ensaladas'){
                                
                                 $(`
 
