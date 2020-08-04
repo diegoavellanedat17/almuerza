@@ -123,12 +123,14 @@ function pedidosUsuario(user){
             var entrada = doc.data().Entradas
             var principio = doc.data().Principio
             var platofuerte = doc.data().PlatoFuerte
+            var proteinas = doc.data().Proteinas
+            var ensaladas = doc.data().Ensaladas
             var bebida = doc.data().Bebidas
             var total = doc.data().total
             var carta=doc.data().carta
             var notas = doc.data().notas
             var estado = doc.data().estado
-            var menu = [entrada, principio, platofuerte, bebida]
+            var menu = [entrada, principio, platofuerte, proteinas, ensaladas, bebida]
             var len
 
             if (platofuerte != undefined){
