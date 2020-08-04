@@ -671,23 +671,39 @@ function AutenticarUsuario(event){
                   icon:"success"
               
               }).then(function(){
-                $("#modal-usuario").modal("toggle")
-                $(".hacerpedido").css("display","none")
-                $(".modalToHide").css("display","block")
-                $(".modal-body-pedido").css("display","block")
-                $(".btn-group").css("display","block")
-                $(".fieldTotal").remove()
-                $(".atras-enviar").css("display","none")
-                $(".almuerzoDia").empty()
-                $(".PlatoDeLaCarta").empty()
-                $(".botones-adicionar-to-hide").css("display","block")
-                $(".botones-quitar-to-hide").css("display","block")
-               
-                $(".ModalHacerPedido").empty()
-                $("#modal-pedido").modal()
-                
+                var user = firebase.auth().currentUser;
+                var consulta_tipo=db.collection('clientes').where("uid","==",user.uid)
+                consulta_tipo.get()
+                .then(function(querySnapshot){
+                    if(querySnapshot.empty){
+                        swal({
+                            title:"Advertencia",
+                              text:"Debes ser de tipo usuario para pedir",
+                              icon:"warning"
+                          }).then(function(){
+                            $("#modal-usuario").modal("toggle")
+                          })
+                    }
+                    else{
+                        $("#modal-usuario").modal("toggle")
+                        $(".hacerpedido").css("display","none")
+                        $(".modalToHide").css("display","block")
+                        $(".modal-body-pedido").css("display","block")
+                        $(".btn-group").css("display","block")
+                        $(".fieldTotal").remove()
+                        $(".atras-enviar").css("display","none")
+                        $(".almuerzoDia").empty()
+                        $(".PlatoDeLaCarta").empty()
+                        $(".botones-adicionar-to-hide").css("display","block")
+                        $(".botones-quitar-to-hide").css("display","block")
+                       
+                        $(".ModalHacerPedido").empty()
+                        $("#modal-pedido").modal()
+                        $("#modal-pedido").modal()
 
-                $("#modal-pedido").modal()
+                    }
+                })
+
               })
     	
 		}
