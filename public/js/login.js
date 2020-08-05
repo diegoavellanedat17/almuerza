@@ -13,7 +13,8 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   var database = firebase.firestore();
-  
+
+
 
 // Lo que queremos es que si un usuario se va a registrar, se meta al formulario de registro
 // el cual tiene la clase register-form/ entonces vamos a crear un formulario register form 
@@ -33,6 +34,8 @@ formulario.addEventListener('submit', crearUsuario);
 authForm.addEventListener('submit', AutenticarUsuario);
 
 var firstTime=false
+
+
 
 function crearUsuario(event){
 	event.preventDefault();

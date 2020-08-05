@@ -61,11 +61,11 @@
   display: block;
 }
 .form .forgot-form{
-    display: none; 
+    display: block; 
 }
 
 .form .login-form{
-  display: none; 
+  display: block; 
 }
 .container {
   position: relative;

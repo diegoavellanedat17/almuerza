@@ -17,7 +17,7 @@
 </head>
 <body >
 
-<h1 class="titulo-cabecera mb-5 ">Registra acá tu restaurante</h1>
+<h1 class="titulo-cabecera mb-5 "></h1>
 
 <div class="login-page mt-2">
   <div class="form">
@@ -75,6 +75,28 @@
   // 		$(".message a").click(function(){
   //  		$("form").animate({height: "toggle", opacity: "toggle"}, "slow");
   // });
+
+const urlParams = new URLSearchParams(window.location.search);
+const QueryModo = urlParams.get('modo');
+
+console.log(QueryModo)
+
+if(QueryModo==='entrar'){
+
+    $(".titulo-cabecera").append("Inicia Sesión en Almuerza.co")
+  $(".login-form").css("display","block")
+    $(".forgot-form").css("display","none")
+    $(".register-form").css("display","none")
+
+}
+else{
+  $(".titulo-cabecera").append("Registra tu restaurante")
+  $(".login-form").css("display","none")
+    $(".forgot-form").css("display","none")
+    $(".register-form").css("display","block")
+
+
+}
 
 
   $(".register a").click(function(){
