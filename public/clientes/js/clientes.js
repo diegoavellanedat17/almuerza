@@ -86,7 +86,10 @@ function misRestaurantes(user){
             `)               
         })
     })
-    $("#wrapper").toggleClass("toggled");
+    var w = window.innerWidth;
+    if(w<958){
+        $("#wrapper").toggleClass("toggled");
+    }
 }
 
 function pedidosUsuario(user){
@@ -219,7 +222,10 @@ function pedidosUsuario(user){
 })
 })
 
-$("#wrapper").toggleClass("toggled");
+var w = window.innerWidth;
+if(w<958){
+    $("#wrapper").toggleClass("toggled");
+}
 
 }
 
@@ -272,7 +278,12 @@ function misDatos(user){
                                 document.forms["user-data"]["tel"].value=tel;
                             })
                         })
-    $("#wrapper").toggleClass("toggled");
+    var w = window.innerWidth;
+    if(w<958){
+        $("#wrapper").toggleClass("toggled");
+    }
+   
+    
 }
 
 function ActualizarDatos(){
