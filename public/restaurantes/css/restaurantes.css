@@ -33,7 +33,6 @@
     padding-top: 0px !important;
     padding-bottom: 3px;
 
-    
 }
 
 .image{
@@ -224,9 +223,17 @@ body {
  
   }
 
+  .list-group-item{
+    font-size: medium;
+    padding-top: 5px !important;
+    padding-bottom: 5px;
+
+}
+
 .list-group-item:hover{
     font-size: medium;
     opacity: 0.5;
+   
 }
 
 .info-card{
@@ -271,7 +278,7 @@ hr.style3 {
   
   #sidebar-wrapper .list-group {
     width: 15rem;
-  
+    
   }
 
 
