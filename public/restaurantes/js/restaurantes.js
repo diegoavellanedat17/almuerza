@@ -152,6 +152,7 @@ $(".real-time").click(function(){
             var ProteinasPedido=doc.data().Proteinas
             var EnsaladasPedido=doc.data().Ensaladas
             var PostresPedido=doc.data().Postres
+            var AcompanamientosPedido=doc.data().Acompañamientos
 
             var nombreCliente=doc.data().nombre
             const hora_pedido=doc.data().hora_pedido
@@ -227,6 +228,29 @@ $(".real-time").click(function(){
                     //pedido[`menu${[i]}`] = EntradasPedido[i];
                 }
 
+            }
+
+            //Primero toca Validar si hay algo dentro del item y no esta creado el header
+
+            if(AcompanamientosPedido!= undefined ){
+                cantidad_menu=AcompanamientosPedido.length
+            
+                for (i = 0; i < AcompanamientosPedido.length; i++) {
+                    //Verificar que exista ese key dentro del objeto
+                    if (!([`menu${[i]}`] in pedido)){// verdadero si no existe el key
+                                
+                        pedido[`menu${[i]}`]=[]
+                        pedido[`menu${[i]}`][0] = AcompanamientosPedido[i];
+                        }
+                        else{
+                             
+                        var array_aux= pedido[`menu${[i]}`]
+                        array_aux.push(AcompanamientosPedido[i])
+                            pedido[`menu${[i]}`] = array_aux;
+                        }
+                                //pedido[`menu${[i]}`] = EntradasPedido[i];
+                    }
+            
             }
             //Primero toca Validar si hay algo dentro del item y no esta creado el header
             if(BebidasPedido!= undefined ){
@@ -654,6 +678,7 @@ $(".pedidos").click(function(){
         var ProteinasPedido=doc.data().Proteinas
         var EnsaladasPedido=doc.data().Ensaladas
         var PostresPedido=doc.data().Postres
+        var AcompanamientosPedido=doc.data().Acompañamientos
 
         var PedidoCarta=doc.data().carta
         var nombreCliente=doc.data().nombre
@@ -733,6 +758,29 @@ $(".pedidos").click(function(){
             }
 
         }
+
+                    //Primero toca Validar si hay algo dentro del item y no esta creado el header
+
+                    if(AcompanamientosPedido!= undefined ){
+                        cantidad_menu=AcompanamientosPedido.length
+                    
+                        for (i = 0; i < AcompanamientosPedido.length; i++) {
+                            //Verificar que exista ese key dentro del objeto
+                            if (!([`menu${[i]}`] in pedido)){// verdadero si no existe el key
+                                        
+                                pedido[`menu${[i]}`]=[]
+                                pedido[`menu${[i]}`][0] = AcompanamientosPedido[i];
+                                }
+                                else{
+                                     
+                                var array_aux= pedido[`menu${[i]}`]
+                                array_aux.push(AcompanamientosPedido[i])
+                                    pedido[`menu${[i]}`] = array_aux;
+                                }
+                                        //pedido[`menu${[i]}`] = EntradasPedido[i];
+                            }
+                    
+                    }
         //Primero toca Validar si hay algo dentro del item y no esta creado el header
         if(BebidasPedido!= undefined ){
       
