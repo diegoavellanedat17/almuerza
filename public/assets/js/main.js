@@ -255,7 +255,7 @@ function initMap() {
     },
 
     {
-      position: new google.maps.LatLng(4.6115566, -74.1467496),
+      position: new google.maps.LatLng(4.6109938, -74.1462714),
       type: 'restaurant',
       name:'Donde el Gordo Antonio',
       link: '<div id="content">'+
