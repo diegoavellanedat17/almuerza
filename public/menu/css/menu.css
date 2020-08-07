@@ -22,8 +22,28 @@ html {
   display:none
 }
 
+@media (max-width: 360px) {
+  /* .card-text{
+    font-size: x-small;
+    border: solid green 1px !important;
+    margin-top: 40px;
+  height: 80%;
+  } */
+
+  .card-title-pretty{
+    font-size: 10px;
+    border-top: transparent !important;
+    border-right: transparent !important;
+    border-left: transparent !important;
+    border: solid 3px #FB747C;
+  
+  }
+}
+
+
 .card-text{
   font-size: x-small;
+  /* border: solid red 1px; */
 height: 80%;
 }
 

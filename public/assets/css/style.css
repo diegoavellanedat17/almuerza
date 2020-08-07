@@ -12,6 +12,9 @@ body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
 }
+.user-lat, .user-lon{
+  display: none;
+}
 
 a {
   color: #F39340;
@@ -397,6 +400,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .mobile-nav-active .mobile-nav-toggle i {
   color: #fff;
+}
+/*--------------------------------------------------------------
+# Map section 
+--------------------------------------------------------------*/
+#map{
+  border-radius: 3%;
+  height: 500px;
 }
 
 /*--------------------------------------------------------------

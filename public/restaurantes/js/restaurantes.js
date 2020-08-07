@@ -1360,6 +1360,14 @@ function MostrarMenuActual(){
                                     </tr>
                                     </thead>
                                     <tbody class="menu-item-body">
+                                    <tr class="stopper-entradas"></tr>
+                                    <tr class="stopper-proteinas"></tr>
+                                    <tr class="stopper-principio"></tr>
+                                    <tr class="stopper-acompanamientos"></tr>
+                                    <tr class="stopper-ensaladas"></tr>
+                                    <tr class="stopper-fuerte"></tr>
+                                    <tr class="stopper-bebidas"></tr>
+                                    <tr class="stopper-postres"></tr>
                                     </tbody>
                     </table>
                     
@@ -1383,17 +1391,146 @@ function MostrarMenuActual(){
         }
 
 
-        $(".menu-item-body").append(`
-        <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
-            <td class="${categoria}TablaMenu">${categoria}</td>
-            <td>${nombrePlato}</td>
-            <td>${descripcion}</td>
-            <td>${dias_array}</td>
-            <td>${estado}</td>
-        
-        </tr>
+        if(categoria ==="Entradas"){
+            $(`
+            <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                <td class="${categoria}TablaMenu">${categoria}</td>
+                <td>${nombrePlato}</td>
+                <td>${descripcion}</td>
+                <td>${dias_array}</td>
+                <td>${estado}</td>
+            
+            </tr>
+            
+            `).insertBefore(".stopper-entradas")
+
+        }
+        else if(categoria ==="Proteinas"){
+
+            $(`
+            <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                <td class="${categoria}TablaMenu">${categoria}</td>
+                <td>${nombrePlato}</td>
+                <td>${descripcion}</td>
+                <td>${dias_array}</td>
+                <td>${estado}</td>
+            
+            </tr>
+            
+            `).insertBefore(".stopper-proteinas")
+
+        }
+        else if(categoria ==="Principio"){
+
+            $(`
+            <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                <td class="${categoria}TablaMenu">${categoria}</td>
+                <td>${nombrePlato}</td>
+                <td>${descripcion}</td>
+                <td>${dias_array}</td>
+                <td>${estado}</td>
+            
+            </tr>
+            
+            `).insertBefore(".stopper-principio")
+
+        }
+
+        else if(categoria ==="Acompañamientos"){
+
+            $(`
+            <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                <td class="${categoria}TablaMenu">${categoria}</td>
+                <td>${nombrePlato}</td>
+                <td>${descripcion}</td>
+                <td>${dias_array}</td>
+                <td>${estado}</td>
+            
+            </tr>
+            
+            `).insertBefore(".stopper-acompanamientos")
+
+        }
+
+        else if(categoria ==="Ensaladas"){
+
+            $(`
+            <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                <td class="${categoria}TablaMenu">${categoria}</td>
+                <td>${nombrePlato}</td>
+                <td>${descripcion}</td>
+                <td>${dias_array}</td>
+                <td>${estado}</td>
+            
+            </tr>
+            
+            `).insertBefore(".stopper-ensaladas")
+
+        }
+
+        else if(categoria ==="Plato Fuerte"){
+
+            $(`
+            <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                <td class="${categoria}TablaMenu">${categoria}</td>
+                <td>${nombrePlato}</td>
+                <td>${descripcion}</td>
+                <td>${dias_array}</td>
+                <td>${estado}</td>
+            
+            </tr>
+            
+            `).insertBefore(".stopper-fuerte")
+
+        }
+
+        else if(categoria ==="Bebidas"){
+
+            $(`
+            <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                <td class="${categoria}TablaMenu">${categoria}</td>
+                <td>${nombrePlato}</td>
+                <td>${descripcion}</td>
+                <td>${dias_array}</td>
+                <td>${estado}</td>
+            
+            </tr>
+            
+            `).insertBefore(".stopper-bebidas")
+
+        }
+
+        else if(categoria ==="Postres"){
+
+            $(`
+            <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                <td class="${categoria}TablaMenu">${categoria}</td>
+                <td>${nombrePlato}</td>
+                <td>${descripcion}</td>
+                <td>${dias_array}</td>
+                <td>${estado}</td>
+            
+            </tr>
+            
+            `).insertBefore(".stopper-postres")
+
+        }
+        else{
+            $(".menu-item-body").append(`
+                <tr id="${doc.id}" onClick="Click_modificar(this.id)" class="item_product"> 
+                    <td class="${categoria}TablaMenu">${categoria}</td>
+                    <td>${nombrePlato}</td>
+                    <td>${descripcion}</td>
+                    <td>${dias_array}</td>
+                    <td>${estado}</td>
+                
+                </tr>
         
         `)
+        }
+
+
+
 
         // para la tabla de filtrado
             

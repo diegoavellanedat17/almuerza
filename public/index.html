@@ -13,6 +13,7 @@
   <link href="assets/img/favicon.png" rel="icon">
 
 
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -42,6 +43,9 @@
   <a href="https://wa.me/573125268249" class="float" target="_blank" >
     <i class="fa fa-whatsapp my-float"></i>
   </a>
+
+  <p class="user-lat"></p>
+  <p class="user-lon"></p>
 
 
   <!-- ======= Header ======= -->
@@ -107,6 +111,28 @@
 
   <main id="main">
 
+    <!-- Maps section -->
+    <section id="map-section" class="map-section">
+      <div class="container-fluid">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Nuestros Restaurantes</h2>
+          <p>Algunos de nuestros usuarios</p>
+        </div>
+
+
+      <div class="row justify-content-center ">
+        <div id="map" class="col-11 col-md-8 shadow ">
+       
+        </div>
+      </div>
+
+
+      </div>
+
+    
+    </section>
+    <!-- END Maps section -->
+
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container-fluid">
@@ -151,6 +177,9 @@
 
       </div>
     </section><!-- End About Section -->
+
+
+    <!-- End About Section -->
 
    <!-- ======= Details Section ======= -->
     <section id="details" class="details">
@@ -335,7 +364,10 @@
   <script src="assets/vendor/aos/aos.js"></script>
 
   <!-- Template Main JS File -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1cnCljbIOYBU_A0AyVxjkvGDzHHMc5bM&language=es-la&region=EG">
+  </script>
   <script src="assets/js/main.js"></script>
+
 
 </body>
 
