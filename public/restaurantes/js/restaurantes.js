@@ -67,7 +67,7 @@ function PlaceLogo(){
             $("#logoImagen").append(`${url}`)
         })
         .catch(function(error) {
-        console.log(error)
+  
         $(".image").css("background",`url(./assets/img/logo-default.png) 50% 50% no-repeat`)
         $(".image").css("background-size", "100% auto")
         });
@@ -1097,8 +1097,6 @@ function AdicionarProducto(){
     $('#modal-producto').modal();
 }
 
-
-
 function PrecioMenu(){
     console.log("Ajustar Precio del Menú")
     // Buscar en la base de datos el precio del menú, si no existe colocal el input vacio, si ya existe colocal el valor actual como placeholder
@@ -1950,12 +1948,63 @@ function homePage(){
                 querySnapshot.forEach(function(doc){
     
                     const tel=doc.data().tel 
+                    const nombre=doc.data().nombre
                     const dir=doc.data().dir 
                     const email=doc.data().email 
                     const clientes=doc.data().clientes 
                     const link=doc.data().nombreRestaurante
-                    const FechaVencimiento=doc.data().fechaVencimiento
-                    console.log(clientes.length)
+                    const estado=doc.data().estado
+                    var FechaVencimiento=doc.data().fechaVencimiento
+                    FechaVencimientoFormat = dateChanger(FechaVencimiento)
+                    
+                    var today = new Date();
+                    var nextDate= new Date(FechaVencimiento)
+
+                    const diffTime= nextDate - today
+                    const diffDays= Math.ceil(diffTime/(1000*60*60*24))
+                    console.log(diffDays)
+
+                    if(diffDays >= 5 ){
+                        $(".user-items").append(`
+                        <div class="alert alert-primary col-12" role="alert">
+                            Hola ${nombre} tienes aún ${diffDays} días de tu periodo ${estado}
+                        </div>
+                        `)
+                        $(".alert-primary").animate({height: "toggle", opacity: "toggle"}, 3000);
+                    }
+
+                    else if(diffDays < 5 && diffDays >=2){
+                        $(".user-items").append(`
+                        <div class="alert alert-warning col-12" role="alert">
+                            Hola ${nombre} te quedan ${diffDays} días de tu periodo ${estado}
+                        </div>
+                        `)
+                    }
+
+                    else if(diffDays >=-3){
+                        $(".user-items").append(`
+                        <div class="alert alert-danger col-12" role="alert">
+                           Realiza tu pago la plataforma se vence en ${diffDays} días
+                        </div>
+                        `)
+                    }
+
+                    else {
+                        swal({
+                            title:"Cuenta inactiva",
+                              text:`Realiza tu pago para volver a usar la plataforma`,
+                              icon:"error"
+                          
+                          }).then(function(){
+                            firebase.auth().signOut()
+                            window.location = '../login.html?modo=entrar'
+                    
+                          })
+                    }
+
+                    
+
+                    
                     $(".user-items").append(` 
                     <div class="col-12  col-lg-6 d-inline-flex ">
                     
@@ -2045,7 +2094,14 @@ function homePage(){
                                     <i class="material-icons icon " style="color:#FB747C;">event</i>
                                 </div>
                                 <div  class="col-10 mb-2">
-                                    <small class=" text-justify text-muted"> Vence ${FechaVencimiento}</small>
+                                    <small class=" text-justify text-muted"> Vence ${FechaVencimientoFormat}</small>
+                                </div>
+
+                                <div  class="col-2 d-flex justify-content-center mb-2" >
+                                <i class="material-icons icon " style="color:#FB747C;">payments</i>
+                                </div>
+                                <div  class="col-10 mb-2">
+                                    <small class=" text-justify text-muted"> Estado ${estado}</small>
                                 </div>
 
    
@@ -2122,5 +2178,13 @@ function ActualizarDatos(){
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
     });
+
+}
+// cambiar las fechas para legibles 
+function dateChanger(date){
+    var unidades= date.substring(0,2)
+    var decenas= date.substring(3,5)
+    var anios=date.substring(6,10)
+    return `${decenas}/${unidades}/${anios}`
 
 }

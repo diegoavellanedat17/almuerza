@@ -11,9 +11,14 @@ var firebaseConfig = {
     appId: "1:415819035666:web:9300f229e79d85c0f6d4cb",
     measurementId: "G-ESS36GVJTN"
   };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  var db = firebase.firestore();
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+
+
+MostrarTabla()
+VerificarAdmin()
+Contador()
 
 // Verificar cual es el nombre del restaurante para pasarlo como parametro
 function getUserData(){
@@ -29,7 +34,6 @@ function getUserData(){
     })
     
 }
-
 
 // Abrir Modal de Gestion del Restaurante
 function ModalRestaurante(restaurant_id){
@@ -85,7 +89,7 @@ $('.date').datepicker({
     autoclose: true
 });
 
-MostrarTabla()
+
 function MostrarTabla(){
 
     var listaRestaurantes= db.collection("restaurantes")
@@ -298,7 +302,6 @@ function SeguroEliminar(){
 
 
 // contador General 
-Contador()
 function Contador() {
     var contadorDeRestaurantes= db.collection("restaurantes")
     contadorDeRestaurantes.get()
@@ -318,7 +321,9 @@ function Contador() {
 
 }
 
-VerificarAdmin()
+
+
+// Verificar que sea un administrador el que quiere ingresar 
 
 function VerificarAdmin(){
     getUserData()
