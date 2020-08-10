@@ -1,0 +1,71 @@
+/*--------------------- Body ----------------------------*/
+
+body {
+    overflow-x: none;
+    background-color: #F2F2F2;
+    font-family: 'Spartan', sans-serif;
+ 
+}
+
+.bg-zaboo-custom{
+    background: linear-gradient(90deg, #FB747C 70% ,#F9A624 100%);
+      opacity: 1;
+  }
+
+
+/*---------------- Navigation Bar--------------------- */
+
+.icon-login{
+    padding: 0px;
+    border: solid 3px rgba(251, 116, 124, 0.91);
+    border-radius: 50%;
+  }
+
+  .circulo-usuario{
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+/* Main */
+  .main-section{
+    margin-top:80px;
+  }
+
+/*--------------------- Tabla Restaurantes ------------------- */
+
+.TablaRestaurantesBody{
+    background-color: white;
+}
+
+th{
+    border:transparent !important;
+}
+
+/* top-left border-radius */
+table  th:first-child {
+    border-top-left-radius: 23px;
+  }
+  
+/* top-right border-radius */
+  table tr:first-child th:last-child {
+    border-top-right-radius: 23px;
+}
+
+/* Cursor on hover */
+tr{
+    cursor: pointer;
+}
+
+/* Colores del icono */
+.icon{
+  border-radius: 50%;
+  background:none;
+}
+.demo{
+  color: rgb(243, 243, 33);
+}
+
+/* -----------------------------Modal----------------------------- */
+.id-restaurante{
+  display: none;
+}

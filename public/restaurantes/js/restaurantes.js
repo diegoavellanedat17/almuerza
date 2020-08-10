@@ -1954,6 +1954,7 @@ function homePage(){
                     const email=doc.data().email 
                     const clientes=doc.data().clientes 
                     const link=doc.data().nombreRestaurante
+                    const FechaVencimiento=doc.data().fechaVencimiento
                     console.log(clientes.length)
                     $(".user-items").append(` 
                     <div class="col-12  col-lg-6 d-inline-flex ">
@@ -2039,6 +2040,15 @@ function homePage(){
                                 <div  class="col-10 mb-2">
                                     <small class=" text-justify text-muted"> ${email}</small>
                                 </div>
+
+                                <div  class="col-2 d-flex justify-content-center mb-2" >
+                                    <i class="material-icons icon " style="color:#FB747C;">event</i>
+                                </div>
+                                <div  class="col-10 mb-2">
+                                    <small class=" text-justify text-muted"> Vence ${FechaVencimiento}</small>
+                                </div>
+
+   
                 
                                 <div  class="col-4 d-flex justify-content-center mb-2 " >
                                     <h1 id="clientes-activos" >${clientes.length}</h1>

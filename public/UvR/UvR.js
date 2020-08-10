@@ -34,8 +34,24 @@ function RedirijirUsuario(userData){
     consulta_restaurantes.get()
     .then(function(querySnapshot){
         if(querySnapshot.empty){
-            console.log("No esta guardado en la base de datos")
-            window.location = '../clientes/clientes.html'//redirigiendo al html de prueba mientras miramos donde redireccionamos para realizar los pedidos
+            console.log("Es un cliente, verificar que tipo de permisos tiene")
+            var consulta_clientes=db.collection('clientes').where("uid","==",userData.uid)
+            consulta_clientes.get()
+            .then(function(queryClientes){
+                queryClientes.forEach(function(doc_client){
+                    var tipo= doc_client.data().tipo
+                    if (tipo ==='admin'){
+                        window.location = '../admins/admins.html'//redirigiendo al html de prueba mientras miramos donde redireccionamos para realizar los pedidos
+                    }
+                    else{
+                        window.location = '../clientes/clientes.html'//redirigiendo al html de prueba mientras miramos donde redireccionamos para realizar los pedidos
+                    }
+                })
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+           
         }
         else{
             querySnapshot.forEach(function(doc){

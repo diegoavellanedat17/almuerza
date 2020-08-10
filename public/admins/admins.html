@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan&display=swap" rel="stylesheet">
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="./css/admins.css" />
+    <link rel="stylesheet" href="../menu/css/normalize.css" />
+    <title>Admin | Almuerza.co</title>
+</head>
+<body>
+          <!-- Navbar Start  -->
+          <div class="container-fluid fixed-top">
+
+            <div class="row bg-zaboo-custom">
+  
+              <div class="col-6" >
+                <img class="logo"src="../restaurantes/assets/img/brand-logo.png" height="70" alt="" style="padding: 0px;"> 
+ 
+              </div>
+    
+              <div class="col-6 mt-2 mb-2 text-right align-self-center ">
+                <div class="dropleft">
+                  <button class="btn btn-secondary  circulo-usuario" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span > </span> <i class="material-icons icon-login shadow">account_circle</i>
+                  </button>
+                  <div class="dropdown-menu user-dropdown" aria-labelledby="dropdownMenuButton">
+                   <p class="user-name"></p>
+                   <button class="dropdown-item" onClick="logout()"><i class="material-icons icon">exit</i>Salir</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           <!-- Navbar End  -->
+
+          <!-- Main Start -->
+          <div class="container-fluid main-section" >
+
+            <h5 class="mt-5">Panel de administración de restaurantes</h6>
+
+            <div class="table-responsive">
+                <table class="table table-hover table "id="dtBasicExample">
+                                <thead class="thead-dark">
+                                <tr class="TablaRestaurantesHeader">
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Representante</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Fecha Inscripción</th>
+                                    <th scope="col">Fecha Inicio</th>
+                                    <th scope="col">Fecha Ven</th>
+                                    <th scope="col"># Clientes</th>
+                                    <th scope="col"># Pedidos</th>
+
+                                </tr>
+                                </thead>
+                                <tbody class="TablaRestaurantesBody" >
+   
+                                </tbody>
+                </table>
+                
+            </div>
+         
+
+
+          </div>
+
+          <!-- Main End -->
+
+    <!-- Modal Direccion-->
+    <div class="modal fade" id="modal-restaurante" tabindex="-1" role="dialog" aria-labelledby="modal-restaurante" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modal-restaurante-label">Gestión del restaurante</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <p class="id-restaurante"></p>
+            </div>
+            <div class="modal-body">
+                <div class="row datosRestaurante">
+
+                </div>
+                <div class="container">
+                    <form class="row mt-3">
+
+                        <div class="form-group col-12">
+                            <label for="estado">Estado</label>
+                            <select id="estado" class="form-control">
+                            <option>demo</option>
+                            <option>activo</option>
+                            <option>inactivo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="inscripcion-date">Fecha de inscripción</label>
+                            <input type="text" class="form-control" id="inscripcion-date"  placeholder="Fecha de inscripción" disabled>
+                        </div>
+
+                        <div class="form-group col-6" >
+                            <div class="input-group date row" data-provide="datepicker">
+                                <label for="inicio-date" class="col-12 d-flex justify-content-center">Fecha de pago</label>
+                                <input type="text" class="form-control inicio-date col-10 d-flex justify-content-center">
+                                <div class="input-group-addon col-2" class="datepicker">
+                                    <span ><i class="material-icons icon">today</i></span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group col-6" >
+                            <div class="input-group date row" data-provide="datepicker">
+                                <label for="final-date" class="col-12 d-flex justify-content-center">Fecha de corte</label>
+                                <input type="text" class="form-control final-date col-10 d-flex justify-content-center">
+                                <div class="input-group-addon col-2" class="datepicker">
+                                    <span ><i class="material-icons icon">today</i></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </form>
+                </div>
+
+
+
+            </div>
+
+            <div class="modal-body2">
+                Estas seguro de eliminar el restaurante? 
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="eliminar" onclick="EliminarRestaurante()">Eliminar</button>
+                <button type="button" class="btn btn-secondary" id="seguro-eliminar" onclick="SeguroEliminar()">Seguro Eliminar</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Direccion-->
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script src="./js/admins.js"></script>
+ 
+    
+</body>
+</html>

@@ -93,6 +93,8 @@ function crearUsuario(event){
 				  
 				  }).then(function(){
 					location.reload()
+					window.location = './login.html?modo=entrar'
+					
 				  })
 
 			  }).catch(function(error) {
@@ -189,8 +191,22 @@ firebase.auth().onAuthStateChanged(user => {
 
 function GuardarInformacionRestaurante(name,email,password,person,nit,tel,userUid,dir,link) {
 
-	// Add a new document in collection "cities"
-	//Acá se debe validar el link 
+
+	//dia actual 
+	var today = new Date();
+	var diaActual=String(today.getDate()).padStart(2, '0');
+    var mesActual=String(today.getMonth()+1).padStart(2, '0');
+	var anioActual=today.getFullYear()
+	
+	//dia vencimiento 
+	var nextDate = new Date();
+	nextDate.setDate(nextDate.getDate()+15)
+	var diaFuturo=String(nextDate.getDate()).padStart(2, '0');
+	var mesFuturo=String(nextDate.getMonth()+1).padStart(2, '0');
+	var anioFuturo=nextDate.getFullYear()
+
+	var acutualFormat=`${mesActual}/${diaActual}/${anioActual}`
+	var futuroFormat=`${mesFuturo}/${diaFuturo}/${anioFuturo}`
 
 
 	console.log('Enviando a base de datos')
@@ -207,6 +223,9 @@ function GuardarInformacionRestaurante(name,email,password,person,nit,tel,userUi
 		uid:userUid,
 		precio:'0',
 		clientes:[],
+		fechaInscripcion: acutualFormat,
+        fechaVencimiento: futuroFormat,
+        estado:'demo'
     })
     .then(function() {
 	console.log("Document successfully written!");
