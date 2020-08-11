@@ -87,17 +87,18 @@
                 <span aria-hidden="true">&times;</span>
               </button>
               <p class="id-restaurante"></p>
+              <p class="id-restaurante2"></p>
             </div>
             <div class="modal-body">
                 <div class="row datosRestaurante">
 
                 </div>
                 <div class="container">
-                    <form class="row mt-3">
+                    <form class="row mt-3" name="modificarRestaurante">
 
                         <div class="form-group col-12">
                             <label for="estado">Estado</label>
-                            <select id="estado" class="form-control">
+                            <select id="estado" class="form-control" name="estado">
                             <option>demo</option>
                             <option>activo</option>
                             <option>inactivo</option>
@@ -122,7 +123,7 @@
                         <div class="form-group col-6" >
                             <div class="input-group date row" data-provide="datepicker">
                                 <label for="final-date" class="col-12 d-flex justify-content-center">Fecha de corte</label>
-                                <input type="text" class="form-control final-date col-10 d-flex justify-content-center">
+                                <input type="text" class="form-control final-date col-10 d-flex justify-content-center"name="final-date">
                                 <div class="input-group-addon col-2" class="datepicker">
                                     <span ><i class="material-icons icon">today</i></span>
                                 </div>
@@ -145,8 +146,10 @@
 
             </div>
             <div class="modal-footer">
+
                 <button type="button" class="btn btn-secondary" id="eliminar" onclick="EliminarRestaurante()">Eliminar</button>
                 <button type="button" class="btn btn-secondary" id="seguro-eliminar" onclick="SeguroEliminar()">Seguro Eliminar</button>
+                <button type="button" class="btn btn-primary" id="modificar" onclick="Modificar()">Modificar</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
            
             </div>

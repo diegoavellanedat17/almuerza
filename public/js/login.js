@@ -88,7 +88,7 @@ function crearUsuario(event){
 
 				swal({
 					title:"¡ Muy Bien !",
-					  text:"Revisa tu Email y regresa para entrar",
+					  text:"Revisa tu Email (Spam) y regresa para entrar",
 					  icon:"success"
 				  
 				  }).then(function(){

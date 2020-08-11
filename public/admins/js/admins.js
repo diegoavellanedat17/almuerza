@@ -39,6 +39,7 @@ function getUserData(){
 function ModalRestaurante(restaurant_id){
     $(".id-restaurante").empty()
     $(".id-restaurante").append(restaurant_id)
+
     $(".modal-body2").css("display","none")
     $(".modal-body").css("display","block")
     $("#eliminar").css("display","block")
@@ -70,7 +71,7 @@ function ModalRestaurante(restaurant_id){
                 `
             )
 
-            $(".estado").val(`${estado}`)
+            $("#estado").val(`${estado}`)
             $("#inscripcion-date").val(`${fechaInscripcion}`)
             $(".final-date").val(`${fechaVencimiento}`)
         })
@@ -367,4 +368,68 @@ firebase.auth().onAuthStateChanged(user => {
 // Salir 
 function logout(){
     firebase.auth().signOut()
+}
+
+// Modificar un restaurante 
+function Modificar(){
+    // tomar el id del restaurante 
+    var uidRestauranteModificar = $(".id-restaurante").text()
+    console.log(uidRestauranteModificar)
+    // tomar lo que hay en las casillas y guararlas en variables 
+    var estado = document.forms["modificarRestaurante"]["estado"].value;
+    var fechaVencimiento=document.forms["modificarRestaurante"]["final-date"].value;
+    fechaVencimiento=dateChanger(fechaVencimiento)
+    console.log(estado)
+    console.log(fechaVencimiento)
+
+    if(fechaVencimiento==="//"){
+        swal({
+            title:"Cuidado",
+            text:"No dejes la fecha en blanco",
+            icon:"error"
+        
+        })
+
+    }
+
+    else{
+
+        var Restaurantes= db.collection("restaurantes").where("uid","==",uidRestauranteModificar)
+        Restaurantes.get()
+            .then(function(restaurante_update){
+
+            restaurante_update.forEach(function(doc){
+                var actualizarDatos=db.collection('restaurantes').doc(doc.id)
+
+
+                return actualizarDatos.update({
+                    estado:estado,
+                    fechaVencimiento:fechaVencimiento
+                })
+                .then(function() {
+                    swal({
+                        title:"Listo",
+                        text:"Restaurante Actualizado",
+                        icon:"success"
+                    
+                    }).then(function(){
+                        $('#modal-restaurante').modal("toggle");
+                    })
+                })
+                .catch(function(error) {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                });
+                
+            })
+       
+
+        })
+
+    }
+    
+
+
+    
+
 }

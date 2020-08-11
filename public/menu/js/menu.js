@@ -52,7 +52,10 @@ function VerificarExistenciarestaurante(){
                 var nombreRestaurante=doc.data().nombre
                 uid_restaurante=doc.data().uid
                 var direccion_restaurante=doc.data().dir
+                var estado=doc.data().estado
+                var fechaVencimiento=doc.data().fechaVencimiento
 
+                VerificarPago(estado,fechaVencimiento)
                 // Colocar el logo del restaurante si existe 
                 LocateLogo(uid_restaurante,nombreRestaurante,direccion_restaurante)
 
@@ -345,7 +348,7 @@ document.getElementById("button_pedir").addEventListener("click", function(){
                 console.log(tipo)
 
                 
-                if(tipo==='cliente'){
+                if(tipo==='cliente' || tipo ==='admin'){
              
                     $(".modalToHide").css("display","block")
                     $(".modal-body-pedido").css("display","block")
@@ -627,7 +630,7 @@ function crearUsuario(event){
 
 				swal({
 					title:"Listo",
-					  text:"Revisa tu email y regresa para pedir",
+					  text:"Revisa tu Email (Spam) y regresa para pedir",
 					  icon:"success"
 				  
 				  }).then(function(){
@@ -1305,4 +1308,45 @@ function LocateLogo(uid_restaurante,nombreRestaurante,direccion_restaurante){
         console.log(error)
         $(".image").css("background",`url(./assets/img/logo-default.JPG) 50% 50% no-repeat`)
         });
+}
+
+function VerificarPago(estado,fechaDeVencimiento){
+
+    var today = new Date();
+    var nextDate= new Date(fechaDeVencimiento)
+
+    const diffTime= nextDate - today
+    const diffDays= Math.ceil(diffTime/(1000*60*60*24))
+    console.log(diffDays)
+
+    if(estado==='activo' || estado ==='demo'){
+
+
+    if(diffDays <= -3){
+        swal({
+            title:"Restaurante no disponible",
+              text:`El restaurante se encuentra inactivoaa`,
+              icon:"warning"
+          
+          }).then(function(){
+            window.location = '../index.html'
+          })
+    }
+
+    }
+    else{
+
+        swal({
+            title:"Restaurante no disponible",
+              text:`El restaurante se encuentra inactivo !`,
+              icon:"warning"
+          
+          }).then(function(){
+            window.location = '../index.html'
+          })
+
+    }
+
+
+
 }

@@ -65,6 +65,14 @@ tr{
   color: rgb(243, 243, 33);
 }
 
+.activo{
+  color: rgb(118, 226, 97);
+}
+
+.inactivo{
+  color: rgb(236, 49, 49);
+}
+
 /* -----------------------------Modal----------------------------- */
 .id-restaurante{
   display: none;

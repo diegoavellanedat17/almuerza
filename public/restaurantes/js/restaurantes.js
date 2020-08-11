@@ -1957,54 +1957,8 @@ function homePage(){
                     var FechaVencimiento=doc.data().fechaVencimiento
                     FechaVencimientoFormat = dateChanger(FechaVencimiento)
                     
-                    var today = new Date();
-                    var nextDate= new Date(FechaVencimiento)
+                    VerificarPago(estado,FechaVencimiento,nombre)
 
-                    const diffTime= nextDate - today
-                    const diffDays= Math.ceil(diffTime/(1000*60*60*24))
-                    console.log(diffDays)
-
-                    if(diffDays >= 5 ){
-                        $(".user-items").append(`
-                        <div class="alert alert-primary col-12" role="alert">
-                            Hola ${nombre} tienes aún ${diffDays} días de tu periodo ${estado}
-                        </div>
-                        `)
-                        $(".alert-primary").animate({height: "toggle", opacity: "toggle"}, 3000);
-                    }
-
-                    else if(diffDays < 5 && diffDays >=2){
-                        $(".user-items").append(`
-                        <div class="alert alert-warning col-12" role="alert">
-                            Hola ${nombre} te quedan ${diffDays} días de tu periodo ${estado}
-                        </div>
-                        `)
-                    }
-
-                    else if(diffDays >=-3){
-                        $(".user-items").append(`
-                        <div class="alert alert-danger col-12" role="alert">
-                           Realiza tu pago la plataforma se vence en ${diffDays} días
-                        </div>
-                        `)
-                    }
-
-                    else {
-                        swal({
-                            title:"Cuenta inactiva",
-                              text:`Realiza tu pago para volver a usar la plataforma`,
-                              icon:"error"
-                          
-                          }).then(function(){
-                            firebase.auth().signOut()
-                            window.location = '../login.html?modo=entrar'
-                    
-                          })
-                    }
-
-                    
-
-                    
                     $(".user-items").append(` 
                     <div class="col-12  col-lg-6 d-inline-flex ">
                     
@@ -2186,5 +2140,75 @@ function dateChanger(date){
     var decenas= date.substring(3,5)
     var anios=date.substring(6,10)
     return `${decenas}/${unidades}/${anios}`
+
+}
+
+function VerificarPago(estado,fechaDeVencimiento,nombre){
+
+    var today = new Date();
+    var nextDate= new Date(fechaDeVencimiento)
+
+    const diffTime= nextDate - today
+    const diffDays= Math.ceil(diffTime/(1000*60*60*24))
+    console.log(diffDays)
+
+    console.log(diffDays)
+    if(estado==='activo' || estado ==='demo'){
+
+    if(diffDays >= 5 ){
+        $(".user-items").append(`
+        <div class="alert alert-primary col-12" role="alert">
+            Hola ${nombre} tienes aún ${diffDays} días de tu periodo ${estado}
+        </div>
+        `)
+        $(".alert-primary").animate({height: "toggle", opacity: "toggle"}, 3000);
+    }
+
+    else if(diffDays < 5 && diffDays >=2){
+        $(".user-items").append(`
+        <div class="alert alert-warning col-12" role="alert">
+            Hola ${nombre} te quedan ${diffDays} días de tu periodo ${estado}
+        </div>
+        `)
+    }
+
+    else if(diffDays >=-3){
+        $(".user-items").append(`
+        <div class="alert alert-danger col-12" role="alert">
+           Realiza tu pago la plataforma se vence en ${diffDays} días
+        </div>
+        `)
+    }
+
+    else {
+        swal({
+            title:"Cuenta inactiva",
+              text:`Realiza tu pago para volver a usar la plataforma`,
+              icon:"error"
+          
+          }).then(function(){
+            firebase.auth().signOut()
+            window.location = '../login.html?modo=entrar'
+    
+          })
+    }
+
+    }
+    else{
+
+        swal({
+            title:"Cuenta inactiva",
+              text:`Realiza tu pago para volver a usar la plataforma`,
+              icon:"error"
+          
+          }).then(function(){
+            firebase.auth().signOut()
+            window.location = '../login.html?modo=entrar'
+    
+          })
+
+    }
+
+
 
 }
