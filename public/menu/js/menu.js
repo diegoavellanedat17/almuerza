@@ -23,6 +23,11 @@ VerificarDia()
 function VerificarExistenciarestaurante(){
     const urlParams = new URLSearchParams(window.location.search);
     const QueryRestaurante = urlParams.get('restaurante');
+    const QueryMesa=urlParams.get('mesa');
+    if (QueryMesa !== null){
+        console.log(QueryMesa)
+    }
+    console.log(QueryMesa)
     const dia_actual=VerificarDia()
     const dias_semana = ["Lunes", "Martes", "Miercoles","Jueves","Viernes","Sábado","Domingo"];
     var consulta_restaurantes=db.collection('restaurantes').where("nombreRestaurante","==",QueryRestaurante)
@@ -201,7 +206,7 @@ function VerificarExistenciarestaurante(){
                     if(estado==='activo'){  
                         if($(`#${categoriaFix}Carta`).length == 0) {
                             //si no existe esa categoria debe crearse
-                            console.log("crearse")
+                           
                             if (categoriaFix === 'Entradas' || categoriaFix === 'Principio'){
                                 console.log("entrada o principio")
 
@@ -308,11 +313,11 @@ function VerificarDia(){
 //Cuando quieran realizar un pedido
 
 document.getElementById("button_pedir").addEventListener("click", function(){
-    numero_almuerzos = 0
-    numero_platos_carta = 0
+
     //debe decidirse cual modal mostrar si el de realizar pedido o realizar atenticación, esto depende si hay usuario o no 
     var user = firebase.auth().currentUser;
     console.log(user)
+
     
     if(user === null){
         $("#modal-usuario").modal()
@@ -320,62 +325,87 @@ document.getElementById("button_pedir").addEventListener("click", function(){
     else{
         //Debe verificarse que tipo de usuario quiere hacer un pedido, si es un restaurante redirige a restaurantes 
         // Si es un cliente abre el modal de hacer pedido 
-        var consulta_precio=db.collection('clientes').where("uid","==",user.uid)
-        consulta_precio.get()
+        var consulta_clientes=db.collection('clientes').where("uid","==",user.uid)
+        consulta_clientes.get()
         .then(function(querySnapshot){
             if(querySnapshot.empty){
                 // Seguramente es un restaurante entonces redirigimos a UvR
-                window.location = '../UvR/UvR.html'; //After successful login, user will be redirected to home.html
+                //Toca asegurarse que es un restaurante
+                var consulta_restaurantes=db.collection('restaurantes').where("uid","==",user.uid)
+                consulta_restaurantes.get()
+                .then(function(querySnapshotRestaurante){
+                    // si no hay restaurantes tampoco con ese ID es por que es la primera vez que entra alguien con ese id
+                    if(querySnapshotRestaurante.empty){
+                        console.log("debe crearse en clientes")
+                        GuardarNuevoCliente(user)
+                        LanzarModal(null)
+                    }
+                    else{
+                        querySnapshotRestaurante.forEach(function(doc){
+                            // en este caso si es un restaurante
+                            window.location = '../UvR/UvR.html'; 
+                        })
+
+                    }
+
+                   
+
+                })
+                
+               
 
             }
+         
             querySnapshot.forEach(function(doc){
 
-                if(numero_almuerzos === 0){
-                    $(".quitarMenu").remove()
-                }
-
-                if(numero_platos_carta === 0){
-                    $(".quitarPlatoCarta").remove()
-                }
-                if(numero_platos_carta=== 0 && numero_almuerzos===0){
-                    console.log("debemos quitar hacer pedido")
-                    $(".notas").remove()
-                    $(".hacerpedido").css("display","none")
-                }
-                
-                
-                const tipo=doc.data().tipo
-                console.log(tipo)
-
-                
-                if(tipo==='cliente' || tipo ==='admin'){
-             
-                    $(".modalToHide").css("display","block")
-                    $(".modal-body-pedido").css("display","block")
-                    $(".btn-group").css("display","block")
-                    $(".fieldTotal").remove()
-                    $(".atras-enviar").css("display","none")
-                    $(".almuerzoDia").empty()
-                    $(".PlatoDeLaCarta").empty()
-                    $(".botones-adicionar-to-hide").css("display","block")
-                    $(".botones-quitar-to-hide").css("display","block")
-                   
-                    $(".ModalHacerPedido").empty()
-                    $("#modal-pedido").modal()
-                   
+                LanzarModal(doc.data().dir)
 
 
-
-                }
-                else{
-                    alert("Comunicate con nosotros en delifast")
-                    firebase.auth().signOut()
-                }
-
-            })
+             })
+            
         })
     }
 })
+
+function LanzarModal(dir){
+    const urlParams = new URLSearchParams(window.location.search);
+    const QueryMesa=urlParams.get('mesa');
+
+    console.log(dir)
+    if(dir===null && QueryMesa === null){
+        address()
+    }
+    numero_almuerzos = 0
+    numero_platos_carta = 0
+    
+
+    if(numero_almuerzos === 0){
+        $(".quitarMenu").remove()
+    }
+
+    if(numero_platos_carta === 0){
+        $(".quitarPlatoCarta").remove()
+    }
+    if(numero_platos_carta=== 0 && numero_almuerzos===0){
+        console.log("debemos quitar hacer pedido")
+        $(".notas").remove()
+        $(".hacerpedido").css("display","none")
+    }
+    
+        $(".modalToHide").css("display","block")
+        $(".modal-body-pedido").css("display","block")
+        $(".btn-group").css("display","block")
+        $(".fieldTotal").remove()
+        $(".atras-enviar").css("display","none")
+        $(".almuerzoDia").empty()
+        $(".PlatoDeLaCarta").empty()
+        $(".botones-adicionar-to-hide").css("display","block")
+        $(".botones-quitar-to-hide").css("display","block")
+       
+        $(".ModalHacerPedido").empty()
+        $("#modal-pedido").modal()
+       
+}
 
 //click en navigation
 $(".menu-click").click(function(){
@@ -764,8 +794,73 @@ function olvidar_contrasena(event){
       });
 }
 
+function EntrarGoogle(){
+    console.log("entrar con google")
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithRedirect(provider);
+
+   
+}
+
+function EntrarFacebook(){
+    console.log("entrar con Facebook")
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+}
+
 
 // tengo un objeto mirando si hay o no autenticacion, si la hay abre lo otro
+firebase.auth().getRedirectResult().then(function(result) {
+    if (result.credential) {
+        var user = firebase.auth().currentUser;
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = result.credential.accessToken;
+      console.log(token)
+      var consulta_clientes=db.collection('clientes').where("uid","==",user.uid)
+      consulta_clientes.get()
+      .then(function(querySnapshot){
+          if(querySnapshot.empty){
+              console.log('no existe')
+              GuardarNuevoCliente(user)
+              LanzarModal(null)
+          }
+          else{
+              console.log('User exists')
+          }
+      })
+
+
+
+      $(".hacerpedido").css("display","none")
+      $(".modalToHide").css("display","block")
+      $(".modal-body-pedido").css("display","block")
+      $(".btn-group").css("display","block")
+      $(".fieldTotal").remove()
+      $(".atras-enviar").css("display","none")
+      $(".almuerzoDia").empty()
+      $(".PlatoDeLaCarta").empty()
+      $(".botones-adicionar-to-hide").css("display","block")
+      $(".botones-quitar-to-hide").css("display","block")
+     
+      $(".ModalHacerPedido").empty()
+      $("#modal-pedido").modal()
+      $("#modal-pedido").modal()
+      // ...
+    }
+    // The signed-in user info.
+    var user = result.user;
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+
 firebase.auth().onAuthStateChanged(user => {
   if(user && firstTime===false) {
     var user = firebase.auth().currentUser;
@@ -792,9 +887,23 @@ firebase.auth().onAuthStateChanged(user => {
         }
 
     querySnapshot.forEach(function(doc){
+        const urlParams = new URLSearchParams(window.location.search);
+        const QueryMesa=urlParams.get('mesa');
+        if (QueryMesa !== null){
+            console.log(QueryMesa)
+            $(".direccion-space").empty()
+            $(".direccion-space").append(`<p> Mesa ${QueryMesa}</p>`)
+        }
+       else{
          var direccionEntrega= doc.data().dir
+         if(direccionEntrega!== null){
          $(".direccion-space").empty()
          $(".direccion-space").append(`<p> ${direccionEntrega}</p>`)
+         }
+         else{
+             address()
+         }
+       }
     })
 
     })
@@ -1103,7 +1212,16 @@ function EnviarOrden(){
     consulta_usuario.get()
     .then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
-            var direccion= doc.data().dir
+            const urlParams = new URLSearchParams(window.location.search);
+            const QueryMesa=urlParams.get('mesa');
+            if(QueryMesa !==null){
+                var direccion =`Mesa ${QueryMesa}`
+            }
+            else{
+                var direccion= doc.data().dir
+                
+            }
+           
             var telefono= doc.data().tel
             var nombre_cliente= doc.data().nombre
             pedido['nombre']=nombre_cliente
@@ -1140,11 +1258,25 @@ function EnviarOrden(){
             pedido['hora_pedido']=Date.now()
             pedido['estado']='ordenado'
             pedido['total']=totalpagar
-
-            
-
+   
+            if(pedido['dir']!==null && pedido['dir']!==""){
             GuardarPedido(pedido,uid_restaurante,user.uid)
             console.log(pedido)
+
+            }
+            else{
+                
+            swal({
+                title:"Falto la dirección",
+                  text:"No configuraste la dirección de entrega",
+                  icon:"error"
+              
+              }).then(function(){
+                $("#modal-pedido").modal('toggle');
+              })
+
+            }
+
         })
     })
     .catch(function(err){
@@ -1234,6 +1366,7 @@ function address(){
 function cambiar_direccion(){
     var user_doc_id = $(".user-direccion-modify").text(); //preferred
     var direccionNueva= document.forms["DireccionForm"]["direccion"].value;
+    if(direccionNueva!==""){
     var actualizacion_direccion=db.collection('clientes').doc(user_doc_id)
     return actualizacion_direccion.update({
         dir: direccionNueva
@@ -1254,6 +1387,16 @@ function cambiar_direccion(){
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
     });
+    }
+    else{
+        swal({
+            title:"Dirección inválida",
+              text:"no es posible colocar esta como dirección de entrega",
+              icon:"error"
+          
+          })
+
+    }
 }
 
 function LocateLogo(uid_restaurante,nombreRestaurante,direccion_restaurante){
@@ -1348,5 +1491,34 @@ function VerificarPago(estado,fechaDeVencimiento){
     }
 
 
+
+}
+
+
+function GuardarNuevoCliente(user){
+
+    console.log(user.displayName)
+    const nombreUsuario=user.displayName
+    const emailUsuario=user.email
+    const phoneNumber=user.phoneNumber
+    const userUid=user.uid
+    const dir=null
+
+
+    db.collection("clientes").doc().set({
+		nombre:nombreUsuario,
+        email: emailUsuario,
+        tel:phoneNumber,
+        dir:null,
+        tipo:'cliente',
+        uid:userUid,
+        
+	})
+    .then(function() {
+        console.log("Document successfully written!"); 
+    })
+    .catch(function(error) {
+    console.error("Error writing document: ", error);
+	});
 
 }

@@ -444,3 +444,22 @@ color:rgb(251, 116, 124);
   font-size: large;
   color: black;
 }
+
+#entrarGoogle{
+  background-color: rgb(238, 237, 237);
+  color: #505050;
+}
+#entrarGoogle:hover{
+  background-color: white;
+  border: solid 1px #FF0000;
+}
+
+#entrarFacebook{
+  background-color: rgb(238, 237, 237);
+  color: #3b5998;
+}
+
+#entrarFacebook:hover{
+  background-color: white;
+  border: solid 1px #3b5998;
+}

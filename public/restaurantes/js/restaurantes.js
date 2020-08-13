@@ -11,13 +11,30 @@ var firebaseConfig = {
     measurementId: "G-ESS36GVJTN"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  var db = firebase.firestore();
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+    // // Retrieve Firebase Messaging object.
+    // const messaging = firebase.messaging();
+    // //Permiso para recibir notificaciones 
+    // messaging.requestPermission()
+    // .then(function(){
+    //     console.log('have permission')
+    //     return messaging.getToken()
+    // })
+    // .then(function(token){
+    //     console.log(token)
+    // })
+    // .catch(function(err){
+    //     console.log(err)
+    // })
+    
   entra_consulta=0;
   entra_pedidos=0;
   entra_carta=0;
 
-
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
 homePage()
 
 // Verificar cual es el nombre del restaurante para pasarlo como parametro
@@ -1969,9 +1986,9 @@ function homePage(){
                                 <i class="material-icons icon-store col-3 col-md-2" >storefront</i>
                                 <h5 class="card-title col-9 ml-md-3 " >${userData.name}</h5>
                                 <a href="https://almuerza.co/menu/menu.html?restaurante=${link}" class="to-menu" target="_blank">
-                                <p class="card-text col-10" ><small class="text-muted small-link">https://almuerza.co/menu/menu.html?restaurante=${link}</small></p>
+                                <p class="card-text col-10" ><small class="text-muted small-link" id="linkCopy">https://almuerza.co/menu/menu.html?restaurante=${link}</small></p>
                                 </a>
-                                <i class="material-icons icon justify-content-end col-1 mr-1" style="font-size:18px; cursor: pointer;">content_copy</i>
+                                <button type="button" class="boton-copy justify-content-end col-1 mr-1" onclick="copyToClipboard('#linkCopy')" data-toggle="popover" title="Popover title" data-content="dd"><i class="material-icons icon " style="font-size:18px; cursor: pointer;">content_copy</i></button>
                                 
                                 </div>
                                 
@@ -2212,3 +2229,16 @@ function VerificarPago(estado,fechaDeVencimiento,nombre){
 
 
 }
+
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+  }
+
+
+
+
+  

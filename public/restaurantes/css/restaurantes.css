@@ -49,6 +49,15 @@
 
 }
 
+.boton-copy{
+  background: transparent;
+  border: none;
+}
+
+.boton-copy:hover{
+text-shadow: 10px;
+}
+
 @media (min-width: 770px) {
 .background-body-container{
   background-color: #EFEEEE;

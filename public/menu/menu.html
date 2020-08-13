@@ -252,9 +252,14 @@
                     </form>
                   
                     <form class="login-form ml-2 mr-2 mt-2 mb-4" name="form-auth">
-                        <input class="mt-2 "type="email" placeholder="Email" name="username"/>
-                        <input type="password" placeholder="Contraseña" name="password"/>
-                        <button type="submit">Entrar</button>
+                      <div class="row">
+                        <input class="mt-2 col-12"type="email" placeholder="Email" name="username"/>
+                        <input class="col-12 "type="password" placeholder="Contraseña" name="password"/>
+                        <button class="col-12 "type="submit">Entrar</button>
+                        <p class="col-12 mt-1">ó</p>
+                        <button class="col-12 mt-1" id="entrarGoogle"type="button" onclick="EntrarGoogle()"><img src="./assets/img/buscar.png" alt=""> Entrar con Google</button>
+                        <button class="col-12 mt-1" id="entrarFacebook"type="button" onclick="EntrarFacebook()"><img src="./assets/img/facebook.png" alt=""> Entrar con Facebook</button>
+                      </div>
                         <p class="message register">¿No estás resgistrado? <a href="#">Crear</a></p>
                         <p class="message forgot">¿Olvidaste la contraseña? <a href="#">Click Acá </a></p>
                     </form>
