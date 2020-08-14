@@ -1946,6 +1946,7 @@ function subirLogo(){
 // Funcion que se activa apenas se abre el dashboard y cuando se da click en página
 
 function homePage(){
+
     getUserData()
     .then(userData=>{
         $(".user-name").text(userData.name)
@@ -2094,6 +2095,22 @@ function homePage(){
                     </div>
                 
                 </div>
+
+                <div class="col-12  col-lg-6 d-inline-flex ">
+                    
+                    <div class="card mb-3 mt-3 shadow">
+        
+                        <div class="card-body">
+                        <h5 class="card-title col-12 col-md-12 d-flex justify-content-center" >Horario de tu restaurante </h5>
+
+                           
+                        
+                        </div>
+        
+                    </div>
+        
+                </div>
+    
                 
                 
                 
@@ -2240,5 +2257,3 @@ function copyToClipboard(element) {
 
 
 
-
-  
