@@ -2096,7 +2096,7 @@ function homePage(){
                 
                 </div>
 
-                <div class="col-12  col-lg-6 d-inline-flex ">
+                <div class="col-12  col-lg-4  " >
                     
                     <div class="card mb-3 mt-3 shadow">
         
@@ -2109,6 +2109,29 @@ function homePage(){
         
                     </div>
         
+                </div>
+
+                <div class="col-12  col-lg-4 "  >
+                    
+                <div class="card mb-3 mt-3 shadow">
+    
+                    <div class="card-body">
+                    
+
+                    <div class="row">
+                    <h5 class="card-title col-12 col-md-12 d-flex justify-content-center" >Paga tu suscripción</h5>
+                   
+                    <div  class="col-12 col-sm-6 col-md-12 mt-3">
+                        <small class=" text-justify text-muted">Puedes pagar tu suscripcioón a través de transferencia Davivienda, nequi o DaviPlata</small>
+                        <small class=" text-justify text-muted">También dando click en el siguiente botón</small>
+                    </div>
+                    
+                </div>
+                    
+                    </div>
+    
+                </div>
+    
                 </div>
     
                 

@@ -233,16 +233,16 @@ function initMap() {
       +'</div>'
     },
 
-    {
+    // {
 
-      position: new google.maps.LatLng(4.6128671, -74.1449886),
-      type: 'restaurant',
-      name:'Delicias del pacífico',
-      link: '<div id="content">'+
-      '<h5>Delicias del pacífico</h5>'+
-      '<a href="https://almuerza.co/menu/menu.html?restaurante=mesondelavilla">Ver Menú</a>'
-      +'</div>'
-    },
+    //   position: new google.maps.LatLng(4.6128671, -74.1449886),
+    //   type: 'restaurant',
+    //   name:'Delicias del pacífico',
+    //   link: '<div id="content">'+
+    //   '<h5>Delicias del pacífico</h5>'+
+    //   '<a href="https://almuerza.co/menu/menu.html?restaurante=mesondelavilla">Ver Menú</a>'
+    //   +'</div>'
+    // },
 
     {
       position: new google.maps.LatLng(4.6115241, -74.1467656),
@@ -254,25 +254,25 @@ function initMap() {
       +'</div>'
     },
 
-    {
-      position: new google.maps.LatLng(4.6109938, -74.1462714),
-      type: 'restaurant',
-      name:'Donde el Gordo Antonio',
-      link: '<div id="content">'+
-      '<h5>Donde el Gordo Antonio</h5>'+
-      '<a href="https://almuerza.co/menu/menu.html?restaurante=Dondeelgordoantonio">Ver Menú</a>'
-      +'</div>'
-    },
+    // {
+    //   position: new google.maps.LatLng(4.6109938, -74.1462714),
+    //   type: 'restaurant',
+    //   name:'Donde el Gordo Antonio',
+    //   link: '<div id="content">'+
+    //   '<h5>Donde el Gordo Antonio</h5>'+
+    //   '<a href="https://almuerza.co/menu/menu.html?restaurante=Dondeelgordoantonio">Ver Menú</a>'
+    //   +'</div>'
+    // },
 
-    {
-      position: new google.maps.LatLng(4.6049465, -74.1451151),
-      type: 'restaurant',
-      name:'El Barrio Burguer JS ',
-      link: '<div id="content">'+
-      '<h5>El Barrio Burguer JS </h5>'+
-      '<a href="https://almuerza.co/menu/menu.html?restaurante=mibarrioburgerjs">Ver Menú</a>'
-      +'</div>'
-    },
+    // {
+    //   position: new google.maps.LatLng(4.6049465, -74.1451151),
+    //   type: 'restaurant',
+    //   name:'El Barrio Burguer JS ',
+    //   link: '<div id="content">'+
+    //   '<h5>El Barrio Burguer JS </h5>'+
+    //   '<a href="https://almuerza.co/menu/menu.html?restaurante=mibarrioburgerjs">Ver Menú</a>'
+    //   +'</div>'
+    // },
 
     {
       position: new google.maps.LatLng(4.6143132, -74.1500766),
@@ -294,15 +294,15 @@ function initMap() {
       +'</div>'
     },
 
-    {
-      position: new google.maps.LatLng(4.6145886, -74.1455946),
-      type: 'restaurant',
-      name:'Restaurante y cafetería Julis',
-      link: '<div id="content">'+
-      '<h5>Restaurante y cafetería Julis</h5>'+
-      '<a href="https://almuerza.co/menu/menu.html?restaurante=restaranteycafeteriajulis">Ver Menú</a>'
-      +'</div>'
-    },
+    // {
+    //   position: new google.maps.LatLng(4.6145886, -74.1455946),
+    //   type: 'restaurant',
+    //   name:'Restaurante y cafetería Julis',
+    //   link: '<div id="content">'+
+    //   '<h5>Restaurante y cafetería Julis</h5>'+
+    //   '<a href="https://almuerza.co/menu/menu.html?restaurante=restaranteycafeteriajulis">Ver Menú</a>'
+    //   +'</div>'
+    // },
 
     {
       position: new google.maps.LatLng(4.6992268, -74.046111),
