@@ -16,12 +16,16 @@ var db = firebase.firestore();
 firebase.auth().onAuthStateChanged(user => {
     if(user) {
         
-        pedidosUsuario(user)
+        pedidoDia(user)
         
         $(".restaurants").click(function(){
             misRestaurantes(user)
         })
-        
+
+        $(".pedidos_dia").click(function(){
+            pedidoDia(user)
+        })
+
         $(".pedidos").click(function(){
             pedidosUsuario(user)
         })
@@ -95,7 +99,9 @@ function misRestaurantes(user){
 function pedidosUsuario(user){
     
     consulta_pedidos=db.collection('pedidos').where("uid_cliente","==",user.uid).orderBy("hora_pedido", "desc")
-    .onSnapshot(function(querySnapshot) {
+    consulta_pedidos.get()
+    .then(function(querySnapshot){
+    // .onSnapshot(function(querySnapshot) {
 
         $(".user-items").empty()
         $(".user-items").append(`
@@ -199,7 +205,7 @@ function pedidosUsuario(user){
                         $(".TablaPedidosBody").append(pedido['tr1'].concat(pedido['menutext'], pedido['tr2']))
                     }
                 }  
-            } else if (platofuerte == "" || platofuerte == undefined){
+            } else if (entrada == "" || entrada == undefined){
                 pedido = TableDisplay(0, 1);
                 $(".TablaPedidosBody").append(pedido['rs1'].concat(pedido['cartatext'], pedido['rs2'], pedido['tr2']))
             } else if (len == 1 && carta != "") {
@@ -311,4 +317,128 @@ function ActualizarDatos(){
         console.error("Error updating document: ", error);
     });
 
+}
+
+function pedidoDia(user){
+    var today12 = new Date();
+    today12.setHours(0,0,0,0);
+    today12=today12.getTime()
+    console.log(today12)
+    
+    consulta_pedidos=db.collection('pedidos').where("uid_cliente","==",user.uid).where("hora_pedido", ">=", today12 ).orderBy("hora_pedido","desc")
+    .onSnapshot(function(querySnapshot) {
+        querySnapshot.forEach(function(doc){
+            $(".user-items").empty()
+            var fecha = new Date(doc.data().hora_pedido).toLocaleString("es-CO")
+            var uid_restaurante = doc.data().uid_restaurante
+            var entrada = doc.data().Entradas
+            var principio = doc.data().Principio
+            var platofuerte = doc.data().PlatoFuerte
+            var proteinas = doc.data().Proteinas
+            var acompanamientos = doc.data().Acompañamientos
+            var ensaladas = doc.data().Ensaladas
+            var bebida = doc.data().Bebidas
+            var total = doc.data().total
+            var carta=doc.data().carta
+            var estado = doc.data().estado
+            var menu = [entrada, principio, platofuerte, proteinas, ensaladas, bebida, acompanamientos]
+            
+            console.log(menu)
+            
+            var len
+
+            if (platofuerte != undefined){
+                len = platofuerte.length
+            } else if (entrada != undefined){
+                len = entrada.length
+            } else if (principio != undefined){
+                len = principio.length
+            } else if (bebida != undefined){
+                len = bebida.length
+            } else {
+                len = 1
+            }
+
+            // function menuDisplay()
+            
+            consulta_restaurantes=db.collection('restaurantes').where("uid","==",uid_restaurante)
+            .onSnapshot(function(querySnapshot) {
+                querySnapshot.forEach(function(doc){
+                    const name = doc.data().nombre
+                    var text = []
+                    var status
+                    
+                    
+                    for(i = 0 ; i < len; i++){ 
+                        var menuaux = [];
+                        for(j = 0 ; j < menu.length; j++){
+                            if (menu[j] != undefined && menu[j].length != 0){
+                                menuaux.push(` ${menu[j][i]}`)                                
+                            } 
+                        }
+                        if (menuaux != undefined || menuaux.length != 0){
+                            if (i==1){
+                                text.push(`<small class=" text-justify text-muted"><br><b>Menu ${i+1}:</b> ${menuaux}</small>`)
+                            } else {
+                                text.push(`<small class=" text-justify text-muted"><b>Menu ${i+1}:</b> ${menuaux}</small>`)
+
+                            }
+                        }
+                        
+                        
+                    } 
+                    if (carta != undefined && carta.length != 0 && carta != ""){
+                        text.push(`<small class=" text-justify text-muted"><br><b>Carta:</b> ${carta}</small>`)
+                    }
+
+                    if (estado == 'ordenado'){
+                        status = `<small class=" text-justify text-muted"><font color="#FB747C"><b>Tu pedido fue enviado al restaurante&#128528;</b></font></small>`
+                    } else if (estado == 'recibido'){
+                        status = `<small class=" text-justify text-muted"><font color="#F9A624"><b>El restaurante está preparando tu pedido &#128512;</b></font></small>`
+                    } else {
+                        status = `<small class=" text-justify text-muted"><font color="#18B755"><b>Se envió el pedido a tu ubicación &#129321;</b></font></small>`
+                    }
+
+                   console.log(menuaux)
+                    
+                   $(".user-items").append(`
+                   <h3 class="col-12 d-flex flex-row-reverse" style="font-size:30px; color: #cccccc;"><i class="material-icons icon " style="font-size:30px;">restaurant_menu</i> Mi Pedido</h3> 
+                   <div class="col-12 col-md-6 col-lg-30 d-inline-flex" >
+                        <div class="card mb-3 mt-3 ">
+                            <div class="card-body">
+                                <h6 class="card-title col-12  d-flex justify-content-center" ><b>${name}</b></h6>
+                                <div class="row">
+                                    <div  class="col-2 d-flex justify-content-center mb-2">
+                                        <i class="material-icons icon " style="color:#FB747C;">access_time</i>
+                                    </div>
+                                    <div  class="col-10 mb-2">
+                                        <small class=" text-justify text-muted">${fecha} </small>
+                                    </div>
+                                    <div  class="col-2 d-flex justify-content-center mb-2">
+                                        <i class="material-icons icon " style="color:#FB747C;">restaurant_menu</i>
+                                    </div>
+                                    <div  class="col-10 mb-2">
+                                        ${text}
+                                    </div>                   
+                                    <div  class="col-2 d-flex justify-content-center mb-2" >
+                                        <i class="material-icons icon " style="color:#FB747C;">timer</i>
+                                    </div>
+                                    <div  class="col-10 mb-2">
+                                        ${status}
+                                    </div>
+                                    <div  class="col-2 d-flex justify-content-center mb-2" >
+                                        <i class="material-icons icon " style="color:#FB747C;">attach_money</i>
+                                    </div>
+                                    <div  class="col-10 mb-2">
+                                        <small class=" text-justify text-muted"><b>${total}</b></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    `)
+                }) 
+            })
+        })       
+    })    
 }
