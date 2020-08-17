@@ -1291,9 +1291,7 @@ function EnviarOrden(){
 }
 
 function GuardarPedido(pedido,uid_restaurante,user_uid) {
-    $('#botonEnviar').prop("disabled", false)
-    $("#textoEnviar").empty()
-    $("#textoEnviar").append('Enviar')
+
 	
     db.collection("pedidos").doc().set(pedido)
     .then(function() {
@@ -1305,10 +1303,15 @@ function GuardarPedido(pedido,uid_restaurante,user_uid) {
               icon:"success"
           
           }).then(()=>{
+            $('#botonEnviar').prop("disabled", false)
+            $("#textoEnviar").empty()
+            $("#textoEnviar").append('Enviar')
             $("#modal-pedido").modal('toggle');
+    
             console.log("cerrar modal")
             window.location = '../clientes/clientes.html'
           })
+
         var consulta_restaurantes=db.collection('restaurantes').where("uid","==",uid_restaurante)
         consulta_restaurantes.get()
         .then(function(querySnapshot){
