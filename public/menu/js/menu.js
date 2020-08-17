@@ -995,9 +995,9 @@ function HacerPedido(){
             <small>Atras</small>
       </button>
 
-      <button type="button" class="btn btn-labeled col-5 d-flex align-items-center shadow mt-1 mb-1 mr-1 ml-1" onclick="EnviarOrden()" style="background: #4BD143; color: white;">
+      <button type="button" id="botonEnviar" class="btn btn-labeled col-5 d-flex align-items-center shadow mt-1 mb-1 mr-1 ml-1 " onclick="EnviarOrden()" style="background: #4BD143; color: white;">
         <span class="btn-label"><i class="material-icons icon d-flex align-items-center mr-1">add_circle</i></span>
-        <small>Enviar</small>
+        <small id="textoEnviar">Enviar</small>
     </button>
         
         `)
@@ -1203,7 +1203,10 @@ function Atras(){
 
 function EnviarOrden(){
     var pedido = {};
-  
+    $('#botonEnviar').attr('disabled','disabled');
+    $("#textoEnviar").empty()
+    $("#textoEnviar").append('Enviando tu Pedido')
+
     //Esta funcion escribe en la base de datos de pedidos y tambien hace un append al array 
     // de restaurante con el uiid del cliente. 
     var user = firebase.auth().currentUser
@@ -1261,6 +1264,7 @@ function EnviarOrden(){
    
             if(pedido['dir']!==null && pedido['dir']!==""){
             GuardarPedido(pedido,uid_restaurante,user.uid)
+            console.log("Enviar A Guardar Pedido ")
             console.log(pedido)
 
             }
@@ -1287,11 +1291,14 @@ function EnviarOrden(){
 }
 
 function GuardarPedido(pedido,uid_restaurante,user_uid) {
-
+    $('#botonEnviar').prop("disabled", false)
+    $("#textoEnviar").empty()
+    $("#textoEnviar").append('Enviar')
 	
     db.collection("pedidos").doc().set(pedido)
     .then(function() {
         console.log("Document successfully written!");
+
         swal({
             title:"Listo",
               text:"Pedido enviado",
