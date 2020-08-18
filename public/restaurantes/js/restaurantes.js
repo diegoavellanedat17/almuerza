@@ -96,7 +96,7 @@ function getMeta(url){
     img.onload = function(){
         logo_width=this.width
         logo_height=this.height
-        console.log(logo_width + logo_height)
+        
     };
     img.src = url;
 }
@@ -1990,7 +1990,7 @@ function homePage(){
                                 <a href="https://almuerza.co/menu/menu.html?restaurante=${link}" class="to-menu" target="_blank">
                                 <p class="card-text col-10" ><small class="text-muted small-link" id="linkCopy">https://almuerza.co/menu/menu.html?restaurante=${link}</small></p>
                                 </a>
-                                <button type="button" class="boton-copy justify-content-end col-1 mr-1" onclick="copyToClipboard('#linkCopy')" data-toggle="popover" title="Popover title" data-content="dd"><i class="material-icons icon " style="font-size:18px; cursor: pointer;">content_copy</i></button>
+                                <button type="button" class="boton-copy justify-content-end col-1 mr-1" onclick="copyToClipboard('#linkCopy')"data-toggle="tooltip" data-placement="top" title="Copiar"><i class="material-icons icon " style="font-size:18px; cursor: pointer;">content_copy</i></button>
                                 
                                 </div>
                                 
@@ -2094,6 +2094,33 @@ function homePage(){
                         </div>
                 
                     </div>
+                
+                </div>
+
+                <div class="col-12  col-lg-6 d-inline-flex ">
+                    
+                        <div class="card mb-3 mt-3 shadow">
+                    
+                            <div class="card-body">
+                                <div class="row d-flex align-items-center">
+                                
+                                    <h5 class="card-title col-9 ml-md-3 " >Paga tu suscripción</h5>
+
+                                    <p class="card-title col-9 ml-md-3 text-justify text-muted "> Ofrecemos diferentes canales de pago </p>
+                                    
+                                    <div class="col-12 d-flex flex-row-reverse " >
+                                        
+                                        <button type="button" class="btn btn-labeled  mt-3 d-flex align-items-center " onClick="ModalPagar()" style="  background: #FB747C; color: white;">
+                                            <span class="btn-label"><i class="material-icons icon d-flex align-items-center">payment</i></span>
+                                            <small>Medios de Pago</small>
+                                        </button>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                
+                        </div>
                 
                 </div>
 
@@ -2245,12 +2272,19 @@ function copyToClipboard(element) {
     var $temp = $("<input>");
     $("body").append($temp);
     $temp.val($(element).text()).select();
-    document.execCommand("copy");
+    var copiar=document.execCommand("copy");
     $temp.remove();
+    if(copiar===true){
+        console.log("copiado")
+        $(".boton-copy").tooltip('show')
+    }
   }
 
 
+function ModalPagar(){
+    $("#modal-pagar").modal()
+}
 
-function GuardarHorario(){
-    console.log($("#horario-apertura").val())
+function PagarSuscripcion(){
+    window.open("https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=186198979-26bb8885-64d0-4503-9b14-7ca874ab9f36");
 }

@@ -200,7 +200,7 @@ function GuardarInformacionRestaurante(name,email,password,person,nit,tel,userUi
 	
 	//dia vencimiento 
 	var nextDate = new Date();
-	nextDate.setDate(nextDate.getDate()+15)
+	nextDate.setDate(nextDate.getDate()+7)
 	var diaFuturo=String(nextDate.getDate()).padStart(2, '0');
 	var mesFuturo=String(nextDate.getMonth()+1).padStart(2, '0');
 	var anioFuturo=nextDate.getFullYear()
