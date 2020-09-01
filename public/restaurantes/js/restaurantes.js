@@ -1056,6 +1056,11 @@ $(".menu").click(function(){
         <button type="button" class="btn btn-labeled  col-12 col-md-3 mt-2 ml-3 d-flex align-items-center" onClick="PrecioMenu()" style="background-color: #F9A624; color: white;">
             <span class="btn-label"><i class="material-icons icon d-flex align-items-center">attach_money</i></span>
             <small> Precio del Menú </small>
+        </button>
+
+        <button type="button" class="btn btn-labeled  col-12 col-md-3 mt-2 ml-3 d-flex align-items-center" onClick="PrecioDomicilio()" style="background-color: #8334eb; color: white;">
+        <span class="btn-label"><i class="material-icons icon d-flex align-items-center">directions_bike</i></span>
+        <small> Precio del Domicilio </small>
         </button>  
 
 
@@ -1132,6 +1137,25 @@ function PrecioMenu(){
     })
 }
 
+function PrecioDomicilio(){
+    console.log("Ajustar Domicilio")
+        // Buscar en la base de datos el precio del menú, si no existe colocal el input vacio, si ya existe colocal el valor actual como placeholder
+        var user = firebase.auth().currentUser;
+        var consulta_precio=db.collection('restaurantes').where("uid","==",user.uid)
+        consulta_precio.get()
+        .then(function(querySnapshot){
+            querySnapshot.forEach(function(doc){
+                const precioDomicilio=doc.data().precioDomicilio
+                console.log(doc.id)
+                $('.id-precioDomicilio').empty()
+                $('.id-precioDomicilio').append(doc.id)
+                $('#precio-domicilio').val(precioDomicilio)
+                $('#modal-domicilio').modal();
+            })
+        })
+
+}
+
 function UpdatePrecio(){
     var precio=document.forms["PrecioForm"]["precio"].value;
     var user = firebase.auth().currentUser;
@@ -1148,6 +1172,30 @@ function UpdatePrecio(){
           
           }).then(function(){
             $('#modal-precio').modal('toggle');
+          })
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+}
+
+function UpdatePrecioDomicilio(){
+    var precioDomicilio=document.forms["PrecioDomicilioForm"]["precio-domicilio"].value;
+    var user = firebase.auth().currentUser;
+    var precio_id = $(".id-precioDomicilio").text(); //preferred
+    var actualizacion_precio=db.collection('restaurantes').doc(precio_id)
+    return actualizacion_precio.update({
+        precioDomicilio:precioDomicilio
+    })
+    .then(function() {
+        swal({
+            title:"Listo",
+              text:"Precio del Domicilio Actualizado",
+              icon:"success"
+          
+          }).then(function(){
+            $('#modal-domicilio').modal('toggle');
           })
     })
     .catch(function(error) {

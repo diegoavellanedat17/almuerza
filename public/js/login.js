@@ -222,6 +222,7 @@ function GuardarInformacionRestaurante(name,email,password,person,nit,tel,userUi
 		tipo:'restaurante',
 		uid:userUid,
 		precio:'0',
+		precioDomicilio:'0',
 		clientes:[],
 		fechaInscripcion: acutualFormat,
         fechaVencimiento: futuroFormat,

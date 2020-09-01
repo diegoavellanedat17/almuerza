@@ -187,7 +187,7 @@ table tr:first-child th:last-child {
   display:none;
 }
 
-.id-pedido{
+.id-pedido, .id-precioDomicilio{
   display:none;
 }
 

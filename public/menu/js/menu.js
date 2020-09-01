@@ -167,9 +167,11 @@ function VerificarExistenciarestaurante(){
                 .then(function(querySnapshot){
                     querySnapshot.forEach(function(doc){
                         precio=doc.data().precio
+                        precioDomicilio=doc.data().precioDomicilio
                      
 
                         $(".precio-restaurant").append(` $ ${precio}`)
+                        $(".precio-restaurant-domicilio").append(` $ ${precioDomicilio}`)
 
 
                     })
@@ -1103,6 +1105,8 @@ function HacerPedido(){
         <div class="row subtotal-carta ">
         
         </div>
+
+
         
         `)
         $(".headerTablaHacerPedidoCarta").empty()
@@ -1149,7 +1153,8 @@ function HacerPedido(){
     }
 
     const precio_menus=precio*numero_almuerzos
-    const granTotal=precio_menus+total_platos_carta
+    precioDomicilio=parseInt(precioDomicilio, 10);
+    const granTotal=precio_menus+total_platos_carta+precioDomicilio
     console.log(granTotal)
     $(".subtotal-menu").append( `<p class="col-12 text-right align-self-center "><span class="subtotal-title"> Subtotal Menú:</span> $${precio_menus}</p> `)
     $(".subtotal-carta").append(`<p class="col-12 text-right align-self-center "><span class="subtotal-title"> Subtotal Carta:</span> $${total_platos_carta}</p> `)
@@ -1158,6 +1163,7 @@ function HacerPedido(){
             <div class="container-fluid">
                 <div class="row">
                 <div class="col-12 totalPagar text-right">
+                    <p class="subtotal-title">Domicilio: <span class="GranTotal">$${precioDomicilio}</span> </p>
                     <p class="subtotal-title">Total: <span class="GranTotal">$${granTotal}</span> </p> 
                 </div>
                 </div>
