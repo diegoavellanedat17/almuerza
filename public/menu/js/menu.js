@@ -59,6 +59,10 @@ function VerificarExistenciarestaurante(){
                 var direccion_restaurante=doc.data().dir
                 var estado=doc.data().estado
                 var fechaVencimiento=doc.data().fechaVencimiento
+                horaApertura=doc.data().horaApertura
+                horaCierre=doc.data().horaCierre
+
+                HorarioRestaurante(horaApertura,horaCierre)
 
                 VerificarPago(estado,fechaVencimiento)
                 // Colocar el logo del restaurante si existe 
@@ -319,11 +323,21 @@ document.getElementById("button_pedir").addEventListener("click", function(){
     //debe decidirse cual modal mostrar si el de realizar pedido o realizar atenticación, esto depende si hay usuario o no 
     var user = firebase.auth().currentUser;
     console.log(user)
+    if(HorarioRestaurante(horaApertura,horaCierre)===false){
+   
+        swal({
+			title:"Atención",
+              text:`No estas en el horario de atención pide entre:
+               ${horaApertura} - ${horaCierre} `,
+			  icon:"warning"
+		  })
 
-    
-    if(user === null){
+    }
+    else{
+        if(user === null){
         $("#modal-usuario").modal()
     }
+
     else{
         //Debe verificarse que tipo de usuario quiere hacer un pedido, si es un restaurante redirige a restaurantes 
         // Si es un cliente abre el modal de hacer pedido 
@@ -366,6 +380,7 @@ document.getElementById("button_pedir").addEventListener("click", function(){
              })
             
         })
+        }
     }
 })
 
@@ -1538,3 +1553,91 @@ function GuardarNuevoCliente(user){
 	});
 
 }
+
+function HorarioRestaurante(horaApertura,horaCierre){
+    console.log(horaApertura)
+    console.log(horaCierre)
+
+    var date=new Date()
+    var hora= date.getHours()
+    var minutos=date.getMinutes()
+    console.log(hora)
+    var arrayApertura=horaApertura.split(":")
+    var arrayCierre=horaCierre.split(":")
+    var hApertura = parseInt(arrayApertura[0],10)
+    var mApertura = parseInt(arrayApertura[1],10)
+    var hCierre = parseInt(arrayCierre[0],10)
+    var mCierre = parseInt(arrayCierre[1],10)
+    console.log(hApertura)
+    console.log(hCierre)
+
+    
+
+    if(hora >= hApertura && hora <= hCierre){
+        console.log("estas en la franja ")
+        if(hora===hApertura){
+            // ver los minutos 
+            if(minutos<mApertura){
+                console.log("En pocos minutos se abrira el restaurante")
+                
+                swal({
+                    title:"Atención",
+                      text:`En pocos minutos podrás pedir en este restaurante:
+                      Horario
+                       ${horaApertura} - ${horaCierre} `,
+                      icon:"warning"
+                  })
+                
+                  return false
+                //$("#button_pedir_int").prop('disabled', true);
+            }
+            else{
+                console.log("restaurante abierto")
+                return true
+                //$("#button_pedir_int").prop('disabled', false);
+                
+            }
+        }
+
+        else if(hora === hCierre){
+            if(minutos > mCierre){
+                swal({
+                    title:"Atención",
+                      text:`No estas en el horario de atención pide entre:
+                       ${horaApertura} - ${horaCierre} `,
+                      icon:"warning"
+                  })
+                console.log("el restaurante se encuentra cerrado")
+                return false
+                //$("#button_pedir_int").prop('disabled', true);
+            }
+            else{
+                console.log("restaurante abierto")
+                return true
+                //$("#button_pedir_int").prop('disabled', false);
+            }
+        }
+        else{
+            
+            console.log("restaurante abierto")
+            return true
+            //$("#button_pedir_int").prop('disabled', false);
+        }
+    }
+    else{
+        swal({
+			title:"Atención",
+              text:`No estas en el horario de atención pide entre:
+               ${horaApertura} - ${horaCierre} `,
+			  icon:"warning"
+		  })
+        console.log("no estas en la frnanja")
+        return false
+        //$("#button_pedir").prop('disabled', true);
+    }
+
+
+
+
+}
+

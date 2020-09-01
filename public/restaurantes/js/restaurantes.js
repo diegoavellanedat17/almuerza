@@ -2005,7 +2005,7 @@ function homePage(){
         // Hacer Query de restaurante para descargar la información básica 
         var consulta_restaurantes=db.collection('restaurantes').where("uid","==",userData.uid)
         consulta_restaurantes.get()
-        .then(function(querySnapshot){
+        .then(function(querySnapshot){  
             if(querySnapshot.empty){
                 console.log("No es un restaurante debe salir")
                 firebase.auth().signOut()
@@ -2021,7 +2021,10 @@ function homePage(){
                     const clientes=doc.data().clientes 
                     const link=doc.data().nombreRestaurante
                     const estado=doc.data().estado
+                    const horaApertura=doc.data().horaApertura
+                    const horaCierre=doc.data().horaCierre
                     var FechaVencimiento=doc.data().fechaVencimiento
+
                     FechaVencimientoFormat = dateChanger(FechaVencimiento)
                     
                     VerificarPago(estado,FechaVencimiento,nombre)
@@ -2081,8 +2084,46 @@ function homePage(){
                         </div>
                 
                     </div>
+
+                    <div class="col-12 col-md-6 col-lg-3 d-inline-flex">
+                    
+                    <div class="card mb-3 mt-3 shadow">
                 
-                    <div class="col-12 col-md-6 col-lg-3 d-inline-flex" >
+                        <div class="card-body">
+                            <div class="row d-flex align-items-center">
+                            
+                                <h5 class="card-title col-9 ml-md-3 " >Horario de tu restaurante</h5>
+
+                                <p class="card-title col-9 ml-md-3 text-justify text-muted "> Configura a continuación el horario de tu restaurante </p>
+
+                                <div class="col-5 col-md-12">
+                                    <label for="horario-apertura" class="col-12">Apertura</label>
+                                    <input class="timepicker" id="horario-apertura">
+                                </div>
+
+                                <div class="col-5 col-md-12">
+                                    <label for="horario-cierre" class="col-12 ">Cierre</label>
+                                    <input class="timepicker " id="horario-cierre">
+                                </div>
+                                
+                                <div class="col-12 d-flex flex-row-reverse " >
+                                    
+                                    <button type="button" class="btn btn-labeled  mt-3 d-flex align-items-center " onClick="GuardarHoraio()" style="  background: #FB747C; color: white;">
+                                        <span class="btn-label"><i class="material-icons icon d-flex align-items-center">watch_later</i></span>
+                                        <small>Guardar Horario</small>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+            
+                    </div>
+        
+                </div>
+                
+                
+                <div class="col-12 col-md-6 col-lg-3 d-inline-flex"  >
                 
                     <div class="card mb-3 mt-3 shadow">
                         
@@ -2145,7 +2186,9 @@ function homePage(){
                 
                 </div>
 
-                <div class="col-12  col-lg-6 d-inline-flex ">
+
+
+                <div class="col-12 col-md-6 col-lg-3 d-inline-flex">
                     
                         <div class="card mb-3 mt-3 shadow">
                     
@@ -2176,11 +2219,26 @@ function homePage(){
                         
                 `
                 )
+                console.log(horaApertura)
+                $('#horario-apertura').val(`${horaApertura}`)
+                $('#horario-cierre').val(`${horaCierre}`)
+
+                $(".timepicker").keypress(function (evt) {
+                    evt.preventDefault();
+                });
+                
 
                 $(function(){
 
-                    $('.picker').timepicker({
-                        use24hours: true
+                    $('.timepicker').timepicker({
+                        timeFormat: 'H:mm',
+                        interval: 30,
+                        minTime: '10',
+                        maxTime: '23',
+                        startTime: '9',
+                        dynamic: false,
+                        dropdown: true,
+                        scrollbar: true
 
                     })
                 })
@@ -2335,4 +2393,46 @@ function ModalPagar(){
 
 function PagarSuscripcion(){
     window.open("https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=186198979-26bb8885-64d0-4503-9b14-7ca874ab9f36");
+}
+
+function GuardarHoraio(){
+    var horaApertura=$("#horario-apertura").val()
+    var horaCierre=$("#horario-cierre").val()
+    console.log( horaApertura)
+    console.log( horaCierre)
+
+    var user = firebase.auth().currentUser;
+    consulta_documento=db.collection('restaurantes').where("uid","==",user.uid)
+
+    consulta_documento.get()
+    .then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            
+            var docID=doc.id
+            var actualizacion_horario=db.collection('restaurantes').doc(docID)
+            return actualizacion_horario.update({
+                horaApertura: horaApertura,
+                horaCierre: horaCierre
+            })
+            .then(function() {
+                swal({
+                    title:"Listo",
+                      text:"Precio de Menú Actualizado",
+                      icon:"success"
+                  
+                  })
+            })
+            .catch(function(error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+         
+        })
+    })
+
+
+
+
+
+
 }

@@ -224,6 +224,8 @@ function GuardarInformacionRestaurante(name,email,password,person,nit,tel,userUi
 		precio:'0',
 		precioDomicilio:'0',
 		clientes:[],
+		horaApertura:'08:00',
+		horaCierre:'21:00',
 		fechaInscripcion: acutualFormat,
         fechaVencimiento: futuroFormat,
         estado:'demo'

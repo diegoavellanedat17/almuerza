@@ -440,3 +440,7 @@ input[type='checkbox'] {
 border-radius: 50%;
 }
 
+.timepicker{
+  max-width: 120px;
+  
+}
