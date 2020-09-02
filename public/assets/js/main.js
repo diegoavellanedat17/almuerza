@@ -305,12 +305,12 @@ function initMap() {
     // },
 
     {
-      position: new google.maps.LatLng(4.6992268, -74.046111),
+      position: new google.maps.LatLng(4.699819	, -74.043703),
       type: 'restaurant',
-      name:'Restaurante Mamá Vieja',
+      name:'Restaurante Portal de San Marino',
       link: '<div id="content">'+
-      '<h5>Restaurante Mamá Vieja</h5>'+
-      '<a href="https://almuerza.co/menu/menu.html?restaurante=restaurantemamavieja">Ver Menú</a>'
+      '<h5>Restaurante Portal de San Marino</h5>'+
+      '<a href="https://almuerza.co/menu/menu.html?restaurante=restauranteportaldesanmarino">Ver Menú</a>'
       +'</div>'
     },
 
