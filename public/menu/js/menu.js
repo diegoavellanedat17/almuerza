@@ -323,6 +323,7 @@ document.getElementById("button_pedir").addEventListener("click", function(){
     //debe decidirse cual modal mostrar si el de realizar pedido o realizar atenticación, esto depende si hay usuario o no 
     var user = firebase.auth().currentUser;
     console.log(user)
+    validateAdress()
     if(HorarioRestaurante(horaApertura,horaCierre)===false){
    
         swal({
@@ -1635,9 +1636,89 @@ function HorarioRestaurante(horaApertura,horaCierre){
         return false
         //$("#button_pedir").prop('disabled', true);
     }
+}
 
+// esta función devuelve True or False dependiendo si la ubicación del cliente cae dentro de la zona de servicio o no
+function validateAdress(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const QueryRestaurante = urlParams.get('restaurante');
+    var attr = []
+    var consulta_restaurantes=db.collection('restaurantes').where("nombreRestaurante","==",QueryRestaurante)
+    consulta_restaurantes.get()
+    .then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            attr[0]=doc.data().dir
+            attr[1]=doc.data().areaServicio
+            var user = firebase.auth().currentUser
+            var dir_cliente
+            var consulta_usuario=db.collection('clientes').where("uid","==",user.uid)
+            consulta_usuario.get()
+            .then(function(querySnapshot){
+                querySnapshot.forEach(function(doc){
+                    dir_cliente=doc.data().dir
+                    console.log(attr)
+                    console.log(dir_cliente)
+                    var value = geocoder(dir_cliente, attr) 
+                    
+                    return value
+                }) 
+            })
+        })
+    })
+}
 
+// esta función se invoca dentro de la función validateAdress() y se encarga de la geocodificación y validación
+function geocoder(dir_cliente,dir_rest){
+    require([
+        "esri/tasks/Locator", 
+        "esri/tasks/GeometryService",
+        "esri/tasks/support/DistanceParameters",
+        "dojo/domReady!",
+    ], function(Locator, GeometryService, DistanceParameters) {
 
-
+    var locatorTask = new Locator({
+        url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+    })
+  
+    var addressParams = {"singleLine": dir_rest[0]+' Bogota'};
+    locatorTask.addressToLocations({address: addressParams}).then(function(evt){    
+        // console.log(evt)      
+        if (evt[0].location){
+            var pt1 = {
+                type: "point",  // autocasts as new Point()
+                longitude: evt[0].location.longitude,
+                latitude: evt[0].location.latitude
+            };
+        }
+        console.log(pt1)
+        var addressParams = {"singleLine": dir_cliente+' Bogota'};
+        locatorTask.addressToLocations({address: addressParams}).then(function(evt){
+            if (evt[0].location){
+                var pt2 = {
+                    type: "point",  // autocasts as new Point()
+                    longitude: evt[0].location.longitude,
+                    latitude: evt[0].location.latitude
+                };
+            }
+            console.log(pt2) 
+            geometryService = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+            var distParams = new DistanceParameters();
+            distParams.distanceUnit = GeometryService.UNIT_KILOMETER;
+            distParams.geometry1 = pt1;
+            distParams.geometry2 = pt2;
+            distParams.geodesic = true;
+            geometryService.distance(distParams).then(function(distance) {
+                console.log(distance);
+                 if (distance <= dir_rest[1]){
+                    console.log(true)
+                    return true
+                } else {
+                    console.log(false)
+                    return false
+                } 
+            });
+        })
+    })
+})
 }
 

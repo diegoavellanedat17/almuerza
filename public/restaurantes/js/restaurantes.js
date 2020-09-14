@@ -459,6 +459,25 @@ $(".settings").click(function(){
                                 </div>
 
                                 <div class="form-group">
+                                <label for="logo"> Área de Servicio (Kilómetros): </label>
+                                    <input type="text" class="form-control" id="area-change" placeholder="Aquí tu área de servicio" name="direccion">
+                                </div>
+                                
+                                <div class="row d-flex flex-row-reverse">
+                                <button onclick="location.href='http://127.0.0.1:5500/public/geocodificacion/geocode.html'"type="button" class="btn btn-labeled  col-6 col-md-3  mt-2 ml-3 d-flex align-items-center" style=" background-color: yellowgreen; color: white;">
+                                    <span class="btn-label"><i class="material-icons icon d-flex align-items-center">add_photo_alternate</i></span>
+                                    <small> Ver Mapa</small>
+                                    <div id="myModal" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close">&times;</span>
+                                            <div id="viewDiv"></div>
+                                        </div>
+                                    </div>
+                                </button>
+                                
+                                </div>
+
+                                <div class="form-group">
                                 <label for="tel">Tu teléfono</label>
                                 <input type="tel" class="form-control" id="tel-change" placeholder="Aquí tu número " name="tel">
                                 </div>
@@ -475,17 +494,18 @@ $(".settings").click(function(){
 
 
 
-                        var user = firebase.auth().currentUser;
+                        
                         var consulta_precio=db.collection('restaurantes').where("uid","==",user.uid)
                         consulta_precio.get()
                         .then(function(querySnapshot){
                             querySnapshot.forEach(function(doc){
-                                const precio=doc.data().precio
+                                const area=doc.data().areaServicio
                                 docID=doc.id
                                 const direccion=doc.data().dir
                                 const tel=doc.data().tel
 
-                                document.forms["restaurant-data"]["direccion"].value=direccion;
+                                document.forms["restaurant-data"]["direccion-change"].value=direccion;
+                                document.forms["restaurant-data"]["area-change"].value=area;
                                 document.forms["restaurant-data"]["tel"].value=tel;
                             })
                         })
