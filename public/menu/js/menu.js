@@ -323,7 +323,7 @@ document.getElementById("button_pedir").addEventListener("click", function(){
     //debe decidirse cual modal mostrar si el de realizar pedido o realizar atenticación, esto depende si hay usuario o no 
     var user = firebase.auth().currentUser;
     console.log(user)
-    validateAdress()
+
     if(HorarioRestaurante(horaApertura,horaCierre)===false){
    
         swal({
@@ -335,54 +335,70 @@ document.getElementById("button_pedir").addEventListener("click", function(){
 
     }
     else{
+
         if(user === null){
         $("#modal-usuario").modal()
-    }
+        }
 
-    else{
-        //Debe verificarse que tipo de usuario quiere hacer un pedido, si es un restaurante redirige a restaurantes 
-        // Si es un cliente abre el modal de hacer pedido 
-        var consulta_clientes=db.collection('clientes').where("uid","==",user.uid)
-        consulta_clientes.get()
-        .then(function(querySnapshot){
-            if(querySnapshot.empty){
-                // Seguramente es un restaurante entonces redirigimos a UvR
-                //Toca asegurarse que es un restaurante
-                var consulta_restaurantes=db.collection('restaurantes').where("uid","==",user.uid)
-                consulta_restaurantes.get()
-                .then(function(querySnapshotRestaurante){
-                    // si no hay restaurantes tampoco con ese ID es por que es la primera vez que entra alguien con ese id
-                    if(querySnapshotRestaurante.empty){
-                        console.log("debe crearse en clientes")
-                        GuardarNuevoCliente(user)
-                        LanzarModal(null)
-                    }
-                    else{
-                        querySnapshotRestaurante.forEach(function(doc){
-                            // en este caso si es un restaurante
-                            window.location = '../UvR/UvR.html'; 
-                        })
+        else{
+            
+            validateAdress()
+            .then(function(valueAdress){
+                    // lanzamos a validar la geocodificación y la guardamos en una variable 
+                    //Debe verificarse que tipo de usuario quiere hacer un pedido, si es un restaurante redirige a restaurantes 
+                    // Si es un cliente abre el modal de hacer pedido 
+                    var consulta_clientes=db.collection('clientes').where("uid","==",user.uid)
+                    consulta_clientes.get()
+                    .then(function(querySnapshot){
+                        if(querySnapshot.empty){
+                            // Seguramente es un restaurante entonces redirigimos a UvR
+                            //Toca asegurarse que es un restaurante
+                            var consulta_restaurantes=db.collection('restaurantes').where("uid","==",user.uid)
+                            consulta_restaurantes.get()
+                            .then(function(querySnapshotRestaurante){
+                                // si no hay restaurantes tampoco con ese ID es por que es la primera vez que entra alguien con ese id
+                                if(querySnapshotRestaurante.empty){
+                                    console.log("debe crearse en clientes")
+                                    GuardarNuevoCliente(user)
+                                    LanzarModal(null)
+                                }
+                                else{
+                                    querySnapshotRestaurante.forEach(function(doc){
+                                        // en este caso si es un restaurante
+                                        window.location = '../UvR/UvR.html'; 
+                                    })
 
-                    }
+                                }
 
-                   
+                            
 
-                })
+                            })
+                            
+
+                        }
+                        querySnapshot.forEach(function(doc){
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const QueryMesa=urlParams.get('mesa');
+
+                            if(valueAdress!==true && QueryMesa ===null){
+                               
+                                swal({
+                                    title:"Atención",
+                                      text:`Revisa tu dirección, no te encuentras en la cobertura del restaurante`,
+                                      icon:"warning"
+                                  })
+                            }
+                            else{
+                                LanzarModal(doc.data().dir)
+                            }
+                            
+                        })  
+                    })
                 
-               
+            })
 
             }
-         
-            querySnapshot.forEach(function(doc){
-
-                LanzarModal(doc.data().dir)
-
-
-             })
-            
-        })
         }
-    }
 })
 
 function LanzarModal(dir){
@@ -1640,28 +1656,33 @@ function HorarioRestaurante(horaApertura,horaCierre){
 
 // esta función devuelve True or False dependiendo si la ubicación del cliente cae dentro de la zona de servicio o no
 function validateAdress(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const QueryRestaurante = urlParams.get('restaurante');
-    var attr = []
-    var consulta_restaurantes=db.collection('restaurantes').where("nombreRestaurante","==",QueryRestaurante)
-    consulta_restaurantes.get()
-    .then(function(querySnapshot){
-        querySnapshot.forEach(function(doc){
-            attr[0]=doc.data().dir
-            attr[1]=doc.data().areaServicio
-            var user = firebase.auth().currentUser
-            var dir_cliente
-            var consulta_usuario=db.collection('clientes').where("uid","==",user.uid)
-            consulta_usuario.get()
-            .then(function(querySnapshot){
-                querySnapshot.forEach(function(doc){
-                    dir_cliente=doc.data().dir
-                    console.log(attr)
-                    console.log(dir_cliente)
-                    var value = geocoder(dir_cliente, attr) 
-                    
-                    return value
-                }) 
+    return new Promise((resolve,reject)=>{
+        const urlParams = new URLSearchParams(window.location.search);
+        const QueryRestaurante = urlParams.get('restaurante');
+        var attr = []
+        var consulta_restaurantes=db.collection('restaurantes').where("nombreRestaurante","==",QueryRestaurante)
+        consulta_restaurantes.get()
+        .then(function(querySnapshot){
+            querySnapshot.forEach(function(doc){
+                attr[0]=doc.data().dir
+                attr[1]=doc.data().areaServicio
+                var user = firebase.auth().currentUser
+                var dir_cliente
+                var consulta_usuario=db.collection('clientes').where("uid","==",user.uid)
+                consulta_usuario.get()
+                .then(function(querySnapshot){
+                    querySnapshot.forEach(function(doc){
+                        dir_cliente=doc.data().dir
+                        console.log(attr)
+                        console.log(dir_cliente)
+                        geocoder(dir_cliente, attr)
+                        .then(function(value){
+                            resolve(value)
+                        })
+                        
+                        
+                    }) 
+                })
             })
         })
     })
@@ -1669,54 +1690,58 @@ function validateAdress(){
 
 // esta función se invoca dentro de la función validateAdress() y se encarga de la geocodificación y validación
 function geocoder(dir_cliente,dir_rest){
-    require([
-        "esri/tasks/Locator", 
-        "esri/tasks/GeometryService",
-        "esri/tasks/support/DistanceParameters",
-        "dojo/domReady!",
-    ], function(Locator, GeometryService, DistanceParameters) {
+    return new Promise((resolve,reject)=>{
+        require([
+            "esri/tasks/Locator", 
+            "esri/tasks/GeometryService",
+            "esri/tasks/support/DistanceParameters",
+            "dojo/domReady!",
+        ], function(Locator, GeometryService, DistanceParameters) {
 
-    var locatorTask = new Locator({
-        url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
-    })
-  
-    var addressParams = {"singleLine": dir_rest[0]+' Bogota'};
-    locatorTask.addressToLocations({address: addressParams}).then(function(evt){    
-        // console.log(evt)      
-        if (evt[0].location){
-            var pt1 = {
-                type: "point",  // autocasts as new Point()
-                longitude: evt[0].location.longitude,
-                latitude: evt[0].location.latitude
-            };
-        }
-        console.log(pt1)
-        var addressParams = {"singleLine": dir_cliente+' Bogota'};
-        locatorTask.addressToLocations({address: addressParams}).then(function(evt){
+        var locatorTask = new Locator({
+            url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+        })
+    
+        var addressParams = {"singleLine": dir_rest[0]+' Bogota'};
+        locatorTask.addressToLocations({address: addressParams}).then(function(evt){    
+            // console.log(evt)      
             if (evt[0].location){
-                var pt2 = {
+                var pt1 = {
                     type: "point",  // autocasts as new Point()
                     longitude: evt[0].location.longitude,
                     latitude: evt[0].location.latitude
                 };
             }
-            console.log(pt2) 
-            geometryService = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
-            var distParams = new DistanceParameters();
-            distParams.distanceUnit = GeometryService.UNIT_KILOMETER;
-            distParams.geometry1 = pt1;
-            distParams.geometry2 = pt2;
-            distParams.geodesic = true;
-            geometryService.distance(distParams).then(function(distance) {
-                console.log(distance);
-                 if (distance <= dir_rest[1]){
-                    console.log(true)
-                    return true
-                } else {
-                    console.log(false)
-                    return false
-                } 
-            });
+            console.log(pt1)
+            var addressParams = {"singleLine": dir_cliente+' Bogota'};
+            locatorTask.addressToLocations({address: addressParams}).then(function(evt){
+                if (evt[0].location){
+                    var pt2 = {
+                        type: "point",  // autocasts as new Point()
+                        longitude: evt[0].location.longitude,
+                        latitude: evt[0].location.latitude
+                    };
+                }
+                console.log(pt2) 
+                geometryService = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+                var distParams = new DistanceParameters();
+                distParams.distanceUnit = GeometryService.UNIT_KILOMETER;
+                distParams.geometry1 = pt1;
+                distParams.geometry2 = pt2;
+                distParams.geodesic = true;
+                geometryService.distance(distParams).then(function(distance) {
+                    console.log(distance);
+                    if (distance <= dir_rest[1]){
+                        console.log(true)
+                        resolve(true)
+                        return true
+                    } else {
+                        console.log(false)
+                        resolve(false)
+                        return false
+                    } 
+                });
+            })
         })
     })
 })

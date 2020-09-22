@@ -494,16 +494,16 @@ $(".settings").click(function(){
 
 
 
-                        
-                        var consulta_precio=db.collection('restaurantes').where("uid","==",user.uid)
-                        consulta_precio.get()
+                        var user = firebase.auth().currentUser;
+                        var consulta_restaurante=db.collection('restaurantes').where("uid","==",user.uid)
+                        consulta_restaurante.get()
                         .then(function(querySnapshot){
                             querySnapshot.forEach(function(doc){
                                 const area=doc.data().areaServicio
                                 docID=doc.id
                                 const direccion=doc.data().dir
                                 const tel=doc.data().tel
-
+                                
                                 document.forms["restaurant-data"]["direccion-change"].value=direccion;
                                 document.forms["restaurant-data"]["area-change"].value=area;
                                 document.forms["restaurant-data"]["tel"].value=tel;
@@ -2290,12 +2290,13 @@ function homePage(){
 
 // funcion para actualizar los datos del restaurante 
 function ActualizarDatos(){
-
-    const direccion = document.forms["restaurant-data"]["direccion"].value;
-     const tel= document.forms["restaurant-data"]["tel"].value;
+    const area =document.forms["restaurant-data"]["area-change"].value
+    const direccion = document.forms["restaurant-data"]["direccion-change"].value;
+    const tel= document.forms["restaurant-data"]["tel"].value;
 
     var actualizarDatos=db.collection('restaurantes').doc(docID)
     return actualizarDatos.update({
+        areaServicio:area,
         dir:direccion,
         tel:tel
     })

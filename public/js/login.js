@@ -228,7 +228,9 @@ function GuardarInformacionRestaurante(name,email,password,person,nit,tel,userUi
 		horaCierre:'21:00',
 		fechaInscripcion: acutualFormat,
         fechaVencimiento: futuroFormat,
-        estado:'demo'
+		estado:'demo',
+		areaServicio:'1'
+
     })
     .then(function() {
 	console.log("Document successfully written!");
