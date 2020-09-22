@@ -405,7 +405,6 @@ function LanzarModal(dir){
     const urlParams = new URLSearchParams(window.location.search);
     const QueryMesa=urlParams.get('mesa');
 
-    console.log(dir)
     if(dir===null && QueryMesa === null){
         address()
     }
@@ -421,7 +420,7 @@ function LanzarModal(dir){
         $(".quitarPlatoCarta").remove()
     }
     if(numero_platos_carta=== 0 && numero_almuerzos===0){
-        console.log("debemos quitar hacer pedido")
+
         $(".notas").remove()
         $(".hacerpedido").css("display","none")
     }
@@ -443,13 +442,13 @@ function LanzarModal(dir){
 
 //click en navigation
 $(".menu-click").click(function(){
-console.log("click en menu")
-$(".menu-click").addClass("navigation-select")
-$(".carta-click").removeClass("navigation-select")
+
+    $(".menu-click").addClass("navigation-select")
+    $(".carta-click").removeClass("navigation-select")
 })
 
 $(".carta-click").click(function(){
-    console.log("click en menu")
+
     $(".carta-click").addClass("navigation-select")
     $(".menu-click").removeClass("navigation-select")
 })
@@ -1186,23 +1185,49 @@ function HacerPedido(){
 
     const precio_menus=precio*numero_almuerzos
     precioDomicilio=parseInt(precioDomicilio, 10);
-    const granTotal=precio_menus+total_platos_carta+precioDomicilio
-    console.log(granTotal)
+    const urlParams = new URLSearchParams(window.location.search);
+    const QueryMesa=urlParams.get('mesa');
+    var granTotal=0
+
     $(".subtotal-menu").append( `<p class="col-12 text-right align-self-center "><span class="subtotal-title"> Subtotal Menú:</span> $${precio_menus}</p> `)
     $(".subtotal-carta").append(`<p class="col-12 text-right align-self-center "><span class="subtotal-title"> Subtotal Carta:</span> $${total_platos_carta}</p> `)
 
-    $( `<div class="fieldTotal">
-            <div class="container-fluid">
-                <div class="row">
+    if(QueryMesa !==null){
+        console.log('Es una mesa')
+        granTotal=precio_menus+total_platos_carta
+
+        $( `<div class="fieldTotal">
+        <div class="container-fluid">
+            <div class="row">
                 <div class="col-12 totalPagar text-right">
-                    <p class="subtotal-title">Domicilio: <span class="GranTotal">$${precioDomicilio}</span> </p>
                     <p class="subtotal-title">Total: <span class="GranTotal">$${granTotal}</span> </p> 
                 </div>
-                </div>
+            </div>
             </div>
         </div>
+    
+    `).insertAfter( ".ModalHacerPedido" );
+
+    }
+    else{
+        console.log('no es una mesa')
+        granTotal=precio_menus+total_platos_carta+precioDomicilio
+        $( `<div class="fieldTotal">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 totalPagar text-right">
+                    <p class="subtotal-title">Domicilio: <span class="GranTotalDomicilio">$${precioDomicilio}</span> </p>
+                    <p class="subtotal-title">Total: <span class="GranTotal">$${granTotal}</span> </p> 
+                </div>
+            </div>
+            </div>
+        </div>
+    
+    `).insertAfter( ".ModalHacerPedido" );
         
-        `).insertAfter( ".ModalHacerPedido" );
+    }
+
+
 
     var notas=document.forms["PedidoForm"][`notas`].value
     if(notas!=""){
@@ -1272,6 +1297,7 @@ function EnviarOrden(){
             var PedidoDeCarta=$("#PedidoDeCarta").text()
             var PedidoDeCarta = PedidoDeCarta.split(',');
             var totalpagar=$(".GranTotal").text()
+            console.log(totalpagar)
             //se tendrá un array con el nombre de la categoria que tenga la orden 
             var categorias = $(".clase-categoria").map(function() { return this.id;});
             var categoriaPedido=[]

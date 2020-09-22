@@ -464,7 +464,7 @@ $(".settings").click(function(){
                                 </div>
                                 
                                 <div class="row d-flex flex-row-reverse">
-                                <button onclick="location.href='http://127.0.0.1:5500/public/geocodificacion/geocode.html'"type="button" class="btn btn-labeled  col-6 col-md-3  mt-2 ml-3 d-flex align-items-center" style=" background-color: yellowgreen; color: white;">
+                                <button onclick="location.href='http://almuerza.co/geocodificacion/geocode.html'"type="button" class="btn btn-labeled  col-6 col-md-3  mt-2 ml-3 d-flex align-items-center" style=" background-color: yellowgreen; color: white;">
                                     <span class="btn-label"><i class="material-icons icon d-flex align-items-center">add_photo_alternate</i></span>
                                     <small> Ver Mapa</small>
                                     <div id="myModal" class="modal">
