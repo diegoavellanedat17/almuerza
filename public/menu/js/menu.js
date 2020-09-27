@@ -306,7 +306,6 @@ function VerificarDia(){
    
     today =  new Date();
     today_day_week=today.getDay();
-    console.log(today_day_week);
     if(today_day_week===0){
         return 6
     }
@@ -341,7 +340,8 @@ document.getElementById("button_pedir").addEventListener("click", function(){
         }
 
         else{
-            
+            $("#realizaPedido").empty()
+            $("#realizaPedido").append("Validando tu dirección")
             validateAdress()
             .then(function(valueAdress){
                     // lanzamos a validar la geocodificación y la guardamos en una variable 
@@ -897,7 +897,6 @@ firebase.auth().getRedirectResult().then(function(result) {
 firebase.auth().onAuthStateChanged(user => {
   if(user && firstTime===false) {
     var user = firebase.auth().currentUser;
-    console.log(user)
     $(".icon-login").css("color","white")
     $(".user-name").append(user.displayName)
     $(".user-dropdown").empty()
@@ -1598,30 +1597,28 @@ function GuardarNuevoCliente(user){
 }
 
 function HorarioRestaurante(horaApertura,horaCierre){
-    console.log(horaApertura)
-    console.log(horaCierre)
+
 
     var date=new Date()
     var hora= date.getHours()
     var minutos=date.getMinutes()
-    console.log(hora)
+ 
     var arrayApertura=horaApertura.split(":")
     var arrayCierre=horaCierre.split(":")
     var hApertura = parseInt(arrayApertura[0],10)
     var mApertura = parseInt(arrayApertura[1],10)
     var hCierre = parseInt(arrayCierre[0],10)
     var mCierre = parseInt(arrayCierre[1],10)
-    console.log(hApertura)
-    console.log(hCierre)
+
 
     
 
     if(hora >= hApertura && hora <= hCierre){
-        console.log("estas en la franja ")
+ 
         if(hora===hApertura){
             // ver los minutos 
             if(minutos<mApertura){
-                console.log("En pocos minutos se abrira el restaurante")
+         
                 
                 swal({
                     title:"Atención",
@@ -1635,7 +1632,7 @@ function HorarioRestaurante(horaApertura,horaCierre){
                 //$("#button_pedir_int").prop('disabled', true);
             }
             else{
-                console.log("restaurante abierto")
+  
                 return true
                 //$("#button_pedir_int").prop('disabled', false);
                 
@@ -1650,19 +1647,19 @@ function HorarioRestaurante(horaApertura,horaCierre){
                        ${horaApertura} - ${horaCierre} `,
                       icon:"warning"
                   })
-                console.log("el restaurante se encuentra cerrado")
+
                 return false
                 //$("#button_pedir_int").prop('disabled', true);
             }
             else{
-                console.log("restaurante abierto")
+         
                 return true
                 //$("#button_pedir_int").prop('disabled', false);
             }
         }
         else{
             
-            console.log("restaurante abierto")
+           
             return true
             //$("#button_pedir_int").prop('disabled', false);
         }
@@ -1674,7 +1671,7 @@ function HorarioRestaurante(horaApertura,horaCierre){
                ${horaApertura} - ${horaCierre} `,
 			  icon:"warning"
 		  })
-        console.log("no estas en la frnanja")
+       
         return false
         //$("#button_pedir").prop('disabled', true);
     }
@@ -1758,12 +1755,14 @@ function geocoder(dir_cliente,dir_rest){
                 geometryService.distance(distParams).then(function(distance) {
                     console.log(distance);
                     if (distance <= dir_rest[1]){
-                        console.log(true)
                         resolve(true)
+                        $("#realizaPedido").empty()
+                        $("#realizaPedido").append("Realiza tu pedido")
                         return true
                     } else {
-                        console.log(false)
                         resolve(false)
+                        $("#realizaPedido").empty()
+                        $("#realizaPedido").append("Realiza tu pedido")
                         return false
                     } 
                 });
