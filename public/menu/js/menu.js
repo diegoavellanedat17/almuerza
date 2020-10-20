@@ -342,8 +342,8 @@ document.getElementById("button_pedir").addEventListener("click", function(){
         else{
             $("#realizaPedido").empty()
             $("#realizaPedido").append("Validando tu dirección")
-            validateAdress()
-            .then(function(valueAdress){
+            //validateAdress()
+            //.then(function(valueAdress){
                     // lanzamos a validar la geocodificación y la guardamos en una variable 
                     //Debe verificarse que tipo de usuario quiere hacer un pedido, si es un restaurante redirige a restaurantes 
                     // Si es un cliente abre el modal de hacer pedido 
@@ -379,23 +379,24 @@ document.getElementById("button_pedir").addEventListener("click", function(){
                         querySnapshot.forEach(function(doc){
                             const urlParams = new URLSearchParams(window.location.search);
                             const QueryMesa=urlParams.get('mesa');
-
-                            if(valueAdress!==true && QueryMesa ===null){
+                            // activar para geoferenecia
+                            // if(valueAdress!==true && QueryMesa ===null){
                                
-                                swal({
-                                    title:"Atención",
-                                      text:`Revisa tu dirección, no te encuentras en la cobertura del restaurante`,
-                                      icon:"warning"
-                                  })
-                            }
-                            else{
-                                LanzarModal(doc.data().dir)
-                            }
+                            //     swal({
+                            //         title:"Atención",
+                            //           text:`Revisa tu dirección, no te encuentras en la cobertura del restaurante`,
+                            //           icon:"warning"
+                            //       })
+                            // }
+                            // else{
+                            //     LanzarModal(doc.data().dir)
+                            // }
+                            LanzarModal(doc.data().dir)
                             
                         })  
                     })
                 
-            })
+            //})
 
             }
         }
